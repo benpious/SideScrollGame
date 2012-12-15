@@ -1,0 +1,319 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3B2B88D8164862DC004BADC9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88D7164862DC004BADC9 /* UIKit.framework */; };
+		3B2B88DA164862DC004BADC9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88D9164862DC004BADC9 /* Foundation.framework */; };
+		3B2B88DC164862DC004BADC9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88DB164862DC004BADC9 /* CoreGraphics.framework */; };
+		3B2B88DE164862DC004BADC9 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88DD164862DC004BADC9 /* GLKit.framework */; };
+		3B2B88E0164862DC004BADC9 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88DF164862DC004BADC9 /* OpenGLES.framework */; };
+		3B2B88E6164862DC004BADC9 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B2B88E4164862DC004BADC9 /* InfoPlist.strings */; };
+		3B2B88E8164862DC004BADC9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B88E7164862DC004BADC9 /* main.m */; };
+		3B2B88EC164862DC004BADC9 /* SGAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B88EB164862DC004BADC9 /* SGAppDelegate.m */; };
+		3B2B88EE164862DC004BADC9 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B2B88ED164862DC004BADC9 /* Default.png */; };
+		3B2B88F0164862DC004BADC9 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B2B88EF164862DC004BADC9 /* Default@2x.png */; };
+		3B2B88F2164862DC004BADC9 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B2B88F1164862DC004BADC9 /* Default-568h@2x.png */; };
+		3B2B88F5164862DC004BADC9 /* MainStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B2B88F3164862DC004BADC9 /* MainStoryboard.storyboard */; };
+		3B2B88F7164862DC004BADC9 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B2B88F6164862DC004BADC9 /* Shader.fsh */; };
+		3B2B88F9164862DC004BADC9 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B2B88F8164862DC004BADC9 /* Shader.vsh */; };
+		3B2B88FC164862DC004BADC9 /* SGViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B2B88FB164862DC004BADC9 /* SGViewController.m */; };
+		3BE07C7F164B95D600DBFD78 /* sirowl.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BE07C7E164B95D600DBFD78 /* sirowl.png */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3B2B88D3164862DC004BADC9 /* SideScrollGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideScrollGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B2B88D7164862DC004BADC9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		3B2B88D9164862DC004BADC9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3B2B88DB164862DC004BADC9 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3B2B88DD164862DC004BADC9 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		3B2B88DF164862DC004BADC9 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
+		3B2B88E3164862DC004BADC9 /* SideScrollGame-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SideScrollGame-Info.plist"; sourceTree = "<group>"; };
+		3B2B88E5164862DC004BADC9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3B2B88E7164862DC004BADC9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3B2B88E9164862DC004BADC9 /* SideScrollGame-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SideScrollGame-Prefix.pch"; sourceTree = "<group>"; };
+		3B2B88EA164862DC004BADC9 /* SGAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGAppDelegate.h; sourceTree = "<group>"; };
+		3B2B88EB164862DC004BADC9 /* SGAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGAppDelegate.m; sourceTree = "<group>"; };
+		3B2B88ED164862DC004BADC9 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		3B2B88EF164862DC004BADC9 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		3B2B88F1164862DC004BADC9 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		3B2B88F4164862DC004BADC9 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard.storyboard; sourceTree = "<group>"; };
+		3B2B88F6164862DC004BADC9 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
+		3B2B88F8164862DC004BADC9 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		3B2B88FA164862DC004BADC9 /* SGViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGViewController.h; sourceTree = "<group>"; };
+		3B2B88FB164862DC004BADC9 /* SGViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SGViewController.m; sourceTree = "<group>"; };
+		3BE07C7E164B95D600DBFD78 /* sirowl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sirowl.png; path = ../../sirowl.png; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3B2B88D0164862DC004BADC9 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B2B88D8164862DC004BADC9 /* UIKit.framework in Frameworks */,
+				3B2B88DA164862DC004BADC9 /* Foundation.framework in Frameworks */,
+				3B2B88DC164862DC004BADC9 /* CoreGraphics.framework in Frameworks */,
+				3B2B88DE164862DC004BADC9 /* GLKit.framework in Frameworks */,
+				3B2B88E0164862DC004BADC9 /* OpenGLES.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3B2B88C8164862DC004BADC9 = {
+			isa = PBXGroup;
+			children = (
+				3B2B88E1164862DC004BADC9 /* SideScrollGame */,
+				3B2B88D6164862DC004BADC9 /* Frameworks */,
+				3B2B88D4164862DC004BADC9 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3B2B88D4164862DC004BADC9 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3B2B88D3164862DC004BADC9 /* SideScrollGame.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3B2B88D6164862DC004BADC9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3B2B88D7164862DC004BADC9 /* UIKit.framework */,
+				3B2B88D9164862DC004BADC9 /* Foundation.framework */,
+				3B2B88DB164862DC004BADC9 /* CoreGraphics.framework */,
+				3B2B88DD164862DC004BADC9 /* GLKit.framework */,
+				3B2B88DF164862DC004BADC9 /* OpenGLES.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3B2B88E1164862DC004BADC9 /* SideScrollGame */ = {
+			isa = PBXGroup;
+			children = (
+				3B2B88EA164862DC004BADC9 /* SGAppDelegate.h */,
+				3B2B88EB164862DC004BADC9 /* SGAppDelegate.m */,
+				3B2B88F3164862DC004BADC9 /* MainStoryboard.storyboard */,
+				3B2B88F6164862DC004BADC9 /* Shader.fsh */,
+				3B2B88F8164862DC004BADC9 /* Shader.vsh */,
+				3B2B88FA164862DC004BADC9 /* SGViewController.h */,
+				3B2B88FB164862DC004BADC9 /* SGViewController.m */,
+				3BE07C7E164B95D600DBFD78 /* sirowl.png */,
+				3B2B88E2164862DC004BADC9 /* Supporting Files */,
+			);
+			path = SideScrollGame;
+			sourceTree = "<group>";
+		};
+		3B2B88E2164862DC004BADC9 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3B2B88E3164862DC004BADC9 /* SideScrollGame-Info.plist */,
+				3B2B88E4164862DC004BADC9 /* InfoPlist.strings */,
+				3B2B88E7164862DC004BADC9 /* main.m */,
+				3B2B88E9164862DC004BADC9 /* SideScrollGame-Prefix.pch */,
+				3B2B88ED164862DC004BADC9 /* Default.png */,
+				3B2B88EF164862DC004BADC9 /* Default@2x.png */,
+				3B2B88F1164862DC004BADC9 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3B2B88D2164862DC004BADC9 /* SideScrollGame */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3B2B88FF164862DC004BADC9 /* Build configuration list for PBXNativeTarget "SideScrollGame" */;
+			buildPhases = (
+				3B2B88CF164862DC004BADC9 /* Sources */,
+				3B2B88D0164862DC004BADC9 /* Frameworks */,
+				3B2B88D1164862DC004BADC9 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SideScrollGame;
+			productName = SideScrollGame;
+			productReference = 3B2B88D3164862DC004BADC9 /* SideScrollGame.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3B2B88CA164862DC004BADC9 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = SG;
+				LastUpgradeCheck = 0450;
+				ORGANIZATIONNAME = "Benjamin Pious";
+			};
+			buildConfigurationList = 3B2B88CD164862DC004BADC9 /* Build configuration list for PBXProject "SideScrollGame" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 3B2B88C8164862DC004BADC9;
+			productRefGroup = 3B2B88D4164862DC004BADC9 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3B2B88D2164862DC004BADC9 /* SideScrollGame */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3B2B88D1164862DC004BADC9 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B2B88E6164862DC004BADC9 /* InfoPlist.strings in Resources */,
+				3B2B88EE164862DC004BADC9 /* Default.png in Resources */,
+				3B2B88F0164862DC004BADC9 /* Default@2x.png in Resources */,
+				3B2B88F2164862DC004BADC9 /* Default-568h@2x.png in Resources */,
+				3B2B88F5164862DC004BADC9 /* MainStoryboard.storyboard in Resources */,
+				3B2B88F7164862DC004BADC9 /* Shader.fsh in Resources */,
+				3B2B88F9164862DC004BADC9 /* Shader.vsh in Resources */,
+				3BE07C7F164B95D600DBFD78 /* sirowl.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3B2B88CF164862DC004BADC9 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B2B88E8164862DC004BADC9 /* main.m in Sources */,
+				3B2B88EC164862DC004BADC9 /* SGAppDelegate.m in Sources */,
+				3B2B88FC164862DC004BADC9 /* SGViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3B2B88E4164862DC004BADC9 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3B2B88E5164862DC004BADC9 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		3B2B88F3164862DC004BADC9 /* MainStoryboard.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3B2B88F4164862DC004BADC9 /* en */,
+			);
+			name = MainStoryboard.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3B2B88FD164862DC004BADC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3B2B88FE164862DC004BADC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3B2B8900164862DC004BADC9 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SideScrollGame/SideScrollGame-Prefix.pch";
+				INFOPLIST_FILE = "SideScrollGame/SideScrollGame-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		3B2B8901164862DC004BADC9 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SideScrollGame/SideScrollGame-Prefix.pch";
+				INFOPLIST_FILE = "SideScrollGame/SideScrollGame-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3B2B88CD164862DC004BADC9 /* Build configuration list for PBXProject "SideScrollGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B2B88FD164862DC004BADC9 /* Debug */,
+				3B2B88FE164862DC004BADC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3B2B88FF164862DC004BADC9 /* Build configuration list for PBXNativeTarget "SideScrollGame" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B2B8900164862DC004BADC9 /* Debug */,
+				3B2B8901164862DC004BADC9 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 3B2B88CA164862DC004BADC9 /* Project object */;
+}
