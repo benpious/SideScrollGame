@@ -9,6 +9,8 @@
 #import "SGObjectEntity.h"
 
 @implementation SGObjectEntity
-
+@synthesize vertexCoords;
+@synthesize textureCoords;
+@synthesize effect;
 
 @end

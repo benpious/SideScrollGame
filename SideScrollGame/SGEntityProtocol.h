@@ -11,6 +11,6 @@
 
 @protocol SGEntityProtocol <NSObject>
 @property (retain) GLKBaseEffect* effect;
--(GLfloat[]) textureCoords;
--(GLfloat[]) vertexCoords;
+@property (assign) GLfloat* textureCoords;
+@property (assign) GLfloat* vertexCoords;
 @end

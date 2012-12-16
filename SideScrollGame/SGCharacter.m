@@ -11,12 +11,15 @@
 @implementation SGCharacter
 @synthesize texture;
 @synthesize effect;
+@synthesize vertexCoords;
+@synthesize textureCoords;
+
 
 -(id) initCharacterNamed: (NSString*) name
 {
     if (self = [super init]) {
         //load texture info and any other files
-        ;
+        
     }
     
     return self;
@@ -44,4 +47,5 @@
     [texture retain];
     
 }
+
 @end
