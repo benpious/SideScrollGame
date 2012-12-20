@@ -25,6 +25,7 @@
 		3B307434167D14EE0088A46A /* SGCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B307433167D14EE0088A46A /* SGCharacter.m */; };
 		3B307439167D214A0088A46A /* SGObjectEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B307438167D214A0088A46A /* SGObjectEntity.m */; };
 		3B30743D167D222C0088A46A /* SGGameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B30743C167D222C0088A46A /* SGGameEngine.m */; };
+		3B75A9F5167D8DB700657BF8 /* SGQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B75A9F4167D8DB700657BF8 /* SGQueue.m */; };
 		3BE07C7F164B95D600DBFD78 /* sirowl.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BE07C7E164B95D600DBFD78 /* sirowl.png */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +57,8 @@
 		3B307438167D214A0088A46A /* SGObjectEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGObjectEntity.m; sourceTree = "<group>"; };
 		3B30743B167D222C0088A46A /* SGGameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGGameEngine.h; sourceTree = "<group>"; };
 		3B30743C167D222C0088A46A /* SGGameEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGGameEngine.m; sourceTree = "<group>"; };
+		3B75A9F3167D8DB700657BF8 /* SGQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQueue.h; sourceTree = "<group>"; };
+		3B75A9F4167D8DB700657BF8 /* SGQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQueue.m; sourceTree = "<group>"; };
 		3BE07C7E164B95D600DBFD78 /* sirowl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sirowl.png; path = ../../sirowl.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -116,6 +119,8 @@
 				3B2B88FB164862DC004BADC9 /* SGViewController.m */,
 				3B30743B167D222C0088A46A /* SGGameEngine.h */,
 				3B30743C167D222C0088A46A /* SGGameEngine.m */,
+				3B75A9F3167D8DB700657BF8 /* SGQueue.h */,
+				3B75A9F4167D8DB700657BF8 /* SGQueue.m */,
 				3B30743A167D219A0088A46A /* SGEntities */,
 				3BE07C7E164B95D600DBFD78 /* sirowl.png */,
 				3B2B88E2164862DC004BADC9 /* Supporting Files */,
@@ -225,6 +230,7 @@
 				3B307434167D14EE0088A46A /* SGCharacter.m in Sources */,
 				3B307439167D214A0088A46A /* SGObjectEntity.m in Sources */,
 				3B30743D167D222C0088A46A /* SGGameEngine.m in Sources */,
+				3B75A9F5167D8DB700657BF8 /* SGQueue.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

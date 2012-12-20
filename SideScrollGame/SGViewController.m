@@ -37,12 +37,13 @@ GLfloat texCoords[] = {
 };
 
 GLfloat gTriVertexData[] =
-{    .5f,  .5f, 0.0f,
-    -0.25f, -.5f, 0.0f,
-    -.25f, .5f, 0.0f,
-    .5f,  .5f, 0.0f,
-    .5f, -.5f, 0.0f,
-    -.25f, -.5f, 0.0f
+{
+    0.764f,  1.0f, 0.0f,
+    0.0f, 0.0f, 0.0f,
+    0.0f, 1.0f, 0.0f,
+    0.764f,  1.0f, 0.0f,
+    0.764f, 0.0f, 0.0f,
+    0.0f, 0.0f, 0.0f
     
 };
 
@@ -117,6 +118,8 @@ GLfloat gTriVertexData[] =
 
 - (void)setupGL
 {
+    movement = 0;
+    backwards = NO;
     
     [EAGLContext setCurrentContext:self.context];
     
@@ -186,7 +189,19 @@ GLfloat gTriVertexData[] =
 
 - (void)update
 {
+    if (movement == -1) {
+        backwards = YES;
+    }
     
+    else if (movement == 1) backwards = NO;
+    
+    if (backwards) {
+        movement+=.25;
+    }
+    
+    else movement -= .25;
+    
+    self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movement, -.75, 0) ;
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect

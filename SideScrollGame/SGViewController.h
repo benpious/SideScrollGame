@@ -12,6 +12,8 @@
 @interface SGViewController : GLKViewController
 {
     GLKTextureInfo *owlTex;
-
+    float movement;
+    BOOL backwards;
 }
+
 @end

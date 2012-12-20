@@ -9,8 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "SGCharacter.h"
 #import "SGViewController.h"
+#import "SGQueue.h"
 
 @interface SGGameEngine : NSObject
+{
+    SGQueue* actionQueue;
+}
+
 @property (retain) NSMutableArray* characters;
 @property (assign) SGCharacter* player;
 

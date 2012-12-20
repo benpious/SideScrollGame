@@ -16,9 +16,10 @@
 */
 
 typedef struct {
-    int start;
-    int end;
-} animationDuration;
+    NSString* name;
+    int duration;
+    GLfloat** coords;
+} animation;
 
 enum {
     attackAction, forwardAction, backwardsAction, jumpAction, crouchAction
@@ -26,8 +27,11 @@ enum {
 } action;
 
 @interface SGCharacter : NSObject<SGEntityProtocol>
+{
+    int numAnimations;
+    animation** animations;
+}
 @property (assign) int health;
-@property (retain) NSMutableArray* animations;
 @property (retain) GLKTextureInfo *texture;
 
 -(void) loadTexture: (NSString*) imageName;
