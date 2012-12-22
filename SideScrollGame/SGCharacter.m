@@ -19,7 +19,7 @@
 {
     if (self = [super init]) {
 
-        [self loadTexture:[name stringByAppendingString:@"Texture.png"] ];
+        [self loadTexture:[name stringByAppendingString:@"TextureData.png"] ];
         //load animation arrays
         [self loadAnimations: [name stringByAppendingString:@"AnimationData"]];
     }
@@ -42,7 +42,12 @@
         animation* currAnimation = malloc(sizeof(animation));
         currAnimation->name = [temp objectAtIndex:0];
         currAnimation->duration = (int)[temp objectAtIndex:1];
+        width = *(GLfloat*)[temp objectAtIndex:2];
+        height = *(GLfloat*)[temp objectAtIndex:3];
         
+        for (int j=4; j<currAnimation->duration; j++) {
+            currAnimation->coords[j] = [self glFloatArrayFromOriginX:*(GLfloat*)[temp objectAtIndex: j][0] OriginY:*(GLfloat*)[temp objectAtIndex:j][1]];
+        }
     }
     
     //handle the error
@@ -70,10 +75,11 @@
         NSLog(@"error, texture is nil");
     }
 
-    
-    [imageNameFullPath release];
-    
-    [texture retain];
+    self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
+    self.effect.texture2d0.target = GLKTextureTarget2D;
+    self.effect.texture2d0.name = texture.name;
+    self.effect.light0.enabled = GL_TRUE;
+    self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
     
 }
 
@@ -81,52 +87,50 @@
 {
     
     vertexCoords = malloc(sizeof(GLfloat) * 18);
-
+    
     
     GLfloat proportion;
     
     if (width > height) {
-        proportion = width/height;
+        proportion = height/width;
         
-        vertexCoords[0] = 1;
+        vertexCoords[0] = 1.0f;
         vertexCoords[1] = proportion;
         vertexCoords[3] = 0.0f;
         vertexCoords[4] = 0.0f;
         vertexCoords[6] = 0.0f;
         vertexCoords[7] = proportion;
-        vertexCoords[9] = 1;
-        vertexCoords[10] = 0.0f;
-        vertexCoords[12] = 1;
-        vertexCoords[13] = proportion;
+        vertexCoords[9] = 1.0f;
+        vertexCoords[10] = proportion;
+        vertexCoords[12] = 1.0f;
+        vertexCoords[13] = 0.0f;
         vertexCoords[15] = 0.0f;
         vertexCoords[16] = 0.0f;
     }
     
     else {
         
-        proportion = height/width;
+        proportion = width/height;
         vertexCoords[0] = proportion;
-        vertexCoords[1] = 1;
+        vertexCoords[1] = 1.0f;
         vertexCoords[3] = 0.0f;
         vertexCoords[4] = 0.0f;
         vertexCoords[6] = 0.0f;
-        vertexCoords[7] = 1;
+        vertexCoords[7] = 1.0f;
         vertexCoords[9] = proportion;
-        vertexCoords[10] = 0.0f;
+        vertexCoords[10] = 1.0f;
         vertexCoords[12] = proportion;
-        vertexCoords[13] = 1;
+        vertexCoords[13] = 0.0f;
         vertexCoords[15] = 0.0f;
         vertexCoords[16] = 0.0f;
-    
+        
         
     }
     
     //fill the z coords with 0s
-    for (int i =1; i <= 6 ; i++) {
-        vertexCoords[i*3] = 0.0f;
+    for (int i = 0; i <= 5 ; i++) {
+        vertexCoords[i*3+2] = 0.0f;
     }
-    
-    
     
 }
 

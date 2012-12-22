@@ -21,27 +21,7 @@
         effect = [[GLKBaseEffect alloc] init];
         [self defineTextureCoords];
         [self loadTexture: [name stringByAppendingString:@"TextureData.png"]];
-        
-        //test code
-        self.vertexCoords = malloc(sizeof(GLfloat) * 18);
-        vertexCoords[0] = 0.764f;
-        vertexCoords[1] =   1.0f;
-        vertexCoords[2] = 0.0f;
-        vertexCoords[3] = 0.0f;
-        vertexCoords[4] = 0.0f;
-        vertexCoords[5] = 0.0f;
-        vertexCoords[6] = 0.0f;
-        vertexCoords[7] = 1.0f;
-        vertexCoords[8] = 0.0f;
-        vertexCoords[9] = .764f;
-        vertexCoords[10] = 1.0f;
-        vertexCoords[11] = 0.0f;
-        vertexCoords[12] = .764f;
-        vertexCoords[13] = 0.0f;
-        vertexCoords[14] = 0.0f;
-        vertexCoords[15] = 0.0f;
-        vertexCoords[16] = 0.0f;
-        vertexCoords[17] = 0.0f;
+        [self populateArrays];
         
     }
     
@@ -100,7 +80,56 @@
     
 }
 
-
+-(void) populateArrays
+{
+    
+    vertexCoords = malloc(sizeof(GLfloat) * 18);
+    
+    
+    GLfloat proportion;
+    
+    if (width > height) {
+        proportion = height/width;
+        
+        vertexCoords[0] = 1.0f;
+        vertexCoords[1] = proportion;
+        vertexCoords[3] = 0.0f;
+        vertexCoords[4] = 0.0f;
+        vertexCoords[6] = 0.0f;
+        vertexCoords[7] = proportion;
+        vertexCoords[9] = 1.0f;
+        vertexCoords[10] = proportion;
+        vertexCoords[12] = 1.0f;
+        vertexCoords[13] = 0.0f;
+        vertexCoords[15] = 0.0f;
+        vertexCoords[16] = 0.0f;
+    }
+    
+    else {
+        
+        proportion = width/height;
+        vertexCoords[0] = proportion;
+        vertexCoords[1] = 1.0f;
+        vertexCoords[3] = 0.0f;
+        vertexCoords[4] = 0.0f;
+        vertexCoords[6] = 0.0f;
+        vertexCoords[7] = 1.0f;
+        vertexCoords[9] = proportion;
+        vertexCoords[10] = 1.0f;
+        vertexCoords[12] = proportion;
+        vertexCoords[13] = 0.0f;
+        vertexCoords[15] = 0.0f;
+        vertexCoords[16] = 0.0f;
+        
+        
+    }
+    
+    //fill the z coords with 0s
+    for (int i = 0; i <= 5 ; i++) {
+        vertexCoords[i*3+2] = 0.0f;
+    }
+    
+}
 
 -(void) dealloc
 {

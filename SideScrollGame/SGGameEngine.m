@@ -10,6 +10,7 @@
 
 @implementation SGGameEngine
 
+
 -(BOOL)hitDetectedBetween: (NSObject<SGEntityProtocol>*) a and: (NSObject<SGEntityProtocol>*) b
 {
     return NO;
