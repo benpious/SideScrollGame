@@ -13,6 +13,8 @@
 @synthesize textureCoords;
 @synthesize effect;
 @synthesize texture;
+@synthesize fallSpeed;
+@synthesize isFalling;
 
 -(id) initObjectNamed: (NSString*) name
 {
@@ -22,7 +24,8 @@
         [self defineTextureCoords];
         [self loadTexture: [name stringByAppendingString:@"TextureData.png"]];
         [self populateArrays];
-        
+        fallSpeed = 0.0f;
+        isFalling = NO;
     }
     
     return self;

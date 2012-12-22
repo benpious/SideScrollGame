@@ -28,7 +28,7 @@ typedef struct {
 {
     //keeps track of the current frame in the animation
     int currentFrame;
-    
+    int currentAnimation;
     int numAnimations;
     
     //2d array of animations -- consider replacing with a dictionary of animation arrays
@@ -42,11 +42,9 @@ typedef struct {
 }
 
 @property (assign) int health;
-
--(void) loadTexture: (NSString*) imageName;
-
 //all files that the character will need to load to initialize will have the same name + a suffix indicating what they do
 // nametexture, nameinfo
 -(id) initCharacterNamed: (NSString*) name;
+-(void)nextFrame;
 
 @end

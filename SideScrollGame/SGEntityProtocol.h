@@ -14,5 +14,6 @@
 @property (assign) GLfloat* textureCoords;
 @property (assign) GLfloat* vertexCoords;
 @property (retain) GLKTextureInfo *texture;
-
+@property (assign) BOOL isFalling;
+@property (assign) GLfloat fallSpeed;
 @end

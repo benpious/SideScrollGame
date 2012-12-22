@@ -10,7 +10,7 @@
 
 @implementation SGGameEngine
 
-
+//call whenever an action is made
 -(BOOL)hitDetectedBetween: (NSObject<SGEntityProtocol>*) a and: (NSObject<SGEntityProtocol>*) b
 {
     return NO;
@@ -36,16 +36,27 @@
 {
     //loop through all the characters
     
+    for(SGCharacter* currChar in _characters)
+    {
+        ;
+    
         //request an action from each one
     
         //apply gravity if applicable
+        [self applyGravityTo:currChar];
+    
+    }
+    
     
     //loop through the action queue applying the results
+    
+
 }
 
 -(void) applyGravityTo: (NSObject<SGEntityProtocol>*) object
 {
-    
+    object.fallSpeed += gravitySpeed;
+    object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(0.0f, object.fallSpeed, 0.0f);
 }
 
 -(void) requestActionFromCharacter: (SGCharacter*) character

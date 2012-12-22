@@ -10,6 +10,7 @@
 #import <GLKit/GLKit.h>
 
 #import "SGObjectEntity.h"
+#import "SGCharacter.h"
 
 @interface SGViewController : GLKViewController
 {
@@ -17,6 +18,7 @@
     float movement;
     BOOL backwards;
     SGObjectEntity* object;
+    //SGCharacter* object;
 }
 
 @end

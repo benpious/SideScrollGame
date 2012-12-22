@@ -16,6 +16,7 @@
 {
     SGQueue* actionQueue;
     NSTimer* renderTimer;
+    GLfloat gravitySpeed;
 
 }
 

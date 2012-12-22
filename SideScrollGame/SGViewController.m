@@ -17,6 +17,7 @@ enum
     UNIFORM_NORMAL_MATRIX,
     NUM_UNIFORMS
 };
+
 GLint uniforms[NUM_UNIFORMS];
 
 // Attribute index.
@@ -109,7 +110,8 @@ enum
     
     [self loadShaders];
 
-    object = [[SGObjectEntity alloc] initObjectNamed:@"sirowl"];    
+    object = [[SGObjectEntity alloc] initObjectNamed:@"sirowl"];
+    //object = [[SGCharacter alloc] initCharacterNamed:@"sirowl"];
     
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);

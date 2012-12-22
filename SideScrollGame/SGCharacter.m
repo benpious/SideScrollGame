@@ -13,15 +13,22 @@
 @synthesize effect;
 @synthesize vertexCoords;
 @synthesize textureCoords;
+@synthesize fallSpeed;
+@synthesize isFalling;
 
 #pragma Setup Methods
 -(id) initCharacterNamed: (NSString*) name
 {
     if (self = [super init]) {
-
+        
+        currentAnimation = 0;
+        currentFrame = 0;
+        
         [self loadTexture:[name stringByAppendingString:@"TextureData.png"] ];
         //load animation arrays
         [self loadAnimations: [name stringByAppendingString:@"AnimationData"]];
+        fallSpeed = 0.0f;
+        isFalling = NO;
     }
     
     return self;
@@ -47,9 +54,14 @@
         
         for (int j=4; j<currAnimation->duration; j++) {
             currAnimation->coords[j] = [self glFloatArrayFromOriginX:*(GLfloat*)[temp objectAtIndex: j][0] OriginY:*(GLfloat*)[temp objectAtIndex:j][1]];
+            
+            animations[i] = currAnimation;
         }
+        
+        
+
     }
-    
+
     //handle the error
     if (error != nil) {
         NSLog(@"error reading plist");
@@ -177,6 +189,25 @@
     return arrayf;
 }
 
-#pragma Accessors for the game engine
+#pragma Methods for the game engine
+
+//moves to the next frame in the current animation
+-(void)nextFrame
+{
+    if (currentFrame > animation->duration) {
+        currentAnimation = 0;
+        currentFrame = 0;
+    }
+    
+    else {
+        
+        textureCoords = animations[currentAnimation]->coords[currentFrame];
+        currentFrame++;
+        self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(animation->xOffset, animation->yOffset, 0);
+        
+    }
+    
+    
+}
 
 @end
