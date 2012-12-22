@@ -14,7 +14,7 @@
 @synthesize vertexCoords;
 @synthesize textureCoords;
 
-
+#pragma Setup Methods
 -(id) initCharacterNamed: (NSString*) name
 {
     if (self = [super init]) {
@@ -27,6 +27,7 @@
     return self;
 }
 
+
 -(void) loadAnimations: (NSString*) plistName
 {
     NSPropertyListFormat format;
@@ -34,7 +35,9 @@
     NSString* path = [[NSBundle mainBundle] pathForResource:plistName ofType:@".plist"];
     NSData* plistXML = [[NSFileManager defaultManager] contentsAtPath:path];
     NSArray* animationArray = [NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListImmutable format:&format error:nil];
+    
     for (int i=0; i < [animationArray count] ; i++) {
+        
         NSArray* temp = [animationArray objectAtIndex:i];
         animation* currAnimation = malloc(sizeof(animation));
         currAnimation->name = [temp objectAtIndex:0];
@@ -42,10 +45,12 @@
         
     }
     
+    //handle the error
+    if (error != nil) {
+        NSLog(@"error reading plist");
+    }
     
-    
-    
-    
+    [path release];
 }
 
 -(void) loadTexture: (NSString*) imageName
@@ -77,9 +82,6 @@
     
     vertexCoords = malloc(sizeof(GLfloat) * 18);
 
-    //WILL NOT WORK, WILL NEED TO READ width and height IN FROM A PLIST OR XML
-    GLfloat width = [texture width];
-    GLfloat height = [texture height];
     
     GLfloat proportion;
     
@@ -131,6 +133,11 @@
 -(void) dealloc
 {
     for (int i=0; i<numAnimations; i++) {
+        //free memory allocated in animation struct
+        for (int j = 0 ; j < animation[i].duration; j++) {
+            free(animation[i].coords[j]);
+            free(animation[i].coords);
+        }
         free(animations[i]);
     }
     
@@ -142,5 +149,30 @@
     
     [super dealloc];
 }
+
+#pragma Utility methods to create opengl arrays from rectangles
+
+//makes a glfloat array which will be used to draw a part of the texture image as a frame of animation
+-(GLfloat*) glFloatArrayFromOriginX: (GLfloat) x OriginY: (GLfloat) y
+{
+    GLfloat* arrayf = malloc(sizeof(GLfloat) * 12);
+    
+    arrayf[0] = x + width;
+    arrayf[1] = y + height;
+    arrayf[2] = x;
+    arrayf[3] = y;
+    arrayf[4] = x;
+    arrayf[5] = y + height;
+    arrayf[6] = x + width;
+    arrayf[7] = y + height;
+    arrayf[8] = x + width;
+    arrayf[9] = y;
+    arrayf[10] = x;
+    arrayf[11] = y;
+    
+    return arrayf;
+}
+
+#pragma Accessors for the game engine
 
 @end

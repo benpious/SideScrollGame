@@ -27,28 +27,6 @@ enum
     NUM_ATTRIBUTES
 };
 
-GLfloat texCoords[] = {
-    1.0f,  1.0f,
-    0.0f, 0.0f, 
-    0.0f, 1.0f, 
-    1.0f,  1.0f,
-    1.0f, 0.0f, 
-    0.0f, 0.0f
-};
-
-GLfloat gTriVertexData[] =
-{
-    0.764f,  1.0f, 0.0f,
-    0.0f, 0.0f, 0.0f,
-    0.0f, 1.0f, 0.0f,
-    0.764f,  1.0f, 0.0f,
-    0.764f, 0.0f, 0.0f,
-    0.0f, 0.0f, 0.0f
-    
-};
-
-
-
 @interface SGViewController () {
     GLuint _program;
     GLuint triBuffer;
@@ -118,59 +96,37 @@ GLfloat gTriVertexData[] =
 
 - (void)setupGL
 {
-    movement = 0;
-    backwards = NO;
     
     [EAGLContext setCurrentContext:self.context];
     
     //enable transparency in textures
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-
-
+    // test stuff, delete when finished
     
-    //load the texture
-    NSError *error = nil;
-    NSDictionary* textureOps = @{GLKTextureLoaderApplyPremultiplication : @NO, GLKTextureLoaderGenerateMipmaps : @NO, GLKTextureLoaderOriginBottomLeft : @YES};
-    NSString* imageName = [[NSBundle mainBundle]
-                           pathForResource:@"sirowl.png" ofType: nil];
-    owlTex = [GLKTextureLoader textureWithContentsOfFile: imageName options:textureOps error:&error];
-    
-    if (error != nil) {
-        NSLog(@"error, %d", [error code]);
-    }
-    
-    if (owlTex == nil) {
-        NSLog(@"error, owltex is nil");
-    }
-    
-    [owlTex retain];
+    movement = 0;
+    backwards = NO;
     
     [self loadShaders];
+
+    object = [[SGObjectEntity alloc] initObjectNamed:@"sirowl"];    
     
-    self.effect = [[[GLKBaseEffect alloc] init] autorelease];
-    self.effect.light0.enabled = GL_TRUE;
-    self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
-    
-    if (owlTex!=nil) {
-        self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-        self.effect.texture2d0.target = GLKTextureTarget2D;
-        self.effect.texture2d0.name = owlTex.name;
-        glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-        glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, texCoords);
-    }
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
+
     
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glGenBuffers(1, &triBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, triBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(gTriVertexData), gTriVertexData, GL_STATIC_DRAW);
-
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, object.vertexCoords, GL_STATIC_DRAW);
+    
     glEnableVertexAttribArray(GLKVertexAttribPosition);
     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
     glEnableVertexAttribArray(GLKVertexAttribNormal);
     glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
     
     glBindVertexArrayOES(0);
+        
 }
 
 - (void)tearDownGL
@@ -201,7 +157,7 @@ GLfloat gTriVertexData[] =
     
     else movement -= .25;
     
-    self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movement, -.75, 0) ;
+    object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movement, -.75, 0) ;
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
@@ -211,7 +167,8 @@ GLfloat gTriVertexData[] =
     
     
     // Render the object with GLKit
-    [self.effect prepareToDraw];
+    //[self.effect prepareToDraw];
+    [object.effect prepareToDraw];
     
     glDrawArrays(GL_TRIANGLES, 0, 18);
     

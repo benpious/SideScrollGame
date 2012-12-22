@@ -13,4 +13,6 @@
 @property (retain) GLKBaseEffect* effect;
 @property (assign) GLfloat* textureCoords;
 @property (assign) GLfloat* vertexCoords;
+@property (retain) GLKTextureInfo *texture;
+
 @end

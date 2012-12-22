@@ -9,11 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 
+#import "SGObjectEntity.h"
+
 @interface SGViewController : GLKViewController
 {
     GLKTextureInfo *owlTex;
     float movement;
     BOOL backwards;
+    SGObjectEntity* object;
 }
 
 @end

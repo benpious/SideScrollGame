@@ -10,13 +10,18 @@
 #import "SGCharacter.h"
 #import "SGViewController.h"
 #import "SGQueue.h"
+#import "SGAction.h"
 
 @interface SGGameEngine : NSObject
 {
     SGQueue* actionQueue;
+    NSTimer* renderTimer;
+
 }
 
 @property (retain) NSMutableArray* characters;
 @property (assign) SGCharacter* player;
+
+-(id) initWithLevelPlist: (NSString*) levelName;
 
 @end

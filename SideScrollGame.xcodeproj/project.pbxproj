@@ -25,8 +25,9 @@
 		3B307434167D14EE0088A46A /* SGCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B307433167D14EE0088A46A /* SGCharacter.m */; };
 		3B307439167D214A0088A46A /* SGObjectEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B307438167D214A0088A46A /* SGObjectEntity.m */; };
 		3B30743D167D222C0088A46A /* SGGameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B30743C167D222C0088A46A /* SGGameEngine.m */; };
+		3B3E0AD51683F05F00DBA665 /* SGAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3E0AD41683F05F00DBA665 /* SGAction.m */; };
 		3B75A9F5167D8DB700657BF8 /* SGQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B75A9F4167D8DB700657BF8 /* SGQueue.m */; };
-		3BE07C7F164B95D600DBFD78 /* sirowl.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BE07C7E164B95D600DBFD78 /* sirowl.png */; };
+		3BE07C7F164B95D600DBFD78 /* sirowlTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,9 +58,11 @@
 		3B307438167D214A0088A46A /* SGObjectEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGObjectEntity.m; sourceTree = "<group>"; };
 		3B30743B167D222C0088A46A /* SGGameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGGameEngine.h; sourceTree = "<group>"; };
 		3B30743C167D222C0088A46A /* SGGameEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGGameEngine.m; sourceTree = "<group>"; };
+		3B3E0AD31683F05F00DBA665 /* SGAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAction.h; sourceTree = "<group>"; };
+		3B3E0AD41683F05F00DBA665 /* SGAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAction.m; sourceTree = "<group>"; };
 		3B75A9F3167D8DB700657BF8 /* SGQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQueue.h; sourceTree = "<group>"; };
 		3B75A9F4167D8DB700657BF8 /* SGQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQueue.m; sourceTree = "<group>"; };
-		3BE07C7E164B95D600DBFD78 /* sirowl.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sirowl.png; path = ../../sirowl.png; sourceTree = "<group>"; };
+		3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sirowlTextureData.png; path = ../../sirowlTextureData.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,7 +125,7 @@
 				3B75A9F3167D8DB700657BF8 /* SGQueue.h */,
 				3B75A9F4167D8DB700657BF8 /* SGQueue.m */,
 				3B30743A167D219A0088A46A /* SGEntities */,
-				3BE07C7E164B95D600DBFD78 /* sirowl.png */,
+				3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */,
 				3B2B88E2164862DC004BADC9 /* Supporting Files */,
 			);
 			path = SideScrollGame;
@@ -146,6 +149,8 @@
 			isa = PBXGroup;
 			children = (
 				3B307432167D14EE0088A46A /* SGCharacter.h */,
+				3B3E0AD31683F05F00DBA665 /* SGAction.h */,
+				3B3E0AD41683F05F00DBA665 /* SGAction.m */,
 				3B307433167D14EE0088A46A /* SGCharacter.m */,
 				3B307436167D15880088A46A /* SGEntityProtocol.h */,
 				3B307437167D214A0088A46A /* SGObjectEntity.h */,
@@ -213,7 +218,7 @@
 				3B2B88F5164862DC004BADC9 /* MainStoryboard.storyboard in Resources */,
 				3B2B88F7164862DC004BADC9 /* Shader.fsh in Resources */,
 				3B2B88F9164862DC004BADC9 /* Shader.vsh in Resources */,
-				3BE07C7F164B95D600DBFD78 /* sirowl.png in Resources */,
+				3BE07C7F164B95D600DBFD78 /* sirowlTextureData.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -231,6 +236,7 @@
 				3B307439167D214A0088A46A /* SGObjectEntity.m in Sources */,
 				3B30743D167D222C0088A46A /* SGGameEngine.m in Sources */,
 				3B75A9F5167D8DB700657BF8 /* SGQueue.m in Sources */,
+				3B3E0AD51683F05F00DBA665 /* SGAction.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
