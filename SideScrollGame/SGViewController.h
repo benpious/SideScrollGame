@@ -14,11 +14,11 @@
 
 @interface SGViewController : GLKViewController
 {
-    GLKTextureInfo *owlTex;
     float movement;
     BOOL backwards;
-    SGObjectEntity* object;
-    //SGCharacter* object;
+    //SGObjectEntity* object;
+    SGCharacter* object;
+    //SGCharacter* character;
 }
 
 @end

@@ -110,8 +110,9 @@ enum
     
     [self loadShaders];
 
-    object = [[SGObjectEntity alloc] initObjectNamed:@"sirowl"];
-    //object = [[SGCharacter alloc] initCharacterNamed:@"sirowl"];
+    //object = [[SGObjectEntity alloc] initObjectNamed:@"sirowl"];
+    object = [[SGCharacter alloc] initCharacterNamed:@"sirowl"];
+    //character = [[SGCharacter alloc] initCharacterNamed:@"sirowl"];
     
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
@@ -169,7 +170,6 @@ enum
     
     
     // Render the object with GLKit
-    //[self.effect prepareToDraw];
     [object.effect prepareToDraw];
     
     glDrawArrays(GL_TRIANGLES, 0, 18);

@@ -23,12 +23,14 @@
         
         currentAnimation = 0;
         currentFrame = 0;
-        
+        effect = [[GLKBaseEffect alloc] init];
         [self loadTexture:[name stringByAppendingString:@"TextureData.png"] ];
         //load animation arrays
         [self loadAnimations: [name stringByAppendingString:@"AnimationData"]];
+        [self populateArrays];
         fallSpeed = 0.0f;
         isFalling = NO;
+        
     }
     
     return self;
@@ -42,24 +44,27 @@
     NSString* path = [[NSBundle mainBundle] pathForResource:plistName ofType:@".plist"];
     NSData* plistXML = [[NSFileManager defaultManager] contentsAtPath:path];
     NSArray* animationArray = [NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListImmutable format:&format error:nil];
+    animations = malloc(sizeof(animation*));
     
-    for (int i=0; i < [animationArray count] ; i++) {
+    for (int i=0; i < [animationArray count]; i++) {
         
         NSArray* temp = [animationArray objectAtIndex:i];
         animation* currAnimation = malloc(sizeof(animation));
         currAnimation->name = [temp objectAtIndex:0];
-        currAnimation->duration = (int)[temp objectAtIndex:1];
-        width = *(GLfloat*)[temp objectAtIndex:2];
-        height = *(GLfloat*)[temp objectAtIndex:3];
+        currAnimation->duration = [[temp objectAtIndex:1] intValue];
+        width = [[temp objectAtIndex:2] floatValue];
+        height = [[temp objectAtIndex:3] floatValue];
+        //currentAnimation->xOffset = [temp objectAtIndex:4]
+        //currentAnimation->yOffset = [temp objectAtIndex:5]
         
-        for (int j=4; j<currAnimation->duration; j++) {
-            currAnimation->coords[j] = [self glFloatArrayFromOriginX:*(GLfloat*)[temp objectAtIndex: j][0] OriginY:*(GLfloat*)[temp objectAtIndex:j][1]];
+        currAnimation->coords = malloc(sizeof(GLfloat*));
+        
+        for (int j=4; j-4<currAnimation->duration; j++) {
+            currAnimation->coords[j-4] = [self glFloatArrayFromOriginX:[[[temp objectAtIndex: j]objectAtIndex: 0] floatValue] OriginY:[[[temp objectAtIndex: j]objectAtIndex: 1] floatValue]];
             
             animations[i] = currAnimation;
         }
         
-        
-
     }
 
     //handle the error
@@ -67,7 +72,7 @@
         NSLog(@"error reading plist");
     }
     
-    [path release];
+    textureCoords = animations[0]->coords[0];    
 }
 
 -(void) loadTexture: (NSString*) imageName
@@ -150,9 +155,9 @@
 {
     for (int i=0; i<numAnimations; i++) {
         //free memory allocated in animation struct
-        for (int j = 0 ; j < animation[i].duration; j++) {
-            free(animation[i].coords[j]);
-            free(animation[i].coords);
+        for (int j = 0 ; j < animations[i]->duration; j++) {
+            free(animations[i]->coords[j]);
+            free(animations[i]->coords);
         }
         free(animations[i]);
     }
@@ -171,20 +176,26 @@
 //makes a glfloat array which will be used to draw a part of the texture image as a frame of animation
 -(GLfloat*) glFloatArrayFromOriginX: (GLfloat) x OriginY: (GLfloat) y
 {
+    
     GLfloat* arrayf = malloc(sizeof(GLfloat) * 12);
     
-    arrayf[0] = x + width;
-    arrayf[1] = y + height;
-    arrayf[2] = x;
-    arrayf[3] = y;
-    arrayf[4] = x;
-    arrayf[5] = y + height;
-    arrayf[6] = x + width;
-    arrayf[7] = y + height;
-    arrayf[8] = x + width;
-    arrayf[9] = y;
-    arrayf[10] = x;
-    arrayf[11] = y;
+    GLfloat xpercent = x / 140;
+    GLfloat ypercent = y / 170;
+    GLfloat xwidthpercent = (x + width) / 140;
+    GLfloat yheightpercent = (y + height) / 170;
+    
+    arrayf[0] = xwidthpercent;
+    arrayf[1] = yheightpercent;
+    arrayf[2] = xpercent;
+    arrayf[3] = ypercent;
+    arrayf[4] = xpercent;
+    arrayf[5] = yheightpercent;
+    arrayf[6] = xwidthpercent;
+    arrayf[7] = yheightpercent;
+    arrayf[8] = xwidthpercent;
+    arrayf[9] = ypercent;
+    arrayf[10] = xpercent;
+    arrayf[11] = ypercent;
     
     return arrayf;
 }
@@ -194,7 +205,7 @@
 //moves to the next frame in the current animation
 -(void)nextFrame
 {
-    if (currentFrame > animation->duration) {
+    if (currentFrame > animations[currentAnimation]->duration) {
         currentAnimation = 0;
         currentFrame = 0;
     }
@@ -203,7 +214,7 @@
         
         textureCoords = animations[currentAnimation]->coords[currentFrame];
         currentFrame++;
-        self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(animation->xOffset, animation->yOffset, 0);
+        self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(animations[currentAnimation]->xOffset, animations[currentAnimation]->yOffset, 0);
         
     }
     
