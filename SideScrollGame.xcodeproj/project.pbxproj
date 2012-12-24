@@ -117,18 +117,13 @@
 			children = (
 				3B2B88EA164862DC004BADC9 /* SGAppDelegate.h */,
 				3B2B88EB164862DC004BADC9 /* SGAppDelegate.m */,
-				3B2B88F3164862DC004BADC9 /* MainStoryboard.storyboard */,
-				3B2B88F6164862DC004BADC9 /* Shader.fsh */,
-				3B2B88F8164862DC004BADC9 /* Shader.vsh */,
 				3B2B88FA164862DC004BADC9 /* SGViewController.h */,
 				3B2B88FB164862DC004BADC9 /* SGViewController.m */,
-				3B30743B167D222C0088A46A /* SGGameEngine.h */,
-				3B30743C167D222C0088A46A /* SGGameEngine.m */,
 				3B75A9F3167D8DB700657BF8 /* SGQueue.h */,
 				3B75A9F4167D8DB700657BF8 /* SGQueue.m */,
+				3BFE522B16881FC2005D025D /* Logic */,
+				3BFE522C16881FF8005D025D /* Resources */,
 				3B30743A167D219A0088A46A /* SGEntities */,
-				3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */,
-				3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */,
 				3B2B88E2164862DC004BADC9 /* Supporting Files */,
 			);
 			path = SideScrollGame;
@@ -160,6 +155,27 @@
 				3B307438167D214A0088A46A /* SGObjectEntity.m */,
 			);
 			name = SGEntities;
+			sourceTree = "<group>";
+		};
+		3BFE522B16881FC2005D025D /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				3B30743B167D222C0088A46A /* SGGameEngine.h */,
+				3B30743C167D222C0088A46A /* SGGameEngine.m */,
+			);
+			name = Logic;
+			sourceTree = "<group>";
+		};
+		3BFE522C16881FF8005D025D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3B2B88F3164862DC004BADC9 /* MainStoryboard.storyboard */,
+				3B2B88F6164862DC004BADC9 /* Shader.fsh */,
+				3B2B88F8164862DC004BADC9 /* Shader.vsh */,
+				3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */,
+				3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */,
+			);
+			name = Resources;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

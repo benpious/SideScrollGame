@@ -14,8 +14,14 @@
 
 @interface SGViewController : GLKViewController
 {
-    float movement;
-    BOOL backwards;
+    CGPoint beginning;
+    BOOL forward;
+    BOOL backward;
+    BOOL up;
+    BOOL down;
+    BOOL moving;
+    float movementX;
+    float movementY;
     //SGObjectEntity* object;
     SGCharacter* object;
     //SGCharacter* character;

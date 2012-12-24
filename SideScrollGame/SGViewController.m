@@ -105,8 +105,13 @@ enum
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     // test stuff, delete when finished
     
-    movement = 0;
-    backwards = NO;
+    movementX = 0.0f;
+    movementY = 0.0f;
+    BOOL forward = NO;
+    BOOL backward = NO;
+    BOOL up = NO;
+    BOOL down = NO;
+    BOOL moving = NO;
     
     [self loadShaders];
 
@@ -148,19 +153,24 @@ enum
 
 - (void)update
 {
-    if (movement == -1) {
-        backwards = YES;
+    if (moving!=YES) {
+        return;
     }
     
-    else if (movement == 1) backwards = NO;
-    
-    if (backwards) {
-        movement+=.25;
+    if (up == YES) {
+        movementX -=.01;
+    }
+    if (down == YES) {
+        movementX += .01;
+    }
+    if (forward == YES) {
+        movementY-=.01;
+    }
+    if (backward == YES) {
+        movementY+=.01;
     }
     
-    else movement -= .25;
-    
-    object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movement, -.75, 0) ;
+    object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movementY, movementX , 0) ;
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
@@ -329,5 +339,67 @@ enum
     
     return YES;
 }
+
+#pragma touch recognition methods
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    moving = YES;
+    UITouch* aTouch = [touches anyObject];
+    beginning = [aTouch locationInView:nil];
+
+}
+
+-(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    moving = NO;
+}
+
+
+-(void)touchesMoved:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch* aTouch = [touches anyObject];
+    CGPoint loc = [aTouch locationInView:nil];
+    
+    float deltaX = loc.x - beginning.x;
+    float deltaY = loc.y - beginning.y;
+    
+    if (fabsf(deltaX) < fabsf(deltaY) ) {
+        if (deltaY > 0)
+        {
+            forward = YES;
+            backward = NO;
+        }
+        
+        
+        else {
+            forward = NO;
+            backward = YES;
+            
+        }
+        
+        up = NO;
+        down = NO;
+    }
+    else
+    {
+        if (deltaX > 0) {
+            up = YES;
+            down = NO;
+        }
+        
+        else {
+            down = YES;
+            up = NO;
+        }
+        
+        forward = NO;
+        backward = NO;
+    }
+    
+    
+    
+}
+
 
 @end
