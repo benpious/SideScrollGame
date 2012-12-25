@@ -32,6 +32,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B13E37516897389000F9721 /* SGCharacterAgent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGCharacterAgent.h; sourceTree = "<group>"; };
 		3B2B88D3164862DC004BADC9 /* SideScrollGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideScrollGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2B88D7164862DC004BADC9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3B2B88D9164862DC004BADC9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -148,6 +149,7 @@
 			children = (
 				3B307432167D14EE0088A46A /* SGCharacter.h */,
 				3B307433167D14EE0088A46A /* SGCharacter.m */,
+				3B13E37516897389000F9721 /* SGCharacterAgent.h */,
 				3B3E0AD31683F05F00DBA665 /* SGAction.h */,
 				3B3E0AD41683F05F00DBA665 /* SGAction.m */,
 				3B307436167D15880088A46A /* SGEntityProtocol.h */,

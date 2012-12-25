@@ -22,9 +22,8 @@
     BOOL moving;
     float movementX;
     float movementY;
-    //SGObjectEntity* object;
+    float min;
     SGCharacter* object;
-    //SGCharacter* character;
 }
 
 @end

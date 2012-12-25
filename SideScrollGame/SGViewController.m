@@ -107,11 +107,12 @@ enum
     
     movementX = 0.0f;
     movementY = 0.0f;
-    BOOL forward = NO;
-    BOOL backward = NO;
-    BOOL up = NO;
-    BOOL down = NO;
-    BOOL moving = NO;
+    forward = NO;
+    backward = NO;
+    up = NO;
+    down = NO;
+    moving = NO;
+    min = 5;
     
     [self loadShaders];
 
@@ -353,6 +354,11 @@ enum
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
     moving = NO;
+    forward = NO;
+    backward = NO;
+    up = NO;
+    down = NO;
+    
 }
 
 
@@ -361,8 +367,14 @@ enum
     UITouch* aTouch = [touches anyObject];
     CGPoint loc = [aTouch locationInView:nil];
     
+    
     float deltaX = loc.x - beginning.x;
     float deltaY = loc.y - beginning.y;
+    
+    if (fabsf(deltaX) < min && fabsf(deltaY) < min) {
+        return;
+    }
+     
     
     if (fabsf(deltaX) < fabsf(deltaY) ) {
         if (deltaY > 0)

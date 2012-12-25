@@ -13,7 +13,28 @@
 //call whenever an action is made
 -(BOOL)hitDetectedBetween: (NSObject<SGEntityProtocol>*) a and: (NSObject<SGEntityProtocol>*) b
 {
+    //get the vertexarrays of a and b with their transforms applied
+    
+    //test if squares interset
+    
+        //if they do, do pixel perfect test with masks
+    
     return NO;
+}
+
+-(BOOL) squaresIntersect: (GLfloat*) a : (GLfloat*) b
+{
+    //none of the x coordinates intersect
+    if ((a[0] < b[0] || a[0] > b[0]) && ( a[4] < b[4] || a[4] > b[4] )) {
+        return NO;
+    }
+    
+    //none of the y coordinates intersect
+    if ((a[1] < b[1] || a[1] > b[1]) && (a[6] < b[6] || a[6] > b[6])) {
+        return NO;
+    }
+    
+    return YES;
 }
 
 -(id) initWithLevelPlist: (NSString*) levelName

@@ -218,7 +218,14 @@
         
     }
     
+}
+
+-(SGAction*) nextAction
+{
+    
     
 }
+
+
 
 @end
