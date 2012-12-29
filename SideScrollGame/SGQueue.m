@@ -22,8 +22,10 @@
 
 -(void) offer: (id) object
 {
-    node* newHead = malloc(sizeof(head));
+    node* newHead = malloc(sizeof(node));
     newHead->next = head;
+    newHead->data = object;
+    [newHead->data retain];
     head = newHead;
 }
 -(id) pop
@@ -33,7 +35,9 @@
     }
     length--;
     id toReturn = head->data;
-    free(head);
+    node *oldHead = head;
+    head = head->next;
+    free(oldHead);
     return toReturn;
 }
 

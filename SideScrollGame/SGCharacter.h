@@ -45,5 +45,6 @@ typedef struct {
 -(id) initCharacterNamed: (NSString*) name;
 -(void)nextFrame;
 -(SGAction*) nextAction;
+-(GLfloat*) glFloatArrayFromOriginX: (GLfloat) x OriginY: (GLfloat) y;
 
 @end

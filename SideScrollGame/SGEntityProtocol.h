@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 
+
+
 @protocol SGEntityProtocol <NSObject>
 @property (retain) GLKBaseEffect* effect;
 @property (assign) GLfloat* textureCoords;

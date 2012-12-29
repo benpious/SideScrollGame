@@ -24,12 +24,12 @@
 
 -(BOOL) squaresIntersect: (GLfloat*) a : (GLfloat*) b
 {
-    //none of the x coordinates intersect
+    //test if the x coordinates intersect
     if ((a[0] < b[0] || a[0] > b[0]) && ( a[4] < b[4] || a[4] > b[4] )) {
         return NO;
     }
     
-    //none of the y coordinates intersect
+    //test if the y coordinates intersect
     if ((a[1] < b[1] || a[1] > b[1]) && (a[6] < b[6] || a[6] > b[6])) {
         return NO;
     }
@@ -41,13 +41,17 @@
 {
     if (self = [super init]) {
         actionQueue = [[SGQueue alloc] init];
-        
     }
     
     return self;
 }
 
 -(void) playerActionReceived
+{
+    
+}
+
+-(void) loadPlistWithName: (NSString*) levelName
 {
     
 }

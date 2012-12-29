@@ -24,7 +24,7 @@
         currentAnimation = 0;
         currentFrame = 0;
         effect = [[GLKBaseEffect alloc] init];
-        [self loadTexture:[name stringByAppendingString:@"TextureData.png"] ];
+        [self loadTexture:[name stringByAppendingString:@"TextureData.png"]];
         //load animation arrays
         [self loadAnimations: [name stringByAppendingString:@"AnimationData"]];
         [self populateArrays];
@@ -43,38 +43,49 @@
     NSString* error = nil;
     NSString* path = [[NSBundle mainBundle] pathForResource:plistName ofType:@".plist"];
     NSData* plistXML = [[NSFileManager defaultManager] contentsAtPath:path];
-    NSArray* animationArray = [NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListImmutable format:&format error:nil];
-    animations = malloc(sizeof(animation*));
+    NSArray* animationArray = (NSArray*)[NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListImmutable format:&format error:nil];
     
-    for (int i=0; i < [animationArray count]; i++) {
+    animations = malloc(sizeof(animation*) * [animationArray count]);
+    
+    for (int i = 0; i < [animationArray count]; i++) {
         
         NSArray* temp = [animationArray objectAtIndex:i];
+        
+        //NSLog([temp description]);
+        
         animation* currAnimation = malloc(sizeof(animation));
         currAnimation->name = [temp objectAtIndex:0];
         currAnimation->duration = [[temp objectAtIndex:1] intValue];
         width = [[temp objectAtIndex:2] floatValue];
         height = [[temp objectAtIndex:3] floatValue];
-        //currentAnimation->xOffset = [temp objectAtIndex:4]
-        //currentAnimation->yOffset = [temp objectAtIndex:5]
+        //currAnimation->xOffset = [temp objectAtIndex:4]
+        //currAnimation->yOffset = [temp objectAtIndex:5]
         
-        currAnimation->coords = malloc(sizeof(GLfloat*));
+        currAnimation->coords = malloc(sizeof(GLfloat*) * (currAnimation->duration));
         
-        for (int j=4; j-4<currAnimation->duration; j++) {
-            currAnimation->coords[j-4] = [self glFloatArrayFromOriginX:[[[temp objectAtIndex: j]objectAtIndex: 0] floatValue] OriginY:[[[temp objectAtIndex: j]objectAtIndex: 1] floatValue]];
+        assert(currAnimation->duration > 0);
+        for (int j = 4; (j - 4) < currAnimation->duration; j++) {
+            currAnimation->coords[j - 4] = [self glFloatArrayFromOriginX:[[[temp objectAtIndex: j]objectAtIndex: 0] floatValue] OriginY:[[[temp objectAtIndex: j]objectAtIndex: 1] floatValue]];
             
-            animations[i] = currAnimation;
         }
+        
+        animations[i] = currAnimation;
         
     }
 
     //handle the error
+    
     if (error != nil) {
         NSLog(@"error reading plist");
     }
     
-    textureCoords = animations[0]->coords[0];    
+   
+    textureCoords = animations[0]->coords[1];
 }
 
+/*
+ loads the texture, sets up the glkit base effect
+ */
 -(void) loadTexture: (NSString*) imageName
 {
     //load the texture
@@ -100,6 +111,71 @@
     
 }
 
+-(void) loadHitMaskWithName: (NSString*) name
+{
+    NSString* maskNameFullPath = [[NSBundle mainBundle]
+                                   pathForResource:name ofType: nil];
+    NSData* data = [[NSFileManager defaultManager] contentsAtPath:maskNameFullPath];
+    
+    
+    
+}
+
+
+-(void) dealloc
+{
+    //loop through freeing all animations
+    for (int i=0; i<numAnimations; i++) {
+        //free memory allocated in animation struct
+        for (int j = 0 ; j < animations[i]->duration; j++) {
+            free(animations[i]->coords[j]);
+            free(animations[i]->coords);
+        }
+        free(animations[i]);
+    }
+    
+    free(animations);
+    free(vertexCoords);
+    free(textureCoords);
+    [effect release];
+    [texture release];
+    
+    [super dealloc];
+}
+
+#pragma Utility methods to create opengl arrays from rectangles
+
+//makes a glfloat array which will be used to draw a part of the texture image as a frame of animation
+-(GLfloat*) glFloatArrayFromOriginX: (GLfloat) x OriginY: (GLfloat) y
+{
+    
+    GLfloat* arrayf = malloc(sizeof(GLfloat) * 12);
+    
+    GLfloat xpercent = x / 280;
+    GLfloat ypercent = y / 170;
+    GLfloat xwidthpercent = (x + width) / 280;
+    GLfloat yheightpercent = (y + height) / 170;
+    
+    arrayf[0] = xwidthpercent;
+    arrayf[1] = yheightpercent;
+    arrayf[2] = xpercent;
+    arrayf[3] = ypercent;
+    arrayf[4] = xpercent;
+    arrayf[5] = yheightpercent;
+    arrayf[6] = xwidthpercent;
+    arrayf[7] = yheightpercent;
+    arrayf[8] = xwidthpercent;
+    arrayf[9] = ypercent;
+    arrayf[10] = xpercent;
+    arrayf[11] = ypercent;
+    
+    return arrayf;
+}
+
+/*
+ populates the vertexcoords array
+ all of these arrays start at 0,0, then we can transform them to their proper place
+ */
 -(void) populateArrays
 {
     
@@ -108,6 +184,7 @@
     
     GLfloat proportion;
     
+    //this test and if statement ensure that the vertex coords array is at the right proportion
     if (width > height) {
         proportion = height/width;
         
@@ -151,74 +228,41 @@
     
 }
 
--(void) dealloc
-{
-    for (int i=0; i<numAnimations; i++) {
-        //free memory allocated in animation struct
-        for (int j = 0 ; j < animations[i]->duration; j++) {
-            free(animations[i]->coords[j]);
-            free(animations[i]->coords);
-        }
-        free(animations[i]);
-    }
-    
-    free(animations);
-    free(vertexCoords);
-    free(textureCoords);
-    [effect release];
-    [texture release];
-    
-    [super dealloc];
-}
-
-#pragma Utility methods to create opengl arrays from rectangles
-
-//makes a glfloat array which will be used to draw a part of the texture image as a frame of animation
--(GLfloat*) glFloatArrayFromOriginX: (GLfloat) x OriginY: (GLfloat) y
-{
-    
-    GLfloat* arrayf = malloc(sizeof(GLfloat) * 12);
-    
-    GLfloat xpercent = x / 140;
-    GLfloat ypercent = y / 170;
-    GLfloat xwidthpercent = (x + width) / 140;
-    GLfloat yheightpercent = (y + height) / 170;
-    
-    arrayf[0] = xwidthpercent;
-    arrayf[1] = yheightpercent;
-    arrayf[2] = xpercent;
-    arrayf[3] = ypercent;
-    arrayf[4] = xpercent;
-    arrayf[5] = yheightpercent;
-    arrayf[6] = xwidthpercent;
-    arrayf[7] = yheightpercent;
-    arrayf[8] = xwidthpercent;
-    arrayf[9] = ypercent;
-    arrayf[10] = xpercent;
-    arrayf[11] = ypercent;
-    
-    return arrayf;
-}
 
 #pragma Methods for the game engine
 
-//moves to the next frame in the current animation
+/*
+ moves to the next frame in the current animation
+ note that this method does NOT change the opengl texture array pointer to texcoords -- 
+ this must be done after this method is called
+ */
 -(void)nextFrame
 {
-    if (currentFrame > animations[currentAnimation]->duration) {
+    //if we're at the end of the current animation, put the current frame to zero
+    //and current animation to the idle animation (located at index 0) ********should make a constant
+    if (currentFrame +1 > animations[currentAnimation]->duration-1) {
         currentAnimation = 0;
         currentFrame = 0;
+        NSLog(@"reseting currentframe");
     }
     
     else {
-        
-        textureCoords = animations[currentAnimation]->coords[currentFrame];
-        currentFrame++;
-        self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(animations[currentAnimation]->xOffset, animations[currentAnimation]->yOffset, 0);
-        
+        NSLog(@"incrementing currentframe");
+                currentFrame++;
     }
+        //apply the transform associated with this animation
+        textureCoords = animations[currentAnimation]->coords[currentFrame];
+
+    
+        //this hasn't been implemented yet
+        /*
+        self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(animations[currentAnimation]->xOffset, animations[currentAnimation]->yOffset, 0);
+         */
+        
     
 }
+
+
 
 -(SGAction*) nextAction
 {

@@ -103,6 +103,9 @@ enum
     //enable transparency in textures
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
+    [self loadShaders];
+ 
     // test stuff, delete when finished
     
     movementX = 0.0f;
@@ -113,12 +116,7 @@ enum
     down = NO;
     moving = NO;
     min = 5;
-    
-    [self loadShaders];
-
-    //object = [[SGObjectEntity alloc] initObjectNamed:@"sirowl"];
-    object = [[SGCharacter alloc] initCharacterNamed:@"sirowl"];
-    //character = [[SGCharacter alloc] initCharacterNamed:@"sirowl"];
+    object = [[SGCharacter alloc] initCharacterNamed:@"testanimation"];
     
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
@@ -159,19 +157,26 @@ enum
     }
     
     if (up == YES) {
-        movementX -=.01;
+        movementX -=.02;
     }
     if (down == YES) {
-        movementX += .01;
+        movementX += .02;
     }
     if (forward == YES) {
-        movementY-=.01;
+        movementY-=.02;
     }
     if (backward == YES) {
-        movementY+=.01;
+        movementY+=.02;
     }
     
-    object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movementY, movementX , 0) ;
+    object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movementY, movementX , 0);
+    
+    GLfloat* array = [object glFloatArrayFromOriginX:0.0f OriginY:0.0f];
+    [object nextFrame];
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
+
+    
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
@@ -372,10 +377,14 @@ enum
     float deltaY = loc.y - beginning.y;
     
     if (fabsf(deltaX) < min && fabsf(deltaY) < min) {
+        forward = NO;
+        backward = NO;
+        up = NO;
+        down = NO;
         return;
     }
      
-    
+    //change this -- should compute the angle of the joystick, not just do this
     if (fabsf(deltaX) < fabsf(deltaY) ) {
         if (deltaY > 0)
         {
