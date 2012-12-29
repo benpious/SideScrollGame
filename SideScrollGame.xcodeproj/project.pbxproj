@@ -29,6 +29,8 @@
 		3B4C9C79168BAC950033A8B0 /* testanimationTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4C9C78168BAC950033A8B0 /* testanimationTextureData.png */; };
 		3B4C9C7C168BAD070033A8B0 /* testanimationAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B4C9C7B168BAD070033A8B0 /* testanimationAnimationData.plist */; };
 		3B75A9F5167D8DB700657BF8 /* SGQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B75A9F4167D8DB700657BF8 /* SGQueue.m */; };
+		3B7FE5D7168E9816005E0AB1 /* catTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FE5D6168E9816005E0AB1 /* catTextureData.png */; };
+		3B7FE5DA168E9854005E0AB1 /* catAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */; };
 		3BA7B528168549C500BE3A1B /* sirowlAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */; };
 		3BE07C7F164B95D600DBFD78 /* sirowlTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */; };
 /* End PBXBuildFile section */
@@ -68,6 +70,8 @@
 		3B4C9C7B168BAD070033A8B0 /* testanimationAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = testanimationAnimationData.plist; sourceTree = "<group>"; };
 		3B75A9F3167D8DB700657BF8 /* SGQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQueue.h; sourceTree = "<group>"; };
 		3B75A9F4167D8DB700657BF8 /* SGQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQueue.m; sourceTree = "<group>"; };
+		3B7FE5D6168E9816005E0AB1 /* catTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = catTextureData.png; path = ../../catTextureData.png; sourceTree = "<group>"; };
+		3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = catAnimationData.plist; sourceTree = "<group>"; };
 		3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sirowlAnimationData.plist; sourceTree = "<group>"; };
 		3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sirowlTextureData.png; path = ../../sirowlTextureData.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -100,6 +104,7 @@
 		3B2A93CF168C030C00CC4883 /* Plist Files */ = {
 			isa = PBXGroup;
 			children = (
+				3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */,
 				3B4C9C7B168BAD070033A8B0 /* testanimationAnimationData.plist */,
 				3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */,
 			);
@@ -109,6 +114,7 @@
 		3B2A93D0168C032F00CC4883 /* Textures */ = {
 			isa = PBXGroup;
 			children = (
+				3B7FE5D6168E9816005E0AB1 /* catTextureData.png */,
 				3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */,
 				3B4C9C78168BAC950033A8B0 /* testanimationTextureData.png */,
 			);
@@ -281,6 +287,8 @@
 				3BA7B528168549C500BE3A1B /* sirowlAnimationData.plist in Resources */,
 				3B4C9C79168BAC950033A8B0 /* testanimationTextureData.png in Resources */,
 				3B4C9C7C168BAD070033A8B0 /* testanimationAnimationData.plist in Resources */,
+				3B7FE5D7168E9816005E0AB1 /* catTextureData.png in Resources */,
+				3B7FE5DA168E9854005E0AB1 /* catAnimationData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

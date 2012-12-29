@@ -151,10 +151,10 @@
     
     GLfloat* arrayf = malloc(sizeof(GLfloat) * 12);
     
-    GLfloat xpercent = x / 280;
-    GLfloat ypercent = y / 170;
-    GLfloat xwidthpercent = (x + width) / 280;
-    GLfloat yheightpercent = (y + height) / 170;
+    GLfloat xpercent = x / 770;
+    GLfloat ypercent = y / 110;
+    GLfloat xwidthpercent = (x + width) / 770;
+    GLfloat yheightpercent = (y + height) / 110;
     
     arrayf[0] = xwidthpercent;
     arrayf[1] = yheightpercent;
@@ -243,11 +243,9 @@
     if (currentFrame +1 > animations[currentAnimation]->duration-1) {
         currentAnimation = 0;
         currentFrame = 0;
-        NSLog(@"reseting currentframe");
     }
     
     else {
-        NSLog(@"incrementing currentframe");
                 currentFrame++;
     }
         //apply the transform associated with this animation

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<array>
+	<array>
+		<string>Walk</string>
+		<integer>6</integer>
+		<integer>110</integer>
+		<integer>128</integer>
+		<array>
+			<integer>0</integer>
+			<integer>0</integer>
+		</array>
+		<array>
+			<integer>128</integer>
+			<integer>0</integer>
+		</array>
+		<array>
+			<integer>256</integer>
+			<integer>0</integer>
+		</array>
+		<array>
+			<integer>384</integer>
+			<integer>0</integer>
+		</array>
+		<array>
+			<integer>512</integer>
+			<integer>0</integer>
+		</array>
+		<array>
+			<integer>640</integer>
+			<integer>0</integer>
+		</array>
+	</array>
+</array>
+</plist>

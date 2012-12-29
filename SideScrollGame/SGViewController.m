@@ -116,7 +116,7 @@ enum
     down = NO;
     moving = NO;
     min = 5;
-    object = [[SGCharacter alloc] initCharacterNamed:@"testanimation"];
+    object = [[SGCharacter alloc] initCharacterNamed:@"cat"];
     
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
@@ -171,7 +171,6 @@ enum
     
     object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movementY, movementX , 0);
     
-    GLfloat* array = [object glFloatArrayFromOriginX:0.0f OriginY:0.0f];
     [object nextFrame];
     glBindBuffer(GL_ARRAY_BUFFER, 0);
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
