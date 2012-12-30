@@ -157,16 +157,16 @@ enum
     }
     
     if (up == YES) {
-        movementX -=.02;
+        movementX -=.01;
     }
     if (down == YES) {
-        movementX += .02;
+        movementX += .01;
     }
     if (forward == YES) {
-        movementY-=.02;
+        movementY-=.01;
     }
     if (backward == YES) {
-        movementY+=.02;
+        movementY+=.01;
     }
     
     object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movementY, movementX , 0);
@@ -375,50 +375,68 @@ enum
     float deltaX = loc.x - beginning.x;
     float deltaY = loc.y - beginning.y;
     
-    if (fabsf(deltaX) < min && fabsf(deltaY) < min) {
-        forward = NO;
-        backward = NO;
-        up = NO;
-        down = NO;
-        return;
+    float angle;
+    
+    if (deltaY == 0 || deltaX == 0) {
+        
+        angle = 90.0f;
+    }
+        
+    else angle = GLKMathRadiansToDegrees(atanf(fabsf(deltaX)/fabsf(deltaY)));
+    
+    
+    
+    if (deltaX > 0) {
+        angle += 180.0f;
+        //NSLog(@"deltaX less than 0");
+    }
+    
+    if  (deltaY > 0) {
+        angle +=90.0f;
+        //NSLog(@"deltaY less than 0");
     }
      
-    //change this -- should compute the angle of the joystick, not just do this
-    if (fabsf(deltaX) < fabsf(deltaY) ) {
-        if (deltaY > 0)
-        {
-            forward = YES;
-            backward = NO;
-        }
-        
-        
-        else {
-            forward = NO;
-            backward = YES;
-            
-        }
-        
-        up = NO;
-        down = NO;
-    }
-    else
-    {
-        if (deltaX > 0) {
-            up = YES;
-            down = NO;
-        }
-        
-        else {
-            down = YES;
-            up = NO;
-        }
-        
+
+    //NSLog(@"%f", angle);
+    if (angle >= 45.0f && angle < 135.0f) {
         forward = NO;
         backward = NO;
+        down = YES;
+        up = NO;
+        //NSLog(@"up");
+        return;
     }
     
+    if (angle >= 135.0f && angle < 225.0f) {
+        forward = NO;
+        backward = YES;
+        down = NO;
+        up = NO;
+        //NSLog(@"forwards");
+        return;
+    }
     
+
     
+    if (angle >= 225.0f && angle < 335.0f) {
+        forward = YES;
+        backward = NO;
+        down = NO;
+        up = NO;
+        //NSLog(@"backwards");
+        return;
+    }
+
+    if (angle >= 335.0f || angle < 45.0f) {
+        forward = NO;
+        backward = NO;
+        down = NO;
+        up = YES;
+        //NSLog(@"down");
+        return;
+    }
+
+
 }
 
 
