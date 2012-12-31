@@ -15,7 +15,7 @@
 {
     //get the vertexarrays of a and b with their transforms applied
     
-    //test if squares interset
+    //test if squares intersect
     
         //if they do, do pixel perfect test with masks
     

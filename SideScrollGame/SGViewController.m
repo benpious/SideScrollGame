@@ -151,11 +151,7 @@ enum
 #pragma mark - GLKView and GLKViewController delegate methods
 
 - (void)update
-{
-    if (moving!=YES) {
-        return;
-    }
-    
+{    
     if (up == YES) {
         movementX -=.01;
     }
@@ -352,6 +348,7 @@ enum
     moving = YES;
     UITouch* aTouch = [touches anyObject];
     beginning = [aTouch locationInView:nil];
+    [object setNextAnimation:1];
 
 }
 
@@ -362,6 +359,7 @@ enum
     backward = NO;
     up = NO;
     down = NO;
+    [object setNextAnimation:0];
     
 }
 
@@ -388,22 +386,18 @@ enum
     
     if (deltaX > 0) {
         angle += 180.0f;
-        //NSLog(@"deltaX less than 0");
     }
     
     if  (deltaY > 0) {
         angle +=90.0f;
-        //NSLog(@"deltaY less than 0");
     }
      
 
-    //NSLog(@"%f", angle);
     if (angle >= 45.0f && angle < 135.0f) {
         forward = NO;
         backward = NO;
         down = YES;
         up = NO;
-        //NSLog(@"up");
         return;
     }
     
@@ -412,7 +406,6 @@ enum
         backward = YES;
         down = NO;
         up = NO;
-        //NSLog(@"forwards");
         return;
     }
     
@@ -423,7 +416,6 @@ enum
         backward = NO;
         down = NO;
         up = NO;
-        //NSLog(@"backwards");
         return;
     }
 
@@ -432,7 +424,6 @@ enum
         backward = NO;
         down = NO;
         up = YES;
-        //NSLog(@"down");
         return;
     }
 

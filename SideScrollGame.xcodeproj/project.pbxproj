@@ -33,6 +33,7 @@
 		3B7FE5DA168E9854005E0AB1 /* catAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */; };
 		3BA7B528168549C500BE3A1B /* sirowlAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */; };
 		3BE07C7F164B95D600DBFD78 /* sirowlTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */; };
+		3BE2F7C51691E4430002306D /* actions.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2F7C41691E4430002306D /* actions.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -74,6 +75,7 @@
 		3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = catAnimationData.plist; sourceTree = "<group>"; };
 		3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sirowlAnimationData.plist; sourceTree = "<group>"; };
 		3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sirowlTextureData.png; path = ../../sirowlTextureData.png; sourceTree = "<group>"; };
+		3BE2F7C41691E4430002306D /* actions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = actions.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -209,6 +211,7 @@
 			children = (
 				3B30743B167D222C0088A46A /* SGGameEngine.h */,
 				3B30743C167D222C0088A46A /* SGGameEngine.m */,
+				3BE2F7C41691E4430002306D /* actions.c */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -307,6 +310,7 @@
 				3B30743D167D222C0088A46A /* SGGameEngine.m in Sources */,
 				3B75A9F5167D8DB700657BF8 /* SGQueue.m in Sources */,
 				3B3E0AD51683F05F00DBA665 /* SGAction.m in Sources */,
+				3BE2F7C51691E4430002306D /* actions.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

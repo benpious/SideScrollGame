@@ -50,9 +50,7 @@
     for (int i = 0; i < [animationArray count]; i++) {
         
         NSArray* temp = [animationArray objectAtIndex:i];
-        
-        //NSLog([temp description]);
-        
+                
         animation* currAnimation = malloc(sizeof(animation));
         currAnimation->name = [temp objectAtIndex:0];
         currAnimation->duration = [[temp objectAtIndex:1] intValue];
@@ -63,7 +61,6 @@
         
         currAnimation->coords = malloc(sizeof(GLfloat*) * (currAnimation->duration));
         
-        assert(currAnimation->duration > 0);
         for (int j = 4; (j - 4) < currAnimation->duration; j++) {
             currAnimation->coords[j - 4] = [self glFloatArrayFromOriginX:[[[temp objectAtIndex: j]objectAtIndex: 0] floatValue] OriginY:[[[temp objectAtIndex: j]objectAtIndex: 1] floatValue]];
             
@@ -80,7 +77,7 @@
     }
     
    
-    textureCoords = animations[0]->coords[1];
+    textureCoords = animations[0]->coords[0];
 }
 
 /*
@@ -231,6 +228,13 @@
 
 #pragma Methods for the game engine
 
+
+//test method -- delete later, move logic to character
+-(void) setNextAnimation: (int) animation
+{
+    currentAnimation = animation;
+}
+
 /*
  moves to the next frame in the current animation
  note that this method does NOT change the opengl texture array pointer to texcoords -- 
@@ -241,7 +245,7 @@
     //if we're at the end of the current animation, put the current frame to zero
     //and current animation to the idle animation (located at index 0) ********should make a constant
     if (currentFrame +1 > animations[currentAnimation]->duration-1) {
-        currentAnimation = 0;
+        //currentAnimation = 0;
         currentFrame = 0;
     }
     

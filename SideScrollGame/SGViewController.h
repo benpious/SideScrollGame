@@ -11,6 +11,7 @@
 
 #import "SGObjectEntity.h"
 #import "SGCharacter.h"
+#import "actions.c"
 
 @interface SGViewController : GLKViewController
 {

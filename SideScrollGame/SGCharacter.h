@@ -10,6 +10,7 @@
 #import <GLKit/GLKit.h>
 #import "SGEntityProtocol.h"
 #import "SGAction.h"
+#import "actions.c"
 
 /*
  This class is for anything with an animation
@@ -46,5 +47,7 @@ typedef struct {
 -(void)nextFrame;
 -(SGAction*) nextAction;
 -(GLfloat*) glFloatArrayFromOriginX: (GLfloat) x OriginY: (GLfloat) y;
+-(void) setNextAnimation: (int) animation;
+
 
 @end
