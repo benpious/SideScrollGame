@@ -9,6 +9,8 @@
 #import "SGGameEngine.h"
 
 @implementation SGGameEngine
+@synthesize objects;
+@synthesize characters;
 
 //call whenever an action is made
 -(BOOL)hitDetectedBetween: (NSObject<SGEntityProtocol>*) a and: (NSObject<SGEntityProtocol>*) b
@@ -16,7 +18,7 @@
     //get the vertexarrays of a and b with their transforms applied
     
     //test if squares intersect
-    
+    return [self squaresIntersect:a.vertexCoords :b.vertexCoords];
         //if they do, do pixel perfect test with masks
     
     return NO;
@@ -41,6 +43,7 @@
 {
     if (self = [super init]) {
         actionQueue = [[SGQueue alloc] init];
+        [self loadPlistWithName:levelName];
     }
     
     return self;
@@ -51,9 +54,38 @@
     
 }
 
+/*
+ Loads the level from a given .plist file
+ The format is this: an array with an array inside it for each object or character
+ Each of these arrays has the name of the file to be loaded, plus a label stating if it is a character
+ or an object
+ */
 -(void) loadPlistWithName: (NSString*) levelName
 {
+    NSPropertyListFormat format;
+    NSString* error = nil;
+    NSString* path = [[NSBundle mainBundle] pathForResource:levelName ofType:@".plist"];
+    NSData* plistXML = [[NSFileManager defaultManager] contentsAtPath:path];
+    NSArray* entityArray = (NSArray*)[NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListImmutable format:&format error:nil];
     
+    if (error != nil) {
+        NSLog(@"error reading plist");
+        return;
+    }
+    
+    characters = [[NSMutableArray alloc] initWithCapacity:[entityArray count]/2];
+    objects = [[NSMutableArray alloc] initWithCapacity:[entityArray count]/2];
+    for (int i = 0; i< [entityArray count]; i++) {
+        NSArray* currentEntity = [entityArray objectAtIndex:i];
+        
+        if ([currentEntity objectAtIndex:1] == @"character") {
+            [characters insertObject: [[SGCharacter alloc] initCharacterNamed: [currentEntity objectAtIndex:0]] atIndex:[characters count]] ;
+        }
+        
+        else {
+            [objects  insertObject: [[SGObjectEntity alloc] initObjectNamed: [currentEntity objectAtIndex:0]] atIndex:[objects count]] ;
+        }
+    }
 }
 
 //called whenever the openglview's update function fires
@@ -61,12 +93,12 @@
 {
     //loop through all the characters
     
-    for(SGCharacter* currChar in _characters)
+    for(SGCharacter* currChar in characters)
     {
         ;
     
         //request an action from each one
-    
+        
         //apply gravity if applicable
         [self applyGravityTo:currChar];
     
@@ -84,8 +116,36 @@
     object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(0.0f, object.fallSpeed, 0.0f);
 }
 
--(void) requestActionFromCharacter: (SGCharacter*) character
+-(void) requestActionFromCharacter: (SGCharacter<SGAgentProtocol>*) character
 {
+    
+    
+    //[character requestMoveWithGameState: ];
+}
+
+-(void) applyJoystickMovewithAngle: (GLfloat) angle
+{
+    
+    
+}
+
+-(void) applyTouchDownWithLocation:(CGPoint) loc
+{
+    
+}
+
+-(void) applyTouchUpWithLocation: (CGPoint) loc
+{
+    
+}
+
+
+//returns an array of objects to draw. The object receiving the array should release it at the end of its usefulness
+-(NSMutableArray*) objectsToDraw
+{
+    NSMutableArray* toReturn = [[NSMutableArray alloc] initWithArray:characters];
+    [toReturn addObjectsFromArray:objects];
+    return toReturn;
     
 }
 

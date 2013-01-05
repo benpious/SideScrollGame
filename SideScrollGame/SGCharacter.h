@@ -23,6 +23,7 @@ typedef struct {
     GLfloat** coords;
     GLfloat xOffset;
     GLfloat yOffset;
+    BOOL** animationHitmasks;
 } animation;
 
 

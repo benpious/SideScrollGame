@@ -75,6 +75,7 @@ enum
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [self setupGL];
+    //_engine = [[SGGameEngine alloc] initWithLevelPlist: @"testFile"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -179,11 +180,40 @@ enum
     glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    //to be used later
+    /*
+     for (int i=0; i< [objects count]; i++) {
+     NSObject<SGEntityProtocol>* current = [objects objectAtIndex:i];
+     glBindBuffer(GL_ARRAY_BUFFER, 0);
+     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
+     
+     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, object.vertexCoords, GL_STATIC_DRAW);
+     
+     glEnableVertexAttribArray(GLKVertexAttribPosition);
+     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+     glEnableVertexAttribArray(GLKVertexAttribNormal);
+     glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+     
+     glBindVertexArrayOES(0);
+     
+     
+     [current.effect prepareToDraw];
+     
+     glDrawArrays(GL_TRIANGLES, 0, 18);
+     
+     glUseProgram(_program);
+     
+     }
+     */
     
     // Render the object with GLKit
     [object.effect prepareToDraw];
     
+    NSArray* objects = [_engine objectsToDraw];
+    
+    
     glDrawArrays(GL_TRIANGLES, 0, 18);
+    
     
     // Render the object again with ES2
     glUseProgram(_program);
@@ -411,7 +441,7 @@ enum
     
 
     
-    if (angle >= 225.0f && angle < 335.0f) {
+    if (angle >= 225.0f && angle < 315.0f) {
         forward = YES;
         backward = NO;
         down = NO;
@@ -419,7 +449,7 @@ enum
         return;
     }
 
-    if (angle >= 335.0f || angle < 45.0f) {
+    if (angle >= 315.0f || angle < 45.0f) {
         forward = NO;
         backward = NO;
         down = NO;

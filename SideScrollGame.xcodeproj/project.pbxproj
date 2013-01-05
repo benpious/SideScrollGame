@@ -31,13 +31,19 @@
 		3B75A9F5167D8DB700657BF8 /* SGQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B75A9F4167D8DB700657BF8 /* SGQueue.m */; };
 		3B7FE5D7168E9816005E0AB1 /* catTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FE5D6168E9816005E0AB1 /* catTextureData.png */; };
 		3B7FE5DA168E9854005E0AB1 /* catAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */; };
+		3BA727D51698B37E0065C382 /* SGHitMaskManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727D41698B37E0065C382 /* SGHitMaskManager.m */; };
+		3BA727E01698B95B0065C382 /* SGStaticAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727DF1698B95B0065C382 /* SGStaticAgent.m */; };
+		3BA727E31698BBA10065C382 /* SGSimpleAttackAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727E21698BBA10065C382 /* SGSimpleAttackAgent.m */; };
 		3BA7B528168549C500BE3A1B /* sirowlAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */; };
+		3BD336FA1697426400CFA9F5 /* testLevel.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BD336F91697426400CFA9F5 /* testLevel.plist */; };
+		3BD336FF169747CF00CFA9F5 /* SGLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD336FE169747CF00CFA9F5 /* SGLevel.m */; };
 		3BE07C7F164B95D600DBFD78 /* sirowlTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */; };
 		3BE2F7C51691E4430002306D /* actions.c in Sources */ = {isa = PBXBuildFile; fileRef = 3BE2F7C41691E4430002306D /* actions.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3B13E37516897389000F9721 /* SGCharacterAgent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGCharacterAgent.h; sourceTree = "<group>"; };
+		3B26596E1695FDD9009B106B /* SGAgentProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGAgentProtocol.h; sourceTree = "<group>"; };
 		3B2B88D3164862DC004BADC9 /* SideScrollGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideScrollGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2B88D7164862DC004BADC9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3B2B88D9164862DC004BADC9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -73,7 +79,17 @@
 		3B75A9F4167D8DB700657BF8 /* SGQueue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGQueue.m; sourceTree = "<group>"; };
 		3B7FE5D6168E9816005E0AB1 /* catTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = catTextureData.png; path = ../../catTextureData.png; sourceTree = "<group>"; };
 		3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = catAnimationData.plist; sourceTree = "<group>"; };
+		3BA727D31698B37E0065C382 /* SGHitMaskManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGHitMaskManager.h; sourceTree = "<group>"; };
+		3BA727D41698B37E0065C382 /* SGHitMaskManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGHitMaskManager.m; sourceTree = "<group>"; };
+		3BA727D81698B5F10065C382 /* actions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = actions.h; sourceTree = "<group>"; };
+		3BA727DE1698B95B0065C382 /* SGStaticAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGStaticAgent.h; sourceTree = "<group>"; };
+		3BA727DF1698B95B0065C382 /* SGStaticAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGStaticAgent.m; sourceTree = "<group>"; };
+		3BA727E11698BBA10065C382 /* SGSimpleAttackAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSimpleAttackAgent.h; sourceTree = "<group>"; };
+		3BA727E21698BBA10065C382 /* SGSimpleAttackAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSimpleAttackAgent.m; sourceTree = "<group>"; };
 		3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sirowlAnimationData.plist; sourceTree = "<group>"; };
+		3BD336F91697426400CFA9F5 /* testLevel.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = testLevel.plist; sourceTree = "<group>"; };
+		3BD336FD169747CF00CFA9F5 /* SGLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGLevel.h; sourceTree = "<group>"; };
+		3BD336FE169747CF00CFA9F5 /* SGLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGLevel.m; sourceTree = "<group>"; };
 		3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sirowlTextureData.png; path = ../../sirowlTextureData.png; sourceTree = "<group>"; };
 		3BE2F7C41691E4430002306D /* actions.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = actions.c; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -106,9 +122,8 @@
 		3B2A93CF168C030C00CC4883 /* Plist Files */ = {
 			isa = PBXGroup;
 			children = (
-				3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */,
-				3B4C9C7B168BAD070033A8B0 /* testanimationAnimationData.plist */,
-				3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */,
+				3BD336FB1697427000CFA9F5 /* AnimationData */,
+				3BD336FC1697427C00CFA9F5 /* LevelData */,
 			);
 			name = "Plist Files";
 			sourceTree = "<group>";
@@ -168,8 +183,7 @@
 				3B2B88EB164862DC004BADC9 /* SGAppDelegate.m */,
 				3B2B88FA164862DC004BADC9 /* SGViewController.h */,
 				3B2B88FB164862DC004BADC9 /* SGViewController.m */,
-				3B75A9F3167D8DB700657BF8 /* SGQueue.h */,
-				3B75A9F4167D8DB700657BF8 /* SGQueue.m */,
+				3BA727D71698B5030065C382 /* Utilities */,
 				3BFE522B16881FC2005D025D /* Logic */,
 				3BFE522C16881FF8005D025D /* Resources */,
 				3B30743A167D219A0088A46A /* SGEntities */,
@@ -201,9 +215,60 @@
 				3B3E0AD41683F05F00DBA665 /* SGAction.m */,
 				3B307437167D214A0088A46A /* SGObjectEntity.h */,
 				3B307438167D214A0088A46A /* SGObjectEntity.m */,
+				3BD336FD169747CF00CFA9F5 /* SGLevel.h */,
+				3BD336FE169747CF00CFA9F5 /* SGLevel.m */,
 				3B2A93CD168C02E200CC4883 /* Protocols */,
 			);
 			name = SGEntities;
+			sourceTree = "<group>";
+		};
+		3BA727D71698B5030065C382 /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				3B75A9F3167D8DB700657BF8 /* SGQueue.h */,
+				3B75A9F4167D8DB700657BF8 /* SGQueue.m */,
+				3BA727D31698B37E0065C382 /* SGHitMaskManager.h */,
+				3BA727D41698B37E0065C382 /* SGHitMaskManager.m */,
+			);
+			name = Utilities;
+			sourceTree = "<group>";
+		};
+		3BA727DD1698B8B70065C382 /* Agent Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				3BA727DE1698B95B0065C382 /* SGStaticAgent.h */,
+				3BA727DF1698B95B0065C382 /* SGStaticAgent.m */,
+				3BA727E11698BBA10065C382 /* SGSimpleAttackAgent.h */,
+				3BA727E21698BBA10065C382 /* SGSimpleAttackAgent.m */,
+			);
+			name = "Agent Implementations";
+			sourceTree = "<group>";
+		};
+		3BD336F816973E6C00CFA9F5 /* Agent Logic */ = {
+			isa = PBXGroup;
+			children = (
+				3B26596E1695FDD9009B106B /* SGAgentProtocol.h */,
+				3BA727DD1698B8B70065C382 /* Agent Implementations */,
+			);
+			name = "Agent Logic";
+			sourceTree = "<group>";
+		};
+		3BD336FB1697427000CFA9F5 /* AnimationData */ = {
+			isa = PBXGroup;
+			children = (
+				3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */,
+				3B4C9C7B168BAD070033A8B0 /* testanimationAnimationData.plist */,
+				3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */,
+			);
+			name = AnimationData;
+			sourceTree = "<group>";
+		};
+		3BD336FC1697427C00CFA9F5 /* LevelData */ = {
+			isa = PBXGroup;
+			children = (
+				3BD336F91697426400CFA9F5 /* testLevel.plist */,
+			);
+			name = LevelData;
 			sourceTree = "<group>";
 		};
 		3BFE522B16881FC2005D025D /* Logic */ = {
@@ -211,7 +276,9 @@
 			children = (
 				3B30743B167D222C0088A46A /* SGGameEngine.h */,
 				3B30743C167D222C0088A46A /* SGGameEngine.m */,
+				3BA727D81698B5F10065C382 /* actions.h */,
 				3BE2F7C41691E4430002306D /* actions.c */,
+				3BD336F816973E6C00CFA9F5 /* Agent Logic */,
 			);
 			name = Logic;
 			sourceTree = "<group>";
@@ -292,6 +359,7 @@
 				3B4C9C7C168BAD070033A8B0 /* testanimationAnimationData.plist in Resources */,
 				3B7FE5D7168E9816005E0AB1 /* catTextureData.png in Resources */,
 				3B7FE5DA168E9854005E0AB1 /* catAnimationData.plist in Resources */,
+				3BD336FA1697426400CFA9F5 /* testLevel.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -311,6 +379,10 @@
 				3B75A9F5167D8DB700657BF8 /* SGQueue.m in Sources */,
 				3B3E0AD51683F05F00DBA665 /* SGAction.m in Sources */,
 				3BE2F7C51691E4430002306D /* actions.c in Sources */,
+				3BD336FF169747CF00CFA9F5 /* SGLevel.m in Sources */,
+				3BA727D51698B37E0065C382 /* SGHitMaskManager.m in Sources */,
+				3BA727E01698B95B0065C382 /* SGStaticAgent.m in Sources */,
+				3BA727E31698BBA10065C382 /* SGSimpleAttackAgent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

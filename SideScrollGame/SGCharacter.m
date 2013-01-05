@@ -115,7 +115,6 @@
     NSData* data = [[NSFileManager defaultManager] contentsAtPath:maskNameFullPath];
     
     
-    
 }
 
 
@@ -126,8 +125,10 @@
         //free memory allocated in animation struct
         for (int j = 0 ; j < animations[i]->duration; j++) {
             free(animations[i]->coords[j]);
-            free(animations[i]->coords);
+            //free(animations[i]->animationHitmasks[j]);
         }
+        //free(animations[i]->animationHitmasks);
+        free(animations[i]->coords);
         free(animations[i]);
     }
     

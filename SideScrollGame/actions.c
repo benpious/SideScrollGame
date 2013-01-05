@@ -7,11 +7,4 @@
 //
 
 #include <stdio.h>
-
-enum action {
-    up,
-    down,
-    backwards,
-    forwards,
-    idle
-};
+#include "actions.h"

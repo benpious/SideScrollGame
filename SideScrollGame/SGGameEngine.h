@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "SGCharacter.h"
-#import "SGViewController.h"
 #import "SGQueue.h"
 #import "SGAction.h"
+#import "SGAgentProtocol.h"
+#import "SGObjectEntity.h"
 
 @interface SGGameEngine : NSObject
 {
@@ -20,9 +21,20 @@
 
 }
 
+@property (retain) NSMutableArray* objects;
 @property (retain) NSMutableArray* characters;
 @property (assign) SGCharacter* player;
+@property (assign) GLfloat cameraYOffset;
+@property (assign) GLfloat cameraXOffset;
 
 -(id) initWithLevelPlist: (NSString*) levelName;
 
+//if the viewcontroller has recognized a joystick action, this method is called
+-(void) applyJoystickMovewithAngle: (GLfloat) angle;
+//if the viewcontroller recognizes a button press, this method is called
+-(void) applyTouchDownWithLocation:(CGPoint) loc;
+-(void) applyTouchUpWithLocation: (CGPoint) loc;
+
+-(NSMutableArray*) objectsToDraw;
+-(void) eventLoopCallBack;
 @end

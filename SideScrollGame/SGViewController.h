@@ -12,6 +12,7 @@
 #import "SGObjectEntity.h"
 #import "SGCharacter.h"
 #import "actions.c"
+#import "SGGameEngine.h"
 
 @interface SGViewController : GLKViewController
 {
@@ -26,5 +27,7 @@
     float min;
     SGCharacter* object;
 }
+
+@property (retain) SGGameEngine* engine;
 
 @end
