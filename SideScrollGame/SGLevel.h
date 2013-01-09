@@ -35,6 +35,9 @@ struct node {
 
 
 @interface SGLevel : SGObjectEntity
+{
+    GLfloat changePoint;
+}
 -(id) initWithLevelPlistNamed: (NSString*) levelName;
 
 

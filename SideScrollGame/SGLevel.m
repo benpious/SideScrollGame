@@ -37,4 +37,19 @@
     
 }
 
+-(BOOL) shouldSwitchLevel: (GLfloat) xPos
+{
+    if (xPos > changePoint) {
+        [self switchLevel];
+        return YES;
+    }
+    
+    return NO;
+}
+
+-(void) switchLevel
+{
+    
+}
+
 @end

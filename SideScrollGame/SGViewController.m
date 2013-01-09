@@ -118,6 +118,7 @@ enum
     moving = NO;
     min = 5;
     object = [[SGCharacter alloc] initCharacterNamed:@"cat"];
+    owl = [[SGObjectEntity alloc] initObjectNamed:@"sirowl"];
     
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
@@ -169,8 +170,6 @@ enum
     object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movementY, movementX , 0);
     
     [object nextFrame];
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
 
     
 }
@@ -180,43 +179,59 @@ enum
     glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
+    //NSArray* objects = [_engine objectsToDraw];
+
     //to be used later
     /*
      for (int i=0; i< [objects count]; i++) {
      NSObject<SGEntityProtocol>* current = [objects objectAtIndex:i];
      glBindBuffer(GL_ARRAY_BUFFER, 0);
-     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
+     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, current.textureCoords);
      
-     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, object.vertexCoords, GL_STATIC_DRAW);
+     glBindBuffer(GL_ARRAY_BUFFER, 0);
+     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, current.vertexCoords);
      
-     glEnableVertexAttribArray(GLKVertexAttribPosition);
-     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-     glEnableVertexAttribArray(GLKVertexAttribNormal);
-     glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-     
-     glBindVertexArrayOES(0);
-     
-     
-     [current.effect prepareToDraw];
-     
+     // Render the object with GLKit
+     [object.effect prepareToDraw];
+          
      glDrawArrays(GL_TRIANGLES, 0, 18);
      
+     
+     // Render the object again with ES2
      glUseProgram(_program);
+
      
      }
      */
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, object.vertexCoords);
     
     // Render the object with GLKit
     [object.effect prepareToDraw];
-    
-    NSArray* objects = [_engine objectsToDraw];
-    
-    
+        
     glDrawArrays(GL_TRIANGLES, 0, 18);
     
     
     // Render the object again with ES2
     glUseProgram(_program);
+    
+    
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, owl.textureCoords);
+
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, owl.vertexCoords);
+    
+    [owl.effect prepareToDraw];
+
+    glDrawArrays(GL_TRIANGLES, 0, 18);
+        
+    // Render the object again with ES2
+    glUseProgram(_program);
+
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation

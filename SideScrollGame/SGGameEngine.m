@@ -91,14 +91,19 @@
 //called whenever the openglview's update function fires
 -(void) eventLoopCallBack
 {
-    //loop through all the characters
     
+    //make the gamestate array TODO: should include level
+    NSArray* state = [[NSArray alloc] initWithObjects:characters, objects, nil];
+
+    //loop through all the characters
     for(SGCharacter* currChar in characters)
     {
         ;
     
         //request an action from each one
-        
+        if ([currChar respondsToSelector:NSSelectorFromString( @"requestMoveWithGameState:")]) {
+            [actionQueue offer: [currChar requestMoveWithGameState: state]];
+        }
         //apply gravity if applicable
         [self applyGravityTo:currChar];
     
@@ -106,7 +111,11 @@
     
     
     //loop through the action queue applying the results
-    
+    while (actionQueue.length != 0) {
+        SGAction* action = [actionQueue pop];
+        
+        
+    }
 
 }
 
