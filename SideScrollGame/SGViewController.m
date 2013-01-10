@@ -75,7 +75,7 @@ enum
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [self setupGL];
-    //_engine = [[SGGameEngine alloc] initWithLevelPlist: @"testFile"];
+    _engine = [[SGGameEngine alloc] initWithLevelPlist: @"testLevel"];
 }
 
 - (void)didReceiveMemoryWarning
@@ -117,17 +117,15 @@ enum
     down = NO;
     moving = NO;
     min = 5;
-    object = [[SGCharacter alloc] initCharacterNamed:@"cat"];
-    owl = [[SGObjectEntity alloc] initObjectNamed:@"sirowl"];
-    
+
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
+    //glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
 
     
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glGenBuffers(1, &triBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, triBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, object.vertexCoords, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, ((SGCharacter*)[[_engine characters] objectAtIndex:0]).vertexCoords, GL_STATIC_DRAW);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
@@ -167,9 +165,13 @@ enum
         movementY+=.01;
     }
     
-    object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movementY, movementX , 0);
+    ((SGCharacter*)[[_engine characters] objectAtIndex:0]).effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movementY, movementX , 0);
     
-    [object nextFrame];
+    [((SGCharacter*)[[_engine characters] objectAtIndex:0]) nextFrame];
+    
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0,  ((SGCharacter*)[[_engine characters] objectAtIndex:0]).textureCoords);
+
 
     
 }
@@ -179,58 +181,30 @@ enum
     glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
-    //NSArray* objects = [_engine objectsToDraw];
+    NSArray* objects = [_engine objectsToDraw];
 
-    //to be used later
-    /*
-     for (int i=0; i< [objects count]; i++) {
-     NSObject<SGEntityProtocol>* current = [objects objectAtIndex:i];
-     glBindBuffer(GL_ARRAY_BUFFER, 0);
-     glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, current.textureCoords);
-     
-     glBindBuffer(GL_ARRAY_BUFFER, 0);
-     glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, current.vertexCoords);
-     
-     // Render the object with GLKit
-     [object.effect prepareToDraw];
-          
-     glDrawArrays(GL_TRIANGLES, 0, 18);
-     
-     
-     // Render the object again with ES2
-     glUseProgram(_program);
-
-     
-     }
-     */
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
+    for (int i=0; i< [objects count]; i++) {
+    NSObject<SGEntityProtocol>* current = [objects objectAtIndex:i];
+    
+    //turn off antialiasing of textures
+    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, object.vertexCoords);
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, current.textureCoords);
+    
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, current.vertexCoords);
     
     // Render the object with GLKit
-    [object.effect prepareToDraw];
-        
+    [current.effect prepareToDraw];
+         
     glDrawArrays(GL_TRIANGLES, 0, 18);
     
     
     // Render the object again with ES2
     glUseProgram(_program);
-    
-    
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, owl.textureCoords);
-
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, owl.vertexCoords);
-    
-    [owl.effect prepareToDraw];
-
-    glDrawArrays(GL_TRIANGLES, 0, 18);
-        
-    // Render the object again with ES2
-    glUseProgram(_program);
+         
+    }
 
 }
 
@@ -393,7 +367,7 @@ enum
     moving = YES;
     UITouch* aTouch = [touches anyObject];
     beginning = [aTouch locationInView:nil];
-    [object setNextAnimation:1];
+    [((SGCharacter*)[[_engine characters] objectAtIndex:0]) setNextAnimation:1];
 
 }
 
@@ -404,7 +378,7 @@ enum
     backward = NO;
     up = NO;
     down = NO;
-    [object setNextAnimation:0];
+    [((SGCharacter*)[[_engine characters] objectAtIndex:0]) setNextAnimation:0];
     
 }
 

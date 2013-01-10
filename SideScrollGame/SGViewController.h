@@ -25,8 +25,6 @@
     float movementX;
     float movementY;
     float min;
-    SGCharacter* object;
-    SGObjectEntity* owl;
 }
 
 @property (retain) SGGameEngine* engine;

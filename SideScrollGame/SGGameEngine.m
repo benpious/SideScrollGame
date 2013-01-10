@@ -63,10 +63,10 @@
 -(void) loadPlistWithName: (NSString*) levelName
 {
     NSPropertyListFormat format;
-    NSString* error = nil;
+    NSError* error = nil;
     NSString* path = [[NSBundle mainBundle] pathForResource:levelName ofType:@".plist"];
     NSData* plistXML = [[NSFileManager defaultManager] contentsAtPath:path];
-    NSArray* entityArray = (NSArray*)[NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListImmutable format:&format error:nil];
+    NSArray* entityArray = (NSArray*)[NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListImmutable format:&format error:&error];
     
     if (error != nil) {
         NSLog(@"error reading plist");
@@ -78,7 +78,7 @@
     for (int i = 0; i< [entityArray count]; i++) {
         NSArray* currentEntity = [entityArray objectAtIndex:i];
         
-        if ([currentEntity objectAtIndex:1] == @"character") {
+        if ([[currentEntity objectAtIndex:1] isEqualToString: @"Character"]) {
             [characters insertObject: [[SGCharacter alloc] initCharacterNamed: [currentEntity objectAtIndex:0]] atIndex:[characters count]] ;
         }
         
@@ -113,7 +113,6 @@
     //loop through the action queue applying the results
     while (actionQueue.length != 0) {
         SGAction* action = [actionQueue pop];
-        
         
     }
 
