@@ -30,6 +30,8 @@
         [self populateArrays];
         fallSpeed = 0.0f;
         isFalling = NO;
+        movementX = 0.0f;
+        movementY = 0.0f;
         
     }
     
@@ -56,13 +58,14 @@
         currAnimation->duration = [[temp objectAtIndex:1] intValue];
         width = [[temp objectAtIndex:2] floatValue];
         height = [[temp objectAtIndex:3] floatValue];
-        //currAnimation->xOffset = [temp objectAtIndex:4]
-        //currAnimation->yOffset = [temp objectAtIndex:5]
+        currAnimation->xOffset = [[temp objectAtIndex:4] floatValue] ;
+        currAnimation->yOffset = [[temp objectAtIndex:5] floatValue] ;
+        
         
         currAnimation->coords = malloc(sizeof(GLfloat*) * (currAnimation->duration));
         
-        for (int j = 4; (j - 4) < currAnimation->duration; j++) {
-            currAnimation->coords[j - 4] = [self glFloatArrayFromOriginX:[[[temp objectAtIndex: j]objectAtIndex: 0] floatValue] OriginY:[[[temp objectAtIndex: j]objectAtIndex: 1] floatValue]];
+        for (int j = 6; (j - 6) < currAnimation->duration; j++) {
+            currAnimation->coords[j - 6] = [self glFloatArrayFromOriginX:[[[temp objectAtIndex: j]objectAtIndex: 0] floatValue] OriginY:[[[temp objectAtIndex: j]objectAtIndex: 1] floatValue]];
             
         }
         
@@ -105,15 +108,6 @@
     self.effect.texture2d0.name = texture.name;
     self.effect.light0.enabled = GL_TRUE;
     self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
-    
-}
-
--(void) loadHitMaskWithName: (NSString*) name
-{
-    NSString* maskNameFullPath = [[NSBundle mainBundle]
-                                   pathForResource:name ofType: nil];
-    NSData* data = [[NSFileManager defaultManager] contentsAtPath:maskNameFullPath];
-    
     
 }
 
@@ -243,25 +237,22 @@
  */
 -(void)nextFrame
 {
-    //if we're at the end of the current animation, put the current frame to zero
-    //and current animation to the idle animation (located at index 0) ********should make a constant
+    //loop to the beginning of the animation if we're finished with it
     if (currentFrame +1 > animations[currentAnimation]->duration-1) {
-        //currentAnimation = 0;
         currentFrame = 0;
     }
     
     else {
-                currentFrame++;
+            currentFrame++;
     }
-        //apply the transform associated with this animation
-        textureCoords = animations[currentAnimation]->coords[currentFrame];
 
+    textureCoords = animations[currentAnimation]->coords[currentFrame];
     
-        //this hasn't been implemented yet
-        /*
-        self.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(animations[currentAnimation]->xOffset, animations[currentAnimation]->yOffset, 0);
-         */
-        
+    movementX += animations[currentAnimation]->xOffset;
+    movementY += animations[currentAnimation]->yOffset;
+    
+    //NSLog(@"%f", movementX);
+    self.effect.transform.projectionMatrix = GLKMatrix4MakeTranslation(movementX, movementY, 0);
     
 }
 

@@ -11,19 +11,14 @@
 
 #import "SGObjectEntity.h"
 #import "SGCharacter.h"
-#import "actions.c"
+#import "actions.h"
 #import "SGGameEngine.h"
 
 @interface SGViewController : GLKViewController
 {
     CGPoint beginning;
-    BOOL forward;
-    BOOL backward;
-    BOOL up;
-    BOOL down;
     BOOL moving;
-    float movementX;
-    float movementY;
+    action currAction;
     float min;
 }
 

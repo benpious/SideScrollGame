@@ -15,6 +15,7 @@
 @synthesize texture;
 @synthesize fallSpeed;
 @synthesize isFalling;
+@synthesize hitmask;
 
 -(id) initObjectNamed: (NSString*) name
 {
@@ -60,6 +61,33 @@
         height = texture.height;
     
 
+}
+
+-(void) loadHitMaskWithName: (NSString*) name
+{
+    NSString* maskNameFullPath = [[NSBundle mainBundle]
+                                  pathForResource:name ofType: nil];
+    NSData* data = [[NSFileManager defaultManager] contentsAtPath:maskNameFullPath];
+    
+    hitmask = malloc(sizeof(BOOL*)*height);
+    for (int i =0; i< height; i++) {
+        hitmask[i] = malloc(sizeof(BOOL) * width);
+    }
+    
+    for (int i = 0; i < height; i++) {
+        for (int j = 0; j<width; j++) {
+            
+            if (((*((int*)[data bytes])) >> (int)((i *width) + width)) % 2 == 1) {
+                hitmask[i][j] = YES;
+            }
+            
+            else
+            {
+                hitmask[i][j] = NO;
+            }
+        }
+    }
+    
 }
 
 
@@ -141,6 +169,12 @@
     
     [texture release];
     [effect release];
+    
+    for (int i =0; i<height; i++) {
+        free(hitmask[i]);
+    }
+    
+    free(hitmask);
     
     [super dealloc];
 }

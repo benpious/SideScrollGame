@@ -12,18 +12,22 @@
 #import "SGAction.h"
 #import "SGAgentProtocol.h"
 #import "SGObjectEntity.h"
+#import "actions.h"
+#import "Playable.h"
+#import "SGMainCharacter.h"
 
 @interface SGGameEngine : NSObject
 {
     SGQueue* actionQueue;
     NSTimer* renderTimer;
     GLfloat gravitySpeed;
+    action joystickDirection;
 
 }
 
 @property (retain) NSMutableArray* objects;
 @property (retain) NSMutableArray* characters;
-@property (assign) SGCharacter* player;
+@property (assign) SGCharacter<Playable>* player;
 @property (assign) GLfloat cameraYOffset;
 @property (assign) GLfloat cameraXOffset;
 

@@ -18,4 +18,5 @@
 @property (retain) GLKTextureInfo *texture;
 @property (assign) BOOL isFalling;
 @property (assign) GLfloat fallSpeed;
+@property (assign) BOOL** hitmask;
 @end

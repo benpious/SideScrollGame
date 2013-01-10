@@ -34,7 +34,6 @@ enum
 }
 
 @property (strong, nonatomic) EAGLContext *context;
-@property (strong, nonatomic) GLKBaseEffect *effect;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -56,7 +55,6 @@ enum
     }
     
     [_context release];
-    [_effect release];
     [super dealloc];
 }
 
@@ -74,8 +72,11 @@ enum
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
+
     [self setupGL];
+    
     _engine = [[SGGameEngine alloc] initWithLevelPlist: @"testLevel"];
+
 }
 
 - (void)didReceiveMemoryWarning
@@ -108,18 +109,11 @@ enum
     [self loadShaders];
  
     // test stuff, delete when finished
-    
-    movementX = 0.0f;
-    movementY = 0.0f;
-    forward = NO;
-    backward = NO;
-    up = NO;
-    down = NO;
     moving = NO;
     min = 5;
-
+    currAction = idle;
+    
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
-    //glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, object.textureCoords);
 
     
     glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -139,9 +133,7 @@ enum
 - (void)tearDownGL
 {
     [EAGLContext setCurrentContext:self.context];
-        
-    self.effect = nil;
-    
+            
     if (_program) {
         glDeleteProgram(_program);
         _program = 0;
@@ -152,28 +144,7 @@ enum
 
 - (void)update
 {    
-    if (up == YES) {
-        movementX -=.01;
-    }
-    if (down == YES) {
-        movementX += .01;
-    }
-    if (forward == YES) {
-        movementY-=.01;
-    }
-    if (backward == YES) {
-        movementY+=.01;
-    }
-    
-    ((SGCharacter*)[[_engine characters] objectAtIndex:0]).effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(movementY, movementX , 0);
-    
-    [((SGCharacter*)[[_engine characters] objectAtIndex:0]) nextFrame];
-    
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0,  ((SGCharacter*)[[_engine characters] objectAtIndex:0]).textureCoords);
-
-
-    
+    [_engine eventLoopCallBack];
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
@@ -182,28 +153,29 @@ enum
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     NSArray* objects = [_engine objectsToDraw];
-
+    
     for (int i=0; i< [objects count]; i++) {
-    NSObject<SGEntityProtocol>* current = [objects objectAtIndex:i];
-    
-    //turn off antialiasing of textures
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        NSObject<SGEntityProtocol>* current = [objects objectAtIndex:i];
+        
+        //turn off antialiasing of textures
+        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, current.textureCoords);
+        
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+        glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, current.vertexCoords);
+        
 
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, current.textureCoords);
-    
-    glBindBuffer(GL_ARRAY_BUFFER, 0);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, current.vertexCoords);
-    
-    // Render the object with GLKit
-    [current.effect prepareToDraw];
-         
-    glDrawArrays(GL_TRIANGLES, 0, 18);
-    
-    
-    // Render the object again with ES2
-    glUseProgram(_program);
-         
+        // Render the object with GLKit
+        [current.effect prepareToDraw];
+        
+        glDrawArrays(GL_TRIANGLES, 0, 18);
+        
+        
+        // Render the object again with ES2
+        glUseProgram(_program);
+                 
     }
 
 }
@@ -367,17 +339,12 @@ enum
     moving = YES;
     UITouch* aTouch = [touches anyObject];
     beginning = [aTouch locationInView:nil];
-    [((SGCharacter*)[[_engine characters] objectAtIndex:0]) setNextAnimation:1];
 
 }
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    moving = NO;
-    forward = NO;
-    backward = NO;
-    up = NO;
-    down = NO;
+    currAction = idle;
     [((SGCharacter*)[[_engine characters] objectAtIndex:0]) setNextAnimation:0];
     
 }
@@ -412,40 +379,7 @@ enum
     }
      
 
-    if (angle >= 45.0f && angle < 135.0f) {
-        forward = NO;
-        backward = NO;
-        down = YES;
-        up = NO;
-        return;
-    }
-    
-    if (angle >= 135.0f && angle < 225.0f) {
-        forward = NO;
-        backward = YES;
-        down = NO;
-        up = NO;
-        return;
-    }
-    
-
-    
-    if (angle >= 225.0f && angle < 315.0f) {
-        forward = YES;
-        backward = NO;
-        down = NO;
-        up = NO;
-        return;
-    }
-
-    if (angle >= 315.0f || angle < 45.0f) {
-        forward = NO;
-        backward = NO;
-        down = NO;
-        up = YES;
-        return;
-    }
-
+    [_engine applyJoystickMovewithAngle:angle];
 
 }
 

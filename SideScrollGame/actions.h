@@ -8,15 +8,17 @@
 
 #ifndef SideScrollGame_actions_h
 #define SideScrollGame_actions_h
-const int idle;
-const int up;
-const int down;
-const int forwards;
-const int backwards;
-const int jump;
-const int falling;
-const int blocked;
-const int forwardfacing;
-const int backwardsfacing;
+
+
+typedef enum
+{
+    up,
+    down,
+    backwards,
+    forwards,
+    idle
+    
+}
+action;
 
 #endif

@@ -10,7 +10,7 @@
 #import <GLKit/GLKit.h>
 #import "SGEntityProtocol.h"
 #import "SGAction.h"
-#import "actions.c"
+#import "actions.h"
 
 /*
  This class is for anything with an animation
@@ -39,6 +39,8 @@ typedef struct {
     
     GLfloat width;
     GLfloat height;
+    GLfloat movementX;
+    GLfloat movementY;
 }
 
 @property (assign) int health;

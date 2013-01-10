@@ -11,6 +11,7 @@
 @implementation SGGameEngine
 @synthesize objects;
 @synthesize characters;
+@synthesize player;
 
 //call whenever an action is made
 -(BOOL)hitDetectedBetween: (NSObject<SGEntityProtocol>*) a and: (NSObject<SGEntityProtocol>*) b
@@ -83,6 +84,12 @@
         }
         
         else {
+            
+            if ([[currentEntity objectAtIndex:1] isEqualToString: @"Main"]) {
+                [characters insertObject: [[SGMainCharacter alloc] initCharacterNamed: [currentEntity objectAtIndex:0]] atIndex:[characters count]] ;
+                player = [characters objectAtIndex:[characters count]-1];
+            }
+            else
             [objects  insertObject: [[SGObjectEntity alloc] initObjectNamed: [currentEntity objectAtIndex:0]] atIndex:[objects count]] ;
         }
     }
@@ -98,7 +105,7 @@
     //loop through all the characters
     for(SGCharacter* currChar in characters)
     {
-        ;
+        [currChar nextFrame];
     
         //request an action from each one
         if ([currChar respondsToSelector:NSSelectorFromString( @"requestMoveWithGameState:")]) {
@@ -134,6 +141,32 @@
 -(void) applyJoystickMovewithAngle: (GLfloat) angle
 {
     
+    
+    if (angle >= 45.0f && angle < 135.0f) {
+        joystickDirection = down;
+        [player receiveJoystickInput:joystickDirection];
+        return;
+    }
+    
+    if (angle >= 135.0f && angle < 225.0f) {
+        joystickDirection = backwards;
+        [player receiveJoystickInput:joystickDirection];
+        return;
+    }
+    
+    
+    
+    if (angle >= 225.0f && angle < 315.0f) {
+        joystickDirection = forwards;
+        [player receiveJoystickInput:joystickDirection];
+        return;
+    }
+    
+    if (angle >= 315.0f || angle < 45.0f) {
+        joystickDirection = up;
+        [player receiveJoystickInput:joystickDirection];
+        return;
+    }
     
 }
 
