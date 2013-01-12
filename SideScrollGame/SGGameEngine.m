@@ -45,6 +45,7 @@
     if (self = [super init]) {
         actionQueue = [[SGQueue alloc] init];
         [self loadPlistWithName:levelName];
+        joystick = [[SGJoystick alloc] initJoystick];
     }
     
     return self;
@@ -108,9 +109,11 @@
         [currChar nextFrame];
     
         //request an action from each one
+        
         if ([currChar respondsToSelector:NSSelectorFromString( @"requestMoveWithGameState:")]) {
-            [actionQueue offer: [currChar requestMoveWithGameState: state]];
+            [actionQueue offer: [currChar performSelector:NSSelectorFromString( @"requestMoveWithGameState:") withObject:state]];
         }
+
         //apply gravity if applicable
         [self applyGravityTo:currChar];
     
@@ -138,9 +141,11 @@
     //[character requestMoveWithGameState: ];
 }
 
--(void) applyJoystickMovewithAngle: (GLfloat) angle
+-(void) applyJoystickMovewithAngle: (GLfloat) angle XPos: (GLfloat) xPos YPos: (GLfloat) yPos Radians: (GLfloat) radiansAngle
 {
-    
+    //test code
+    [joystick recieveJoystickInputWithAngle:radiansAngle XPos:xPos YPos:yPos];
+
     
     if (angle >= 45.0f && angle < 135.0f) {
         joystickDirection = down;
@@ -168,6 +173,7 @@
         return;
     }
     
+    
 }
 
 -(void) applyTouchDownWithLocation:(CGPoint) loc
@@ -177,7 +183,7 @@
 
 -(void) applyTouchUpWithLocation: (CGPoint) loc
 {
-    
+    [joystick joyStickInputStopped];
 }
 
 
@@ -186,6 +192,13 @@
 {
     NSMutableArray* toReturn = [[NSMutableArray alloc] initWithArray:characters];
     [toReturn addObjectsFromArray:objects];
+    
+    //test code
+    if (joystick.shouldDraw == YES) {
+        [toReturn addObject:joystick];
+    }
+    
+    
     return toReturn;
     
 }

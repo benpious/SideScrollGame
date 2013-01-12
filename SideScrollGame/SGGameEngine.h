@@ -15,6 +15,7 @@
 #import "actions.h"
 #import "Playable.h"
 #import "SGMainCharacter.h"
+#import "SGJoystick.h"
 
 @interface SGGameEngine : NSObject
 {
@@ -22,6 +23,7 @@
     NSTimer* renderTimer;
     GLfloat gravitySpeed;
     action joystickDirection;
+    SGJoystick* joystick;
 
 }
 
@@ -34,7 +36,7 @@
 -(id) initWithLevelPlist: (NSString*) levelName;
 
 //if the viewcontroller has recognized a joystick action, this method is called
--(void) applyJoystickMovewithAngle: (GLfloat) angle;
+-(void) applyJoystickMovewithAngle: (GLfloat) angle XPos: (GLfloat) xPos YPos: (GLfloat) yPos Radians: (GLfloat) radiansAngle;
 //if the viewcontroller recognizes a button press, this method is called
 -(void) applyTouchDownWithLocation:(CGPoint) loc;
 -(void) applyTouchUpWithLocation: (CGPoint) loc;

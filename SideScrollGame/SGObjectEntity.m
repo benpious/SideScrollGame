@@ -16,12 +16,14 @@
 @synthesize fallSpeed;
 @synthesize isFalling;
 @synthesize hitmask;
+@synthesize height;
+@synthesize width;
 
 -(id) initObjectNamed: (NSString*) name
 {
     if (self = [super init]) {
         
-        effect = [[GLKBaseEffect alloc] init];
+        self.effect = [[GLKBaseEffect alloc] init];
         [self defineTextureCoords];
         [self loadTexture: [name stringByAppendingString:@"TextureData.png"]];
         [self populateArrays];
@@ -40,27 +42,26 @@
     NSDictionary* textureOps = @{GLKTextureLoaderApplyPremultiplication : @NO, GLKTextureLoaderGenerateMipmaps : @NO, GLKTextureLoaderOriginBottomLeft : @YES};
     NSString* imageNameFullPath = [[NSBundle mainBundle]
                                    pathForResource:imageName ofType: nil];
-    texture = [GLKTextureLoader textureWithContentsOfFile: imageNameFullPath options:textureOps error:&error];
+    self.texture = [GLKTextureLoader textureWithContentsOfFile: imageNameFullPath options:textureOps error:&error];
     
     if (error != nil) {
         NSLog(@"Texture loading error: %d", [error code]);
     }
     
-    if (texture == nil) {
+    if (self.texture == nil) {
         NSLog(@"Error: Texture was not loaded");
         return;
     }
     
-        self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-        self.effect.texture2d0.target = GLKTextureTarget2D;
-        self.effect.texture2d0.name = texture.name;
-        [self defineTextureCoords];
-        self.effect.light0.enabled = GL_TRUE;
-        self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
-        width = texture.width;
-        height = texture.height;
+    self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
+    self.effect.texture2d0.target = GLKTextureTarget2D;
+    self.effect.texture2d0.name = texture.name;
+    [self defineTextureCoords];
+    self.effect.light0.enabled = GL_TRUE;
+    self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
+    self.width = self.texture.width;
+    self.height = self.texture.height;    
     
-
 }
 
 -(void) loadHitMaskWithName: (NSString*) name
@@ -94,70 +95,71 @@
 //defines the texture coordinates to cover the whole of the image given
 -(void) defineTextureCoords
 {
-    textureCoords = malloc(sizeof(GLfloat) * 12);
+    self.textureCoords = malloc(sizeof(GLfloat) * 12);
     
-    textureCoords[0] = 1.0f;
-    textureCoords[1] = 1.0f;
-    textureCoords[2] = 0.0f;
-    textureCoords[3] = 0.0f;
-    textureCoords[4] = 0.0f;
-    textureCoords[5] = 1.0f;
-    textureCoords[6] = 1.0f;
-    textureCoords[7] = 1.0f;
-    textureCoords[8] = 1.0f;
-    textureCoords[9] = 0.0f;
-    textureCoords[10] = 0.0f;
-    textureCoords[11] = 0.0f;
+    self.textureCoords[0] = 1.0f;
+    self.textureCoords[1] = 1.0f;
+    self.textureCoords[2] = 0.0f;
+    self.textureCoords[3] = 0.0f;
+    self.textureCoords[4] = 0.0f;
+    self.textureCoords[5] = 1.0f;
+    self.textureCoords[6] = 1.0f;
+    self.textureCoords[7] = 1.0f;
+    self.textureCoords[8] = 1.0f;
+    self.textureCoords[9] = 0.0f;
+    self.textureCoords[10] = 0.0f;
+    self.textureCoords[11] = 0.0f;
     
 }
 
 -(void) populateArrays
 {
     
-    vertexCoords = malloc(sizeof(GLfloat) * 18);
+    self.vertexCoords = malloc(sizeof(GLfloat) * 18);
     
     
     GLfloat proportion;
-    
-    if (width > height) {
-        proportion = height/width;
         
-        vertexCoords[0] = 1.0f;
-        vertexCoords[1] = proportion;
-        vertexCoords[3] = 0.0f;
-        vertexCoords[4] = 0.0f;
-        vertexCoords[6] = 0.0f;
-        vertexCoords[7] = proportion;
-        vertexCoords[9] = 1.0f;
-        vertexCoords[10] = proportion;
-        vertexCoords[12] = 1.0f;
-        vertexCoords[13] = 0.0f;
-        vertexCoords[15] = 0.0f;
-        vertexCoords[16] = 0.0f;
+    if (width > height) {
+        proportion = self.height/self.width;
+        
+        self.vertexCoords[0] = 1.0f;
+        self.vertexCoords[1] = proportion;
+        self.vertexCoords[3] = 0.0f;
+        self.vertexCoords[4] = 0.0f;
+        self.vertexCoords[6] = 0.0f;
+        self.vertexCoords[7] = proportion;
+        self.vertexCoords[9] = 1.0f;
+        self.vertexCoords[10] = proportion;
+        self.vertexCoords[12] = 1.0f;
+        self.vertexCoords[13] = 0.0f;
+        self.vertexCoords[15] = 0.0f;
+        self.vertexCoords[16] = 0.0f;
     }
     
     else {
         
-        proportion = width/height;
-        vertexCoords[0] = proportion;
-        vertexCoords[1] = 1.0f;
-        vertexCoords[3] = 0.0f;
-        vertexCoords[4] = 0.0f;
-        vertexCoords[6] = 0.0f;
-        vertexCoords[7] = 1.0f;
-        vertexCoords[9] = proportion;
-        vertexCoords[10] = 1.0f;
-        vertexCoords[12] = proportion;
-        vertexCoords[13] = 0.0f;
-        vertexCoords[15] = 0.0f;
-        vertexCoords[16] = 0.0f;
+        
+        proportion = self.width/self.height;
+        self.vertexCoords[0] = proportion;
+        self.vertexCoords[1] = 1.0f;
+        self.vertexCoords[3] = 0.0f;
+        self.vertexCoords[4] = 0.0f;
+        self.vertexCoords[6] = 0.0f;
+        self.vertexCoords[7] = 1.0f;
+        self.vertexCoords[9] = proportion;
+        self.vertexCoords[10] = 1.0f;
+        self.vertexCoords[12] = proportion;
+        self.vertexCoords[13] = 0.0f;
+        self.vertexCoords[15] = 0.0f;
+        self.vertexCoords[16] = 0.0f;
         
         
     }
     
     //fill the z coords with 0s
     for (int i = 0; i <= 5 ; i++) {
-        vertexCoords[i*3+2] = 0.0f;
+        self.vertexCoords[i*3+2] = 0.0f;
     }
     
 }

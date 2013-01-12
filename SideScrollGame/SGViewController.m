@@ -346,6 +346,10 @@ enum
 {
     currAction = idle;
     [((SGCharacter*)[[_engine characters] objectAtIndex:0]) setNextAnimation:0];
+    UITouch* aTouch = [touches anyObject];
+    CGPoint loc = [aTouch locationInView:nil];
+
+    [_engine applyTouchUpWithLocation: loc ];
     
 }
 
@@ -360,27 +364,39 @@ enum
     float deltaY = loc.y - beginning.y;
     
     float angle;
+    float radiansAngle;
     
+    //does not work fix WRT the non-negative one
     if (deltaY == 0 || deltaX == 0) {
         
         angle = 90.0f;
-    }
-        
-    else angle = GLKMathRadiansToDegrees(atanf(fabsf(deltaX)/fabsf(deltaY)));
-    
-    
-    
-    if (deltaX > 0) {
-        angle += 180.0f;
+        radiansAngle = GLKMathDegreesToRadians(90.0f);
     }
     
-    if  (deltaY > 0) {
-        angle +=90.0f;
+    else
+    {
+        angle = 270.0f + GLKMathRadiansToDegrees(atanf(fabsf(deltaX)/fabsf(deltaY)));
+        radiansAngle = GLKMathDegreesToRadians( 270.0f) + atanf(fabsf(deltaX)/fabsf(deltaY));
     }
-     
+    
 
-    [_engine applyJoystickMovewithAngle:angle];
-
+    if (deltaY < 0 && deltaX > 0 ) {
+        radiansAngle = GLKMathDegreesToRadians(270.0f) - atanf(fabsf(deltaX)/fabsf(deltaY));
+        angle =  270.0f - GLKMathRadiansToDegrees(atanf(fabsf(deltaX)/fabsf(deltaY)));
+    }
+    
+    if  (deltaY > 0 && deltaX > 0) {
+        radiansAngle = GLKMathDegreesToRadians(90.0f) + atanf(fabsf(deltaX)/fabsf(deltaY));
+        angle = 90.0f + GLKMathRadiansToDegrees(atanf(fabsf(deltaX)/fabsf(deltaY)));
+    }
+    
+    if  (deltaY > 0 && deltaX < 0) {
+        radiansAngle = GLKMathDegreesToRadians(90.0f) - atanf(fabsf(deltaX)/fabsf(deltaY));
+        angle = 90.0f - GLKMathRadiansToDegrees( atanf(fabsf(deltaX)/fabsf(deltaY)));
+    }
+    
+    [_engine applyJoystickMovewithAngle:angle XPos:beginning.x YPos:beginning.y Radians: radiansAngle ];
+    
 }
 
 

@@ -10,10 +10,9 @@
 #import "SGEntityProtocol.h"
 
 @interface SGObjectEntity : NSObject<SGEntityProtocol>
-{
-    GLfloat width;
-    GLfloat height;
-}
+@property (assign) GLfloat width;
+@property (assign) GLfloat height;
+
 -(id) initObjectNamed: (NSString*) name;
 
 @end

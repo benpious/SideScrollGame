@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B105022169F533C00E52403 /* SGJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B105021169F533C00E52403 /* SGJoystick.m */; };
 		3B2B88D8164862DC004BADC9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88D7164862DC004BADC9 /* UIKit.framework */; };
 		3B2B88DA164862DC004BADC9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88D9164862DC004BADC9 /* Foundation.framework */; };
 		3B2B88DC164862DC004BADC9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88DB164862DC004BADC9 /* CoreGraphics.framework */; };
@@ -25,6 +26,7 @@
 		3B307434167D14EE0088A46A /* SGCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B307433167D14EE0088A46A /* SGCharacter.m */; };
 		3B307439167D214A0088A46A /* SGObjectEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B307438167D214A0088A46A /* SGObjectEntity.m */; };
 		3B30743D167D222C0088A46A /* SGGameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B30743C167D222C0088A46A /* SGGameEngine.m */; };
+		3B37D01B169F650E00B0F240 /* joystickTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B37D01A169F650E00B0F240 /* joystickTextureData.png */; };
 		3B3E0AD51683F05F00DBA665 /* SGAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3E0AD41683F05F00DBA665 /* SGAction.m */; };
 		3B3EE0F3169E4E560005E2F6 /* SGMainCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3EE0F2169E4E560005E2F6 /* SGMainCharacter.m */; };
 		3B4C9C79168BAC950033A8B0 /* testanimationTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4C9C78168BAC950033A8B0 /* testanimationTextureData.png */; };
@@ -42,6 +44,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B105020169F533C00E52403 /* SGJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGJoystick.h; sourceTree = "<group>"; };
+		3B105021169F533C00E52403 /* SGJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGJoystick.m; sourceTree = "<group>"; };
 		3B13E37516897389000F9721 /* SGCharacterAgent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGCharacterAgent.h; sourceTree = "<group>"; };
 		3B26596E1695FDD9009B106B /* SGAgentProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGAgentProtocol.h; sourceTree = "<group>"; };
 		3B2B88D3164862DC004BADC9 /* SideScrollGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideScrollGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -71,6 +75,7 @@
 		3B307438167D214A0088A46A /* SGObjectEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGObjectEntity.m; sourceTree = "<group>"; };
 		3B30743B167D222C0088A46A /* SGGameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGGameEngine.h; sourceTree = "<group>"; };
 		3B30743C167D222C0088A46A /* SGGameEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGGameEngine.m; sourceTree = "<group>"; };
+		3B37D01A169F650E00B0F240 /* joystickTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickTextureData.png; path = ../../joystickTextureData.png; sourceTree = "<group>"; };
 		3B3E0AD31683F05F00DBA665 /* SGAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAction.h; sourceTree = "<group>"; };
 		3B3E0AD41683F05F00DBA665 /* SGAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAction.m; sourceTree = "<group>"; };
 		3B3EE0F0169E4D380005E2F6 /* Playable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Playable.h; sourceTree = "<group>"; };
@@ -112,6 +117,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3B10501E169F532200E52403 /* Controls */ = {
+			isa = PBXGroup;
+			children = (
+				3B105020169F533C00E52403 /* SGJoystick.h */,
+				3B105021169F533C00E52403 /* SGJoystick.m */,
+			);
+			name = Controls;
+			sourceTree = "<group>";
+		};
 		3B2A93CD168C02E200CC4883 /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
@@ -137,6 +151,7 @@
 				3B7FE5D6168E9816005E0AB1 /* catTextureData.png */,
 				3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */,
 				3B4C9C78168BAC950033A8B0 /* testanimationTextureData.png */,
+				3B37D01A169F650E00B0F240 /* joystickTextureData.png */,
 			);
 			name = Textures;
 			sourceTree = "<group>";
@@ -219,6 +234,7 @@
 				3B3E0AD41683F05F00DBA665 /* SGAction.m */,
 				3B307437167D214A0088A46A /* SGObjectEntity.h */,
 				3B307438167D214A0088A46A /* SGObjectEntity.m */,
+				3B10501E169F532200E52403 /* Controls */,
 				3BD336FD169747CF00CFA9F5 /* SGLevel.h */,
 				3BD336FE169747CF00CFA9F5 /* SGLevel.m */,
 				3B2A93CD168C02E200CC4883 /* Protocols */,
@@ -372,6 +388,7 @@
 				3B7FE5D7168E9816005E0AB1 /* catTextureData.png in Resources */,
 				3B7FE5DA168E9854005E0AB1 /* catAnimationData.plist in Resources */,
 				3BD336FA1697426400CFA9F5 /* testLevel.plist in Resources */,
+				3B37D01B169F650E00B0F240 /* joystickTextureData.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,6 +412,7 @@
 				3BA727E01698B95B0065C382 /* SGStaticAgent.m in Sources */,
 				3BA727E31698BBA10065C382 /* SGSimpleAttackAgent.m in Sources */,
 				3B3EE0F3169E4E560005E2F6 /* SGMainCharacter.m in Sources */,
+				3B105022169F533C00E52403 /* SGJoystick.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

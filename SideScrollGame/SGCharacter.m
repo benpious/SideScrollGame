@@ -9,6 +9,7 @@
 #import "SGCharacter.h"
 
 @implementation SGCharacter
+@synthesize hitmask;
 @synthesize texture;
 @synthesize effect;
 @synthesize vertexCoords;
@@ -28,8 +29,8 @@
         //load animation arrays
         [self loadAnimations: [name stringByAppendingString:@"AnimationData"]];
         [self populateArrays];
-        fallSpeed = 0.0f;
-        isFalling = NO;
+        self.fallSpeed = 0.0f;
+        self.isFalling = NO;
         movementX = 0.0f;
         movementY = 0.0f;
         
@@ -93,13 +94,13 @@
     NSDictionary* textureOps = @{GLKTextureLoaderApplyPremultiplication : @NO, GLKTextureLoaderGenerateMipmaps : @NO, GLKTextureLoaderOriginBottomLeft : @YES};
     NSString* imageNameFullPath = [[NSBundle mainBundle]
                            pathForResource:imageName ofType: nil];
-    texture = [GLKTextureLoader textureWithContentsOfFile: imageNameFullPath options:textureOps error:&error];
+    self.texture = [GLKTextureLoader textureWithContentsOfFile: imageNameFullPath options:textureOps error:&error];
     
     if (error != nil) {
         NSLog(@"error, %d", [error code]);
     }
     
-    if (texture == nil) {
+    if (self.texture == nil) {
         NSLog(@"error, texture is nil");
     }
 
@@ -171,7 +172,7 @@
 -(void) populateArrays
 {
     
-    vertexCoords = malloc(sizeof(GLfloat) * 18);
+    self.vertexCoords = malloc(sizeof(GLfloat) * 18);
     
     
     GLfloat proportion;
@@ -180,42 +181,42 @@
     if (width > height) {
         proportion = height/width;
         
-        vertexCoords[0] = 1.0f;
-        vertexCoords[1] = proportion;
-        vertexCoords[3] = 0.0f;
-        vertexCoords[4] = 0.0f;
-        vertexCoords[6] = 0.0f;
-        vertexCoords[7] = proportion;
-        vertexCoords[9] = 1.0f;
-        vertexCoords[10] = proportion;
-        vertexCoords[12] = 1.0f;
-        vertexCoords[13] = 0.0f;
-        vertexCoords[15] = 0.0f;
-        vertexCoords[16] = 0.0f;
+        self.vertexCoords[0] = 1.0f;
+        self.vertexCoords[1] = proportion;
+        self.vertexCoords[3] = 0.0f;
+        self.vertexCoords[4] = 0.0f;
+        self.vertexCoords[6] = 0.0f;
+        self.vertexCoords[7] = proportion;
+        self.vertexCoords[9] = 1.0f;
+        self.vertexCoords[10] = proportion;
+        self.vertexCoords[12] = 1.0f;
+        self.vertexCoords[13] = 0.0f;
+        self.vertexCoords[15] = 0.0f;
+        self.vertexCoords[16] = 0.0f;
     }
     
     else {
         
         proportion = width/height;
-        vertexCoords[0] = proportion;
-        vertexCoords[1] = 1.0f;
-        vertexCoords[3] = 0.0f;
-        vertexCoords[4] = 0.0f;
-        vertexCoords[6] = 0.0f;
-        vertexCoords[7] = 1.0f;
-        vertexCoords[9] = proportion;
-        vertexCoords[10] = 1.0f;
-        vertexCoords[12] = proportion;
-        vertexCoords[13] = 0.0f;
-        vertexCoords[15] = 0.0f;
-        vertexCoords[16] = 0.0f;
+        self.vertexCoords[0] = proportion;
+        self.vertexCoords[1] = 1.0f;
+        self.vertexCoords[3] = 0.0f;
+        self.vertexCoords[4] = 0.0f;
+        self.vertexCoords[6] = 0.0f;
+        self.vertexCoords[7] = 1.0f;
+        self.vertexCoords[9] = proportion;
+        self.vertexCoords[10] = 1.0f;
+        self.vertexCoords[12] = proportion;
+        self.vertexCoords[13] = 0.0f;
+        self.vertexCoords[15] = 0.0f;
+        self.vertexCoords[16] = 0.0f;
         
         
     }
     
     //fill the z coords with 0s
     for (int i = 0; i <= 5 ; i++) {
-        vertexCoords[i*3+2] = 0.0f;
+        self.vertexCoords[i*3+2] = 0.0f;
     }
     
 }
@@ -251,7 +252,6 @@
     movementX += animations[currentAnimation]->xOffset;
     movementY += animations[currentAnimation]->yOffset;
     
-    //NSLog(@"%f", movementX);
     self.effect.transform.projectionMatrix = GLKMatrix4MakeTranslation(movementX, movementY, 0);
     
 }
