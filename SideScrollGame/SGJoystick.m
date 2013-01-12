@@ -30,9 +30,7 @@
 
 -(void) recieveJoystickInputWithAngle:(GLfloat)angle XPos:(GLfloat)xPos YPos:(GLfloat)yPos
 {
-    //effect.transform.projectionMatrix = GLKMatrix4Multiply( GLKMatrix4MakeRotation(GLKMathDegreesToRadians(angle), 0, 0, 1), GLKMatrix4MakeTranslation(xPos, yPos, 0));
-
-    effect.transform.projectionMatrix =  GLKMatrix4MakeRotation(angle, 0, 0, 1);
+    effect.transform.projectionMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(xPos, yPos, 0), GLKMatrix4MakeRotation(angle, 0, 0, 1));
 
     shouldDraw = YES;
 }

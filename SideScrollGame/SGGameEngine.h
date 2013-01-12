@@ -36,7 +36,7 @@
 -(id) initWithLevelPlist: (NSString*) levelName;
 
 //if the viewcontroller has recognized a joystick action, this method is called
--(void) applyJoystickMovewithAngle: (GLfloat) angle XPos: (GLfloat) xPos YPos: (GLfloat) yPos Radians: (GLfloat) radiansAngle;
+-(void) applyJoystickMovewithAngle: (GLfloat) angle XPos: (GLfloat) xPos YPos: (GLfloat) yPos Radians: (GLfloat) radiansAngle Size: (CGSize) size;
 //if the viewcontroller recognizes a button press, this method is called
 -(void) applyTouchDownWithLocation:(CGPoint) loc;
 -(void) applyTouchUpWithLocation: (CGPoint) loc;

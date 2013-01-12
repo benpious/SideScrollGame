@@ -395,7 +395,7 @@ enum
         angle = 90.0f - GLKMathRadiansToDegrees( atanf(fabsf(deltaX)/fabsf(deltaY)));
     }
     
-    [_engine applyJoystickMovewithAngle:angle XPos:beginning.x YPos:beginning.y Radians: radiansAngle ];
+    [_engine applyJoystickMovewithAngle:angle XPos:beginning.x YPos:beginning.y Radians: radiansAngle Size: (CGSize) [[self view] frame].size ];
     
 }
 

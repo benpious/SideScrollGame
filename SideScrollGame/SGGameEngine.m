@@ -141,10 +141,10 @@
     //[character requestMoveWithGameState: ];
 }
 
--(void) applyJoystickMovewithAngle: (GLfloat) angle XPos: (GLfloat) xPos YPos: (GLfloat) yPos Radians: (GLfloat) radiansAngle
+-(void) applyJoystickMovewithAngle: (GLfloat) angle XPos: (GLfloat) xPos YPos: (GLfloat) yPos Radians: (GLfloat) radiansAngle Size:(CGSize)size
 {
-    //test code
-    [joystick recieveJoystickInputWithAngle:radiansAngle XPos:xPos YPos:yPos];
+    
+    [joystick recieveJoystickInputWithAngle:radiansAngle XPos:  1-yPos/(size.height/2) YPos:  1-xPos/(size.width/2)];
 
     
     if (angle >= 45.0f && angle < 135.0f) {
