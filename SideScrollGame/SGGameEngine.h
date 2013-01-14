@@ -16,6 +16,7 @@
 #import "Playable.h"
 #import "SGMainCharacter.h"
 #import "SGJoystick.h"
+#import "SGLevel.h"
 
 @interface SGGameEngine : NSObject
 {
@@ -32,6 +33,7 @@
 @property (assign) SGCharacter<Playable>* player;
 @property (assign) GLfloat cameraYOffset;
 @property (assign) GLfloat cameraXOffset;
+@property (retain) SGLevel* level;
 
 -(id) initWithLevelPlist: (NSString*) levelName;
 

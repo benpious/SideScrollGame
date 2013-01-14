@@ -10,15 +10,7 @@
 
 @implementation SGJoystick
 @synthesize shouldDraw;
-@synthesize effect;
-@synthesize vertexCoords;
-@synthesize textureCoords;
-@synthesize texture;
-@synthesize fallSpeed;
-@synthesize isFalling;
-@synthesize hitmask;
-@synthesize height;
-@synthesize width;
+
 
 -(id) initJoystick
 {
@@ -30,7 +22,7 @@
 
 -(void) recieveJoystickInputWithAngle:(GLfloat)angle XPos:(GLfloat)xPos YPos:(GLfloat)yPos
 {
-    effect.transform.projectionMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(xPos, yPos, 0), GLKMatrix4MakeRotation(angle, 0, 0, 1));
+    self.effect.transform.projectionMatrix = GLKMatrix4Scale(GLKMatrix4Multiply(GLKMatrix4MakeTranslation(xPos, yPos, 0), GLKMatrix4MakeRotation(angle, 0, 0, 1)), 0.25f, 0.25f, 0.0f);
 
     shouldDraw = YES;
 }

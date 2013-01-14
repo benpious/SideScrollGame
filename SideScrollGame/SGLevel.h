@@ -10,7 +10,7 @@
 #import "SGObjectEntity.h"
 #import "SGAction.h"
 
-typedef struct node  node;
+typedef struct levelNode  levelNode;
 typedef struct levelPath levelPath;
 
 /*
@@ -20,12 +20,12 @@ typedef struct levelPath levelPath;
  and the action is the action the AI should take to reach that node
  */
 struct levelPath {
-    node* node;
+    levelNode* nextNode;
     float point;
     SGAction* action;
 };
 
-struct node {
+struct levelNode {
     levelPath** leaves;
     int numLeaves;
     id data;

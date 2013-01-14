@@ -178,7 +178,7 @@
     GLfloat proportion;
     
     //this test and if statement ensure that the vertex coords array is at the right proportion
-    if (width > height) {
+    if (width < height) {
         proportion = height/width;
         
         self.vertexCoords[0] = 1.0f;

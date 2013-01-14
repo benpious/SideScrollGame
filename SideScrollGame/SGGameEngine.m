@@ -12,6 +12,7 @@
 @synthesize objects;
 @synthesize characters;
 @synthesize player;
+@synthesize level;
 
 //call whenever an action is made
 -(BOOL)hitDetectedBetween: (NSObject<SGEntityProtocol>*) a and: (NSObject<SGEntityProtocol>*) b
@@ -64,6 +65,9 @@
  */
 -(void) loadPlistWithName: (NSString*) levelName
 {
+    
+    level = [[SGLevel alloc] initWithLevelPlistNamed:levelName];
+    
     NSPropertyListFormat format;
     NSError* error = nil;
     NSString* path = [[NSBundle mainBundle] pathForResource:levelName ofType:@".plist"];
@@ -94,6 +98,8 @@
             [objects  insertObject: [[SGObjectEntity alloc] initObjectNamed: [currentEntity objectAtIndex:0]] atIndex:[objects count]] ;
         }
     }
+    
+    [objects insertObject:level atIndex:0];
 }
 
 //called whenever the openglview's update function fires
@@ -134,27 +140,21 @@
     object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(0.0f, object.fallSpeed, 0.0f);
 }
 
--(void) requestActionFromCharacter: (SGCharacter<SGAgentProtocol>*) character
-{
-    
-    
-    //[character requestMoveWithGameState: ];
-}
 
 -(void) applyJoystickMovewithAngle: (GLfloat) angle XPos: (GLfloat) xPos YPos: (GLfloat) yPos Radians: (GLfloat) radiansAngle Size:(CGSize)size
 {
     
-    [joystick recieveJoystickInputWithAngle:radiansAngle XPos:  1-yPos/(size.height/2) YPos:  1-xPos/(size.width/2)];
+    [joystick recieveJoystickInputWithAngle:radiansAngle XPos:  1-yPos/(size.height/2)  YPos:  1-xPos/(size.width/2) ];
 
     
     if (angle >= 45.0f && angle < 135.0f) {
-        joystickDirection = down;
+        joystickDirection = backwards;
         [player receiveJoystickInput:joystickDirection];
         return;
     }
     
     if (angle >= 135.0f && angle < 225.0f) {
-        joystickDirection = backwards;
+        joystickDirection = down;
         [player receiveJoystickInput:joystickDirection];
         return;
     }
@@ -190,8 +190,8 @@
 //returns an array of objects to draw. The object receiving the array should release it at the end of its usefulness
 -(NSMutableArray*) objectsToDraw
 {
-    NSMutableArray* toReturn = [[NSMutableArray alloc] initWithArray:characters];
-    [toReturn addObjectsFromArray:objects];
+    NSMutableArray* toReturn = [[NSMutableArray alloc] initWithArray:objects];
+    [toReturn addObjectsFromArray:characters];
     
     //test code
     if (joystick.shouldDraw == YES) {

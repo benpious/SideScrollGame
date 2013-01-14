@@ -26,9 +26,9 @@
 		3B307434167D14EE0088A46A /* SGCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B307433167D14EE0088A46A /* SGCharacter.m */; };
 		3B307439167D214A0088A46A /* SGObjectEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B307438167D214A0088A46A /* SGObjectEntity.m */; };
 		3B30743D167D222C0088A46A /* SGGameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B30743C167D222C0088A46A /* SGGameEngine.m */; };
-		3B37D01B169F650E00B0F240 /* joystickTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B37D01A169F650E00B0F240 /* joystickTextureData.png */; };
 		3B3E0AD51683F05F00DBA665 /* SGAction.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3E0AD41683F05F00DBA665 /* SGAction.m */; };
 		3B3EE0F3169E4E560005E2F6 /* SGMainCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3EE0F2169E4E560005E2F6 /* SGMainCharacter.m */; };
+		3B43A93916A1F84E0061F137 /* joystickTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B43A93816A1F84E0061F137 /* joystickTextureData.png */; };
 		3B4C9C79168BAC950033A8B0 /* testanimationTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B4C9C78168BAC950033A8B0 /* testanimationTextureData.png */; };
 		3B4C9C7C168BAD070033A8B0 /* testanimationAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B4C9C7B168BAD070033A8B0 /* testanimationAnimationData.plist */; };
 		3B75A9F5167D8DB700657BF8 /* SGQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B75A9F4167D8DB700657BF8 /* SGQueue.m */; };
@@ -38,6 +38,7 @@
 		3BA727E01698B95B0065C382 /* SGStaticAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727DF1698B95B0065C382 /* SGStaticAgent.m */; };
 		3BA727E31698BBA10065C382 /* SGSimpleAttackAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727E21698BBA10065C382 /* SGSimpleAttackAgent.m */; };
 		3BA7B528168549C500BE3A1B /* sirowlAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */; };
+		3BBC7FC316A4A46D005AAD9D /* testLevelTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BBC7FC216A4A46D005AAD9D /* testLevelTextureData.png */; };
 		3BD336FA1697426400CFA9F5 /* testLevel.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BD336F91697426400CFA9F5 /* testLevel.plist */; };
 		3BD336FF169747CF00CFA9F5 /* SGLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD336FE169747CF00CFA9F5 /* SGLevel.m */; };
 		3BE07C7F164B95D600DBFD78 /* sirowlTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */; };
@@ -75,12 +76,12 @@
 		3B307438167D214A0088A46A /* SGObjectEntity.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGObjectEntity.m; sourceTree = "<group>"; };
 		3B30743B167D222C0088A46A /* SGGameEngine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGGameEngine.h; sourceTree = "<group>"; };
 		3B30743C167D222C0088A46A /* SGGameEngine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGGameEngine.m; sourceTree = "<group>"; };
-		3B37D01A169F650E00B0F240 /* joystickTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickTextureData.png; path = ../../joystickTextureData.png; sourceTree = "<group>"; };
 		3B3E0AD31683F05F00DBA665 /* SGAction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGAction.h; sourceTree = "<group>"; };
 		3B3E0AD41683F05F00DBA665 /* SGAction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGAction.m; sourceTree = "<group>"; };
 		3B3EE0F0169E4D380005E2F6 /* Playable.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Playable.h; sourceTree = "<group>"; };
 		3B3EE0F1169E4E560005E2F6 /* SGMainCharacter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGMainCharacter.h; sourceTree = "<group>"; };
 		3B3EE0F2169E4E560005E2F6 /* SGMainCharacter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGMainCharacter.m; sourceTree = "<group>"; };
+		3B43A93816A1F84E0061F137 /* joystickTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickTextureData.png; path = ../../joystickTextureData.png; sourceTree = "<group>"; };
 		3B4C9C78168BAC950033A8B0 /* testanimationTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = testanimationTextureData.png; path = ../../testanimationTextureData.png; sourceTree = "<group>"; };
 		3B4C9C7B168BAD070033A8B0 /* testanimationAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = testanimationAnimationData.plist; sourceTree = "<group>"; };
 		3B75A9F3167D8DB700657BF8 /* SGQueue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGQueue.h; sourceTree = "<group>"; };
@@ -95,6 +96,7 @@
 		3BA727E11698BBA10065C382 /* SGSimpleAttackAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSimpleAttackAgent.h; sourceTree = "<group>"; };
 		3BA727E21698BBA10065C382 /* SGSimpleAttackAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSimpleAttackAgent.m; sourceTree = "<group>"; };
 		3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sirowlAnimationData.plist; sourceTree = "<group>"; };
+		3BBC7FC216A4A46D005AAD9D /* testLevelTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = testLevelTextureData.png; path = ../../../testLevelTextureData.png; sourceTree = "<group>"; };
 		3BD336F91697426400CFA9F5 /* testLevel.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = testLevel.plist; sourceTree = "<group>"; };
 		3BD336FD169747CF00CFA9F5 /* SGLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGLevel.h; sourceTree = "<group>"; };
 		3BD336FE169747CF00CFA9F5 /* SGLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGLevel.m; sourceTree = "<group>"; };
@@ -149,9 +151,10 @@
 			isa = PBXGroup;
 			children = (
 				3B7FE5D6168E9816005E0AB1 /* catTextureData.png */,
+				3B43A93816A1F84E0061F137 /* joystickTextureData.png */,
 				3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */,
 				3B4C9C78168BAC950033A8B0 /* testanimationTextureData.png */,
-				3B37D01A169F650E00B0F240 /* joystickTextureData.png */,
+				3BBC7FC216A4A46D005AAD9D /* testLevelTextureData.png */,
 			);
 			name = Textures;
 			sourceTree = "<group>";
@@ -388,7 +391,8 @@
 				3B7FE5D7168E9816005E0AB1 /* catTextureData.png in Resources */,
 				3B7FE5DA168E9854005E0AB1 /* catAnimationData.plist in Resources */,
 				3BD336FA1697426400CFA9F5 /* testLevel.plist in Resources */,
-				3B37D01B169F650E00B0F240 /* joystickTextureData.png in Resources */,
+				3B43A93916A1F84E0061F137 /* joystickTextureData.png in Resources */,
+				3BBC7FC316A4A46D005AAD9D /* testLevelTextureData.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

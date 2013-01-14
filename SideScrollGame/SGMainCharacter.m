@@ -20,13 +20,13 @@ const int blockAnimation = 3;
 {
     switch (direction) {
         case up:
-            currentAnimation = walkForwardAnimation;
+            currentAnimation = 3;
             break;
         case down:
-            currentAnimation = walkForwardAnimation;
+            currentAnimation = 4;
             break;
         case forwards:
-            currentAnimation = walkForwardAnimation;
+            currentAnimation = 2;
             break;
         case backwards:
             currentAnimation = walkForwardAnimation;

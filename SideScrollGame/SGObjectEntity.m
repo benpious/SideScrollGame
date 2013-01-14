@@ -120,7 +120,7 @@
     
     GLfloat proportion;
         
-    if (width > height) {
+    if (self.width < self.height) {
         proportion = self.height/self.width;
         
         self.vertexCoords[0] = 1.0f;
