@@ -19,4 +19,6 @@
 @property (assign) BOOL isFalling;
 @property (assign) GLfloat fallSpeed;
 @property (assign) BOOL** hitmask;
+@property (assign) GLfloat width;
+@property (assign) GLfloat height;
 @end

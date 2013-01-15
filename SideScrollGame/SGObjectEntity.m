@@ -26,7 +26,9 @@
         self.effect = [[GLKBaseEffect alloc] init];
         [self defineTextureCoords];
         [self loadTexture: [name stringByAppendingString:@"TextureData.png"]];
-        [self populateArrays];
+        NSString* nameString = [name stringByAppendingString:@"ScaleOffset"];
+        [nameString retain];
+        [self loadScaleAndOffsetInfo:nameString];
         fallSpeed = 0.0f;
         isFalling = NO;
     }
@@ -112,47 +114,47 @@
     
 }
 
--(void) populateArrays
+-(void) populateArraysWithScaleFactor: (GLfloat) scaleFactor XOffset: (GLfloat) xOffSet YOffset: (GLfloat) yOffset
 {
     
     self.vertexCoords = malloc(sizeof(GLfloat) * 18);
     
     
     GLfloat proportion;
+    
+    //this test and if statement ensure that the vertex coords array is at the right proportion
+    if (width < height) {
+        proportion = height/width;
         
-    if (self.width < self.height) {
-        proportion = self.height/self.width;
-        
-        self.vertexCoords[0] = 1.0f;
-        self.vertexCoords[1] = proportion;
-        self.vertexCoords[3] = 0.0f;
-        self.vertexCoords[4] = 0.0f;
-        self.vertexCoords[6] = 0.0f;
-        self.vertexCoords[7] = proportion;
-        self.vertexCoords[9] = 1.0f;
-        self.vertexCoords[10] = proportion;
-        self.vertexCoords[12] = 1.0f;
-        self.vertexCoords[13] = 0.0f;
-        self.vertexCoords[15] = 0.0f;
-        self.vertexCoords[16] = 0.0f;
+        self.vertexCoords[0] = 1.0f*scaleFactor + xOffSet;
+        self.vertexCoords[1] = proportion*scaleFactor + yOffset;
+        self.vertexCoords[3] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[4] = 0.0f*scaleFactor + yOffset;
+        self.vertexCoords[6] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[7] = proportion*scaleFactor + yOffset;
+        self.vertexCoords[9] = 1.0f*scaleFactor + xOffSet;
+        self.vertexCoords[10] = proportion*scaleFactor + yOffset;
+        self.vertexCoords[12] = 1.0f*scaleFactor + xOffSet;
+        self.vertexCoords[13] = 0.0f + yOffset;
+        self.vertexCoords[15] = 0.0f + xOffSet;
+        self.vertexCoords[16] = 0.0f + yOffset;
     }
     
     else {
         
-        
-        proportion = self.width/self.height;
-        self.vertexCoords[0] = proportion;
-        self.vertexCoords[1] = 1.0f;
-        self.vertexCoords[3] = 0.0f;
-        self.vertexCoords[4] = 0.0f;
-        self.vertexCoords[6] = 0.0f;
-        self.vertexCoords[7] = 1.0f;
-        self.vertexCoords[9] = proportion;
-        self.vertexCoords[10] = 1.0f;
-        self.vertexCoords[12] = proportion;
-        self.vertexCoords[13] = 0.0f;
-        self.vertexCoords[15] = 0.0f;
-        self.vertexCoords[16] = 0.0f;
+        proportion = width/height;
+        self.vertexCoords[0] = proportion*scaleFactor + xOffSet;
+        self.vertexCoords[1] = 1.0f*scaleFactor + yOffset;
+        self.vertexCoords[3] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[4] = 0.0f*scaleFactor + yOffset;
+        self.vertexCoords[6] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[7] = 1.0f*scaleFactor + yOffset;
+        self.vertexCoords[9] = proportion*scaleFactor + xOffSet;
+        self.vertexCoords[10] = 1.0f*scaleFactor + yOffset;
+        self.vertexCoords[12] = proportion*scaleFactor + xOffSet;
+        self.vertexCoords[13] = 0.0f*scaleFactor + yOffset;
+        self.vertexCoords[15] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[16] = 0.0f*scaleFactor + yOffset;
         
         
     }
@@ -163,6 +165,25 @@
     }
     
 }
+
+-(void) loadScaleAndOffsetInfo: (NSString*) plistName
+{
+    NSPropertyListFormat format;
+    NSString* error = nil;
+    NSString* path = [[NSBundle mainBundle] pathForResource:plistName ofType:@".plist"];
+    NSData* plistXML = [[NSFileManager defaultManager] contentsAtPath:path];
+    NSArray* infoArray = (NSArray*)[NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListImmutable format:&format error:nil];
+
+    //handle the error
+    
+    if (error != nil) {
+        NSLog(@"error reading plist");
+    }
+    
+    [self populateArraysWithScaleFactor:[[infoArray objectAtIndex:0] floatValue] XOffset:[[infoArray objectAtIndex:1] floatValue] YOffset:[[infoArray objectAtIndex:2] floatValue]];
+    
+}
+
 
 -(void) dealloc
 {

@@ -9,10 +9,16 @@
 		<integer>0</integer>
 	</array>
 	<array>
+		<string>owlchar</string>
+		<string>Object</string>
+		<integer>0</integer>
+		<integer>0</integer>
+	</array>
+	<array>
 		<string>sirowl</string>
 		<string>Object</string>
-		<string>4</string>
-		<string>4</string>
+		<integer>4</integer>
+		<integer>4</integer>
 	</array>
 </array>
 </plist>

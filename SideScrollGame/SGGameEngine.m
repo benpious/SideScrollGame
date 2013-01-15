@@ -19,12 +19,33 @@
 {
     //get the vertexarrays of a and b with their transforms applied
     
-    //test if squares intersect
+    //test if squares intersect //TODO get transformed vertex coords
     return [self squaresIntersect:a.vertexCoords :b.vertexCoords];
         //if they do, do pixel perfect test with masks
     
     return NO;
 }
+
+//will only work if the two objects are on the screen
+-(BOOL) intersectionBetween: (NSObject<SGEntityProtocol>*) a and: (NSObject<SGEntityProtocol>*) b
+{
+    CGRect aCoords;
+    
+    CGRect bCoords;
+    
+    if ((aCoords.origin.x < bCoords.origin.x && aCoords.size.width + aCoords.origin.x < bCoords.size.width + bCoords.origin.x)||(aCoords.origin.x > bCoords.origin.x && aCoords.size.width + aCoords.origin.x > bCoords.size.width + bCoords.origin.x)) {
+        return NO;
+    }
+    
+    if ((aCoords.origin.y < bCoords.origin.y && aCoords.size.height + aCoords.origin.y < bCoords.size.height + bCoords.origin.y) || (aCoords.origin.y > bCoords.origin.y && aCoords.size.height + aCoords.origin.y > bCoords.size.height + bCoords.origin.y)) {
+    return NO;
+    }
+    
+    
+
+    
+}
+
 
 -(BOOL) squaresIntersect: (GLfloat*) a : (GLfloat*) b
 {
@@ -136,8 +157,13 @@
 
 -(void) applyGravityTo: (NSObject<SGEntityProtocol>*) object
 {
-    object.fallSpeed += gravitySpeed;
-    object.effect.transform.modelviewMatrix = GLKMatrix4MakeTranslation(0.0f, object.fallSpeed, 0.0f);
+    
+    if ([self hitDetectedBetween:self.level and:object]) {
+        
+        object.fallSpeed += gravitySpeed;
+        object.effect.transform.projectionMatrix = GLKMatrix4Multiply(object.effect.transform.projectionMatrix ,GLKMatrix4MakeTranslation(0.0f, object.fallSpeed, 0.0f));
+        
+    }
 }
 
 

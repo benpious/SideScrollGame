@@ -75,7 +75,7 @@ enum
 
     [self setupGL];
     
-    _engine = [[SGGameEngine alloc] initWithLevelPlist: @"testLevel"];
+    _engine = [[SGGameEngine alloc] initWithLevelPlist: @"levelt"];
 
 }
 

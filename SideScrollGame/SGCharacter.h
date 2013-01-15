@@ -37,8 +37,6 @@ typedef struct {
     //2d array of animations -- consider replacing with a dictionary of animation arrays
     animation** animations;
     
-    GLfloat width;
-    GLfloat height;
     GLfloat movementX;
     GLfloat movementY;
 }

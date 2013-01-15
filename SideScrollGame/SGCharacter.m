@@ -16,7 +16,8 @@
 @synthesize textureCoords;
 @synthesize fallSpeed;
 @synthesize isFalling;
-
+@synthesize width;
+@synthesize height;
 #pragma Setup Methods
 -(id) initCharacterNamed: (NSString*) name
 {
@@ -28,7 +29,7 @@
         [self loadTexture:[name stringByAppendingString:@"TextureData.png"]];
         //load animation arrays
         [self loadAnimations: [name stringByAppendingString:@"AnimationData"]];
-        [self populateArrays];
+        [self populateArraysWithScaleFactor:1.0f XOffset:-0.5f YOffset:-0.5f];
         self.fallSpeed = 0.0f;
         self.isFalling = NO;
         movementX = 0.0f;
@@ -57,8 +58,8 @@
         animation* currAnimation = malloc(sizeof(animation));
         currAnimation->name = [temp objectAtIndex:0];
         currAnimation->duration = [[temp objectAtIndex:1] intValue];
-        width = [[temp objectAtIndex:2] floatValue];
-        height = [[temp objectAtIndex:3] floatValue];
+        self.width = [[temp objectAtIndex:2] floatValue];
+        self.height = [[temp objectAtIndex:3] floatValue];
         currAnimation->xOffset = [[temp objectAtIndex:4] floatValue] ;
         currAnimation->yOffset = [[temp objectAtIndex:5] floatValue] ;
         
@@ -144,10 +145,10 @@
     
     GLfloat* arrayf = malloc(sizeof(GLfloat) * 12);
     
-    GLfloat xpercent = x / 770;
-    GLfloat ypercent = y / 110;
-    GLfloat xwidthpercent = (x + width) / 770;
-    GLfloat yheightpercent = (y + height) / 110;
+    GLfloat xpercent = x / self.texture.width;
+    GLfloat ypercent = y / self.texture.height;
+    GLfloat xwidthpercent = (x + self.width) / self.texture.width;
+    GLfloat yheightpercent = (y + self.height) / self.texture.height;
     
     arrayf[0] = xwidthpercent;
     arrayf[1] = yheightpercent;
@@ -169,7 +170,7 @@
  populates the vertexcoords array
  all of these arrays start at 0,0, then we can transform them to their proper place
  */
--(void) populateArrays
+-(void) populateArraysWithScaleFactor: (GLfloat) scaleFactor XOffset: (GLfloat) xOffSet YOffset: (GLfloat) yOffset
 {
     
     self.vertexCoords = malloc(sizeof(GLfloat) * 18);
@@ -178,38 +179,38 @@
     GLfloat proportion;
     
     //this test and if statement ensure that the vertex coords array is at the right proportion
-    if (width < height) {
-        proportion = height/width;
+    if (self.width < self.height) {
+        proportion = self.height/self.width;
         
-        self.vertexCoords[0] = 1.0f;
-        self.vertexCoords[1] = proportion;
-        self.vertexCoords[3] = 0.0f;
-        self.vertexCoords[4] = 0.0f;
-        self.vertexCoords[6] = 0.0f;
-        self.vertexCoords[7] = proportion;
-        self.vertexCoords[9] = 1.0f;
-        self.vertexCoords[10] = proportion;
-        self.vertexCoords[12] = 1.0f;
-        self.vertexCoords[13] = 0.0f;
-        self.vertexCoords[15] = 0.0f;
-        self.vertexCoords[16] = 0.0f;
+        self.vertexCoords[0] = 1.0f*scaleFactor + xOffSet;
+        self.vertexCoords[1] = proportion*scaleFactor + yOffset;
+        self.vertexCoords[3] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[4] = 0.0f*scaleFactor + yOffset;
+        self.vertexCoords[6] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[7] = proportion*scaleFactor + yOffset;
+        self.vertexCoords[9] = 1.0f*scaleFactor + xOffSet;
+        self.vertexCoords[10] = proportion*scaleFactor + yOffset;
+        self.vertexCoords[12] = 1.0f*scaleFactor + xOffSet;
+        self.vertexCoords[13] = 0.0f + yOffset;
+        self.vertexCoords[15] = 0.0f + xOffSet;
+        self.vertexCoords[16] = 0.0f + yOffset;
     }
     
     else {
         
-        proportion = width/height;
-        self.vertexCoords[0] = proportion;
-        self.vertexCoords[1] = 1.0f;
-        self.vertexCoords[3] = 0.0f;
-        self.vertexCoords[4] = 0.0f;
-        self.vertexCoords[6] = 0.0f;
-        self.vertexCoords[7] = 1.0f;
-        self.vertexCoords[9] = proportion;
-        self.vertexCoords[10] = 1.0f;
-        self.vertexCoords[12] = proportion;
-        self.vertexCoords[13] = 0.0f;
-        self.vertexCoords[15] = 0.0f;
-        self.vertexCoords[16] = 0.0f;
+        proportion = self.width/self.height;
+        self.vertexCoords[0] = proportion*scaleFactor + xOffSet;
+        self.vertexCoords[1] = 1.0f*scaleFactor + yOffset;
+        self.vertexCoords[3] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[4] = 0.0f*scaleFactor + yOffset;
+        self.vertexCoords[6] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[7] = 1.0f*scaleFactor + yOffset;
+        self.vertexCoords[9] = proportion*scaleFactor + xOffSet;
+        self.vertexCoords[10] = 1.0f*scaleFactor + yOffset;
+        self.vertexCoords[12] = proportion*scaleFactor + xOffSet;
+        self.vertexCoords[13] = 0.0f*scaleFactor + yOffset;
+        self.vertexCoords[15] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[16] = 0.0f*scaleFactor + yOffset;
         
         
     }
