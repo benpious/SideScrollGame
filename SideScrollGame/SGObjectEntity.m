@@ -18,6 +18,8 @@
 @synthesize hitmask;
 @synthesize height;
 @synthesize width;
+@synthesize position;
+
 
 -(id) initObjectNamed: (NSString*) name
 {
@@ -26,11 +28,10 @@
         self.effect = [[GLKBaseEffect alloc] init];
         [self defineTextureCoords];
         [self loadTexture: [name stringByAppendingString:@"TextureData.png"]];
-        NSString* nameString = [name stringByAppendingString:@"ScaleOffset"];
-        [nameString retain];
-        [self loadScaleAndOffsetInfo:nameString];
+        [self loadScaleAndOffsetInfo:[name stringByAppendingString:@"ScaleOffset"]];
         fallSpeed = 0.0f;
         isFalling = NO;
+        //self.hitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:[name stringByAppendingString: @"HitMask.hmk"] Width:self.width Height:self.height];
     }
     
     return self;
@@ -39,7 +40,6 @@
 
 -(void) loadTexture: (NSString*) imageName
 {
-    //load the texture
     NSError *error = nil;
     NSDictionary* textureOps = @{GLKTextureLoaderApplyPremultiplication : @NO, GLKTextureLoaderGenerateMipmaps : @NO, GLKTextureLoaderOriginBottomLeft : @YES};
     NSString* imageNameFullPath = [[NSBundle mainBundle]
@@ -58,7 +58,6 @@
     self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
     self.effect.texture2d0.target = GLKTextureTarget2D;
     self.effect.texture2d0.name = texture.name;
-    [self defineTextureCoords];
     self.effect.light0.enabled = GL_TRUE;
     self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
     self.width = self.texture.width;
@@ -66,32 +65,6 @@
     
 }
 
--(void) loadHitMaskWithName: (NSString*) name
-{
-    NSString* maskNameFullPath = [[NSBundle mainBundle]
-                                  pathForResource:name ofType: nil];
-    NSData* data = [[NSFileManager defaultManager] contentsAtPath:maskNameFullPath];
-    
-    hitmask = malloc(sizeof(BOOL*)*height);
-    for (int i =0; i< height; i++) {
-        hitmask[i] = malloc(sizeof(BOOL) * width);
-    }
-    
-    for (int i = 0; i < height; i++) {
-        for (int j = 0; j<width; j++) {
-            
-            if (((*((int*)[data bytes])) >> (int)((i *width) + width)) % 2 == 1) {
-                hitmask[i][j] = YES;
-            }
-            
-            else
-            {
-                hitmask[i][j] = NO;
-            }
-        }
-    }
-    
-}
 
 
 //defines the texture coordinates to cover the whole of the image given
@@ -193,13 +166,15 @@
     [texture release];
     [effect release];
     
-    for (int i =0; i<height; i++) {
-        free(hitmask[i]);
-    }
-    
-    free(hitmask);
+    [hitmask release];
     
     [super dealloc];
 }
+
+-(void) applyActionEffect: (SGAction*) action
+{
+    
+}
+
 
 @end

@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
-
+#import "SGAction.h"
 
 
 @protocol SGEntityProtocol <NSObject>
@@ -18,7 +18,7 @@
 @property (retain) GLKTextureInfo *texture;
 @property (assign) BOOL isFalling;
 @property (assign) GLfloat fallSpeed;
-@property (assign) BOOL** hitmask;
 @property (assign) GLfloat width;
 @property (assign) GLfloat height;
+-(void) applyActionEffect: (SGAction*) action;
 @end

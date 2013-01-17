@@ -177,6 +177,8 @@ enum
         glUseProgram(_program);
                  
     }
+    
+    [objects release];
 
 }
 

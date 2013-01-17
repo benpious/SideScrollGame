@@ -10,7 +10,7 @@
 
 @implementation SGSimpleAttackAgent
 @synthesize actions;
-//never respond to any requests if by some chance they are made
+//never respond to any requests if by some chance they are made, ATTACK AT ALL COSTS!!!!!!!!
 -(BOOL) flankOrder
 {
     return NO;

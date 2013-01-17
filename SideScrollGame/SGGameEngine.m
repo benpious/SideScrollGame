@@ -15,29 +15,27 @@
 @synthesize level;
 
 //call whenever an action is made
--(BOOL)hitDetectedBetween: (NSObject<SGEntityProtocol>*) a and: (NSObject<SGEntityProtocol>*) b
+-(BOOL)hitDetectedBetween: (NSObject<SGMassProtocol>*) a and: (NSObject<SGMassProtocol>*) b
 {
     //get the vertexarrays of a and b with their transforms applied
     
     //test if squares intersect //TODO get transformed vertex coords
-    return [self squaresIntersect:a.vertexCoords :b.vertexCoords];
+    //return [self squaresIntersect:a.vertexCoords :b.vertexCoords];
         //if they do, do pixel perfect test with masks
     
     return NO;
 }
 
 //will only work if the two objects are on the screen
--(BOOL) intersectionBetween: (NSObject<SGEntityProtocol>*) a and: (NSObject<SGEntityProtocol>*) b
+-(BOOL) intersectionBetween: (NSObject<SGMassProtocol>*) a And: (NSObject<SGMassProtocol>*) b
 {
-    CGRect aCoords;
     
-    CGRect bCoords;
     
-    if ((aCoords.origin.x < bCoords.origin.x && aCoords.size.width + aCoords.origin.x < bCoords.size.width + bCoords.origin.x)||(aCoords.origin.x > bCoords.origin.x && aCoords.size.width + aCoords.origin.x > bCoords.size.width + bCoords.origin.x)) {
+    if ((a.position->origin.x < b.position->origin.x && a.position->size.width + a.position->origin.x < b.position->size.width + b.position->origin.x)||(a.position->origin.x > b.position->origin.x && a.position->size.width + a.position->origin.x > b.position->size.width + b.position->origin.x)) {
         return NO;
     }
     
-    if ((aCoords.origin.y < bCoords.origin.y && aCoords.size.height + aCoords.origin.y < bCoords.size.height + bCoords.origin.y) || (aCoords.origin.y > bCoords.origin.y && aCoords.size.height + aCoords.origin.y > bCoords.size.height + bCoords.origin.y)) {
+    if ((a.position->origin.y < b.position->origin.y && a.position->size.height + a.position->origin.y < b.position->size.height + b.position->origin.y) || (a.position->origin.y > b.position->origin.y && a.position->size.height + a.position-> origin.y > b.position->size.height + b.position->origin.y)) {
     return NO;
     }
     
@@ -150,12 +148,19 @@
     //loop through the action queue applying the results
     while (actionQueue.length != 0) {
         SGAction* action = [actionQueue pop];
-        
+        for (SGCharacter* currChar in characters) {
+            //SHOULD NOT BE SGCHAR -- PLACEHOLDER
+            if ([self hitDetectedBetween:currChar and:currChar]) {
+                [currChar applyActionEffect: action];
+            }
+        }
     }
+    
+    [state release];
 
 }
 
--(void) applyGravityTo: (NSObject<SGEntityProtocol>*) object
+-(void) applyGravityTo: (NSObject<SGEntityProtocol, SGMassProtocol>*) object
 {
     
     if ([self hitDetectedBetween:self.level and:object]) {

@@ -9,8 +9,10 @@
 #import "SGAction.h"
 
 @implementation SGAction
+@synthesize hitmask;
+@synthesize position;
 
--(id) initWithArea: (CGRect) area Damage: (float) damage knockBack: (float) knockBack forceNextAnimation: (BOOL) forceNextAnimation nextAction: (NSString* ) nextAction
+-(id) initWithArea: (CGRect) area Damage: (int) damage knockBack: (GLfloat) knockBack forceNextAnimation: (BOOL) forceNextAnimation nextAction: (NSString* ) nextAction
 {
     if (self = [super init]) {
         _area = area;

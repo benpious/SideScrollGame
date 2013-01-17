@@ -106,6 +106,7 @@
 		3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sirowlAnimationData.plist; sourceTree = "<group>"; };
 		3BB49CA316A504AE006DB8CF /* owlcharTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = owlcharTextureData.png; path = ../../../owlcharTextureData.png; sourceTree = "<group>"; };
 		3BBC7FC216A4A46D005AAD9D /* leveltTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leveltTextureData.png; path = ../../../leveltTextureData.png; sourceTree = "<group>"; };
+		3BCF380E16A5E9CB002F3747 /* SGMassProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGMassProtocol.h; sourceTree = "<group>"; };
 		3BD336F91697426400CFA9F5 /* levelt.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = levelt.plist; sourceTree = "<group>"; };
 		3BD336FD169747CF00CFA9F5 /* SGLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGLevel.h; sourceTree = "<group>"; };
 		3BD336FE169747CF00CFA9F5 /* SGLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGLevel.m; sourceTree = "<group>"; };
@@ -144,6 +145,7 @@
 				3B3EE0F0169E4D380005E2F6 /* Playable.h */,
 				3B13E37516897389000F9721 /* SGCharacterAgent.h */,
 				3B307436167D15880088A46A /* SGEntityProtocol.h */,
+				3BCF380E16A5E9CB002F3747 /* SGMassProtocol.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";

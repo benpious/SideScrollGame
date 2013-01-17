@@ -8,15 +8,16 @@
 
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
+#import "SGMassProtocol.h"
 
-@interface SGAction : NSObject
+@interface SGAction : NSObject<SGMassProtocol>
 @property (assign) CGRect area;
-@property (assign) float damage;
-@property (assign) float knockBack;
+@property (assign) int damage;
+@property (assign) GLfloat knockBack;
 @property (assign) BOOL forceNextAnimation;
 @property (retain) NSString* nextAction;
 
--(id) initWithArea: (CGRect) area Damage: (float) damage knockBack: (float) knockBack forceNextAnimation: (BOOL) forceNextAnimation nextAction: (NSString* ) nextAction;
+-(id) initWithArea: (CGRect) area Damage: (int) damage knockBack: (GLfloat) knockBack forceNextAnimation: (BOOL) forceNextAnimation nextAction: (NSString* ) nextAction;
 
 
 @end

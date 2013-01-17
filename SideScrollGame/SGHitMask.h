@@ -9,10 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @interface SGHitMask : NSObject
+
+@property (assign) BOOL** hitmask;
+
+
 @property (assign) int width;
 @property (assign) int height;
--(id) initHitMaskWithFileNamed: (NSString*) name;
+
+-(id) initHitMaskWithFileNamed: (NSString*) name Width: (int) width Height: (int) height;
 -(id) initHitmaskWithHitmask: (SGHitMask*) hitmask Partition: (CGRect) partition;
-+(BOOL) collisionBetween: (SGHitMask*) a And: (SGHitMask*) b;
++(BOOL) collisionBetweenEquallySizedHitmasks: (SGHitMask*) a And: (SGHitMask*) b;
 
 @end

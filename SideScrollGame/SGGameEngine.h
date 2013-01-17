@@ -17,6 +17,7 @@
 #import "SGMainCharacter.h"
 #import "SGJoystick.h"
 #import "SGLevel.h"
+#import "SGMassProtocol.h"
 
 @interface SGGameEngine : NSObject
 {

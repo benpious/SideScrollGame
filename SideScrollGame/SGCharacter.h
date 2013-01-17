@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 #import "SGEntityProtocol.h"
-#import "SGAction.h"
 #import "actions.h"
+#import "SGMassProtocol.h"
 
 /*
  This class is for anything with an animation
@@ -27,7 +27,7 @@ typedef struct {
 } animation;
 
 
-@interface SGCharacter : NSObject<SGEntityProtocol>
+@interface SGCharacter : NSObject<SGEntityProtocol, SGMassProtocol>
 {
     //keeps track of the current frame in the animation
     int currentFrame;
@@ -46,7 +46,6 @@ typedef struct {
 // nametexture, nameinfo
 -(id) initCharacterNamed: (NSString*) name;
 -(void)nextFrame;
--(SGAction*) nextAction;
 -(GLfloat*) glFloatArrayFromOriginX: (GLfloat) x OriginY: (GLfloat) y;
 -(void) setNextAnimation: (int) animation;
 

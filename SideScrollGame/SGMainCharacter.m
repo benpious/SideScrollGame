@@ -15,7 +15,7 @@ const int blockAnimation = 3;
 
 
 @implementation SGMainCharacter
-
+@synthesize inputsToDisplay;
 -(void) receiveJoystickInput: (action) direction
 {
     switch (direction) {
@@ -45,12 +45,6 @@ const int blockAnimation = 3;
     if (button == 'b') {
         ;
     }
-}
-
-//returns an array specifying which inputs should be displayed and in what positions
--(NSArray*) inputsToDisplay
-{
-    
 }
 
 @end

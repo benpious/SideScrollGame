@@ -11,5 +11,5 @@
 
 
 @interface SGMainCharacter : SGCharacter<Playable>
-
+@property (retain) NSArray* inputsToDisplay;
 @end

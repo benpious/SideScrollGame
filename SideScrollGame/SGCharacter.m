@@ -18,6 +18,8 @@
 @synthesize isFalling;
 @synthesize width;
 @synthesize height;
+@synthesize position;
+
 #pragma Setup Methods
 -(id) initCharacterNamed: (NSString*) name
 {
@@ -34,7 +36,7 @@
         self.isFalling = NO;
         movementX = 0.0f;
         movementY = 0.0f;
-        
+        //self.hitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:[name stringByAppendingString: @"HitMask.hmk"] Width:self.width Height:self.height];
     }
     
     return self;
@@ -178,7 +180,7 @@
     
     GLfloat proportion;
     
-    //this test and if statement ensure that the vertex coords array is at the right proportion
+    //this if statement ensures that the vertex coords array is at the right proportion
     if (self.width < self.height) {
         proportion = self.height/self.width;
         
@@ -235,7 +237,7 @@
 /*
  moves to the next frame in the current animation
  note that this method does NOT change the opengl texture array pointer to texcoords -- 
- this must be done after this method is called
+ this must be done after this method is called -- it is currently done in ViewController before drawing
  */
 -(void)nextFrame
 {
@@ -257,14 +259,10 @@
     
 }
 
-
-
--(SGAction*) nextAction
+-(void) applyActionEffect: (SGAction*) action
 {
-    
-    
+    self.health -= action.damage;
+    movementX -= action.knockBack;
 }
-
-
 
 @end

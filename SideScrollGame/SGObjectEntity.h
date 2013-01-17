@@ -8,8 +8,9 @@
 
 #import <Foundation/Foundation.h>
 #import "SGEntityProtocol.h"
+#import "SGMassProtocol.h"
 
-@interface SGObjectEntity : NSObject<SGEntityProtocol>
+@interface SGObjectEntity : NSObject<SGEntityProtocol, SGMassProtocol>
 
 -(id) initObjectNamed: (NSString*) name;
 
