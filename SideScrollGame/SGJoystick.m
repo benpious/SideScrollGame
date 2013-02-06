@@ -20,7 +20,7 @@
     return  self;
 }
 
--(void) recieveJoystickInputWithAngle:(GLfloat)angle XPos:(GLfloat)xPos YPos:(GLfloat)yPos
+-(void) recieveJoystickInputWithAngle:(const GLfloat)angle XPos:(const GLfloat)xPos YPos:(const GLfloat)yPos
 {
     self.effect.transform.projectionMatrix = GLKMatrix4Scale(GLKMatrix4Multiply(GLKMatrix4MakeTranslation(xPos, yPos, 0), GLKMatrix4MakeRotation(angle, 0, 0, 1)), 0.25f, 0.25f, 0.0f);
 

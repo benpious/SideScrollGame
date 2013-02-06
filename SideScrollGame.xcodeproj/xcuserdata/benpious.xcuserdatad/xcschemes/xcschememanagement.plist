@@ -9,9 +9,19 @@
 			<key>orderHint</key>
 			<integer>0</integer>
 		</dict>
+		<key>SideScrollGameLogicTests.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>3B2253F516C051340036B7A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>3B2B88D2164862DC004BADC9</key>
 		<dict>
 			<key>primary</key>

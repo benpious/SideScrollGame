@@ -26,6 +26,8 @@
 -(BOOL) flankOrder;
 -(BOOL) attackOrder;
 -(BOOL) waitOrder;
+
+//called by the gameengine to request an action given the current game state
 -(SGAction*) requestMoveWithGameState: (NSArray*) gameState;
 
 @end

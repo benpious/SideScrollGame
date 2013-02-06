@@ -20,5 +20,6 @@
 @property (assign) GLfloat fallSpeed;
 @property (assign) GLfloat width;
 @property (assign) GLfloat height;
+
 -(void) applyActionEffect: (SGAction*) action;
 @end

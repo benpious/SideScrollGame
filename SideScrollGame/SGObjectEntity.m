@@ -20,12 +20,13 @@
 @synthesize width;
 @synthesize position;
 
-
 -(id) initObjectNamed: (NSString*) name
 {
     if (self = [super init]) {
         
         self.effect = [[GLKBaseEffect alloc] init];
+        self.position = malloc(sizeof(CGRect));
+        *self.position = CGRectMake(0.0f, 0.0f, 0.0f, 0.0f);
         [self defineTextureCoords];
         [self loadTexture: [name stringByAppendingString:@"TextureData.png"]];
         [self loadScaleAndOffsetInfo:[name stringByAppendingString:@"ScaleOffset"]];
@@ -91,7 +92,8 @@
 {
     
     self.vertexCoords = malloc(sizeof(GLfloat) * 18);
-    
+    self.position->origin.x = xOffSet;
+    self.position->origin.y = yOffset;	
     
     GLfloat proportion;
     
@@ -171,6 +173,7 @@
     [super dealloc];
 }
 
+//Does nothing by default: Subclasses which need to react to actions in specific ways may implement this method.
 -(void) applyActionEffect: (SGAction*) action
 {
     

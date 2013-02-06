@@ -11,7 +11,7 @@
 @interface SGJoystick : SGObjectEntity<SGEntityProtocol>
 
 @property (assign) BOOL shouldDraw;
--(void) recieveJoystickInputWithAngle:(GLfloat) angle XPos: (GLfloat) xPos YPos: (GLfloat) yPos;
+-(void) recieveJoystickInputWithAngle:(const GLfloat) angle XPos: (const GLfloat) xPos YPos: (const GLfloat) yPos;
 -(id) initJoystick;
 -(void) joyStickInputStopped;
 

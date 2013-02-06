@@ -15,50 +15,46 @@
 @synthesize level;
 
 //call whenever an action is made
--(BOOL)hitDetectedBetween: (NSObject<SGMassProtocol>*) a and: (NSObject<SGMassProtocol>*) b
+-(BOOL)hitDetectedBetween: (NSObject<SGMassProtocol> const * const) a and: (NSObject<SGMassProtocol>const * const) b
 {
-    //get the vertexarrays of a and b with their transforms applied
+    if ((a.position->origin.x < b.position->origin.x && a.position->size.width + a.position->origin.x < b.position->origin.x)||(a.position->origin.x > b.position->origin.x + b.position->size.width && a.position->size.width + a.position->origin.x > b.position->size.width + b.position->origin.x)) {
+        return NO;
+    }
     
-    //test if squares intersect //TODO get transformed vertex coords
-    //return [self squaresIntersect:a.vertexCoords :b.vertexCoords];
-        //if they do, do pixel perfect test with masks
+    if ((a.position->origin.y < b.position->origin.y && a.position->size.height + a.position->origin.y < b.position->size.height) || (a.position->origin.y > b.position->origin.y + b.position->size.height && a.position->size.height + a.position->origin.y > b.position->size.height + b.position->origin.y)) {
+        return NO;
+    }
+    
+    //test hitmasks using rect from intersectionbetween
+    CGRect partition = [self intersectionBetween:a And:b];
+    SGHitMask* aMask = [[SGHitMask alloc] initHitmaskWithHitmask:a.hitmask Partition:partition OldHitMaskOrigin:a.position->origin];
+    SGHitMask* bMask = [[SGHitMask alloc] initHitmaskWithHitmask:b.hitmask Partition:partition OldHitMaskOrigin:b.position->origin];
+    
+    if ([SGHitMask collisionBetweenEquallySizedHitmasks:aMask And:bMask]) {
+        
+        [aMask release];
+        [bMask release];
+        
+        return YES;
+    }
+    
+    [aMask release];
+    [bMask release];
+
     
     return NO;
 }
 
 //will only work if the two objects are on the screen
--(BOOL) intersectionBetween: (NSObject<SGMassProtocol>*) a And: (NSObject<SGMassProtocol>*) b
+-(CGRect) intersectionBetween: (NSObject<SGMassProtocol>const * const) a And: (NSObject<SGMassProtocol>const * const) b
 {
+ 
     
-    
-    if ((a.position->origin.x < b.position->origin.x && a.position->size.width + a.position->origin.x < b.position->size.width + b.position->origin.x)||(a.position->origin.x > b.position->origin.x && a.position->size.width + a.position->origin.x > b.position->size.width + b.position->origin.x)) {
-        return NO;
-    }
-    
-    if ((a.position->origin.y < b.position->origin.y && a.position->size.height + a.position->origin.y < b.position->size.height + b.position->origin.y) || (a.position->origin.y > b.position->origin.y && a.position->size.height + a.position-> origin.y > b.position->size.height + b.position->origin.y)) {
-    return NO;
-    }
-    
-    
+    return CGRectMake(MAX(a.position->origin.x, b.position->origin.x), MAX(a.position->origin.y, b.position->origin.y),  MIN(a.position->size.width, b.position->size.width) - MAX(a.position->origin.x, b.position->origin.x) + MIN(a.position->origin.x, b.position->origin.x), MIN(a.position->size.height, b.position->size.height) -  MAX(a.position->origin.x, b.position->origin.x) + MIN(a.position->origin.x, b.position->origin.x));
 
     
 }
 
-
--(BOOL) squaresIntersect: (GLfloat*) a : (GLfloat*) b
-{
-    //test if the x coordinates intersect
-    if ((a[0] < b[0] || a[0] > b[0]) && ( a[4] < b[4] || a[4] > b[4] )) {
-        return NO;
-    }
-    
-    //test if the y coordinates intersect
-    if ((a[1] < b[1] || a[1] > b[1]) && (a[6] < b[6] || a[6] > b[6])) {
-        return NO;
-    }
-    
-    return YES;
-}
 
 -(id) initWithLevelPlist: (NSString*) levelName
 {
@@ -149,8 +145,7 @@
     while (actionQueue.length != 0) {
         SGAction* action = [actionQueue pop];
         for (SGCharacter* currChar in characters) {
-            //SHOULD NOT BE SGCHAR -- PLACEHOLDER
-            if ([self hitDetectedBetween:currChar and:currChar]) {
+            if ([self hitDetectedBetween:currChar and: action ]) {
                 [currChar applyActionEffect: action];
             }
         }
@@ -160,10 +155,10 @@
 
 }
 
--(void) applyGravityTo: (NSObject<SGEntityProtocol, SGMassProtocol>*) object
+-(void) applyGravityTo: (NSObject<SGEntityProtocol, SGMassProtocol>* const) object
 {
     
-    if ([self hitDetectedBetween:self.level and:object]) {
+    if (![self hitDetectedBetween:self.level and:object]) {
         
         object.fallSpeed += gravitySpeed;
         object.effect.transform.projectionMatrix = GLKMatrix4Multiply(object.effect.transform.projectionMatrix ,GLKMatrix4MakeTranslation(0.0f, object.fallSpeed, 0.0f));
@@ -172,7 +167,7 @@
 }
 
 
--(void) applyJoystickMovewithAngle: (GLfloat) angle XPos: (GLfloat) xPos YPos: (GLfloat) yPos Radians: (GLfloat) radiansAngle Size:(CGSize)size
+-(void) applyJoystickMovewithAngle: (GLfloat const ) angle XPos: (GLfloat const) xPos YPos: (GLfloat const) yPos Radians: (GLfloat const) radiansAngle Size:(CGSize const)size
 {
     
     [joystick recieveJoystickInputWithAngle:radiansAngle XPos:  1-yPos/(size.height/2)  YPos:  1-xPos/(size.width/2) ];
@@ -233,5 +228,6 @@
     return toReturn;
     
 }
+
 
 @end

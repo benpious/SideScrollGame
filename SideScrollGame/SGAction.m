@@ -12,7 +12,7 @@
 @synthesize hitmask;
 @synthesize position;
 
--(id) initWithArea: (CGRect) area Damage: (int) damage knockBack: (GLfloat) knockBack forceNextAnimation: (BOOL) forceNextAnimation nextAction: (NSString* ) nextAction
+-(id) initWithArea: (CGRect const) area Damage: (int const) damage knockBack: (GLfloat const) knockBack forceNextAnimation: (BOOL const) forceNextAnimation nextAction: (NSString*) nextAction
 {
     if (self = [super init]) {
         _area = area;

@@ -334,7 +334,7 @@ enum
     return YES;
 }
 
-#pragma touch recognition methods
+#pragma mark touch recognition methods
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
@@ -378,7 +378,7 @@ enum
     else
     {
         angle = 270.0f + GLKMathRadiansToDegrees(atanf(fabsf(deltaX)/fabsf(deltaY)));
-        radiansAngle = GLKMathDegreesToRadians( 270.0f) + atanf(fabsf(deltaX)/fabsf(deltaY));
+        radiansAngle = GLKMathDegreesToRadians(270.0f) + atanf(fabsf(deltaX)/fabsf(deltaY));
     }
     
 

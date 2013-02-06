@@ -12,12 +12,15 @@
 
 @property (assign) BOOL** hitmask;
 
-
 @property (assign) int width;
 @property (assign) int height;
 
+
+
 -(id) initHitMaskWithFileNamed: (NSString*) name Width: (int) width Height: (int) height;
--(id) initHitmaskWithHitmask: (SGHitMask*) hitmask Partition: (CGRect) partition;
+-(id) initHitmaskWithHitmask: (SGHitMask*) oldHitmask Partition: (CGRect) partition OldHitMaskOrigin: (CGPoint) hitMaskOrigin;
+-(id) initHitMaskWithBoolArray: (BOOL**) oldHitmask Width: (int) width Height: (int) height;
+
 +(BOOL) collisionBetweenEquallySizedHitmasks: (SGHitMask*) a And: (SGHitMask*) b;
 
 @end

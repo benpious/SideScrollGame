@@ -42,31 +42,56 @@
     }
     return self;
 }
--(id) initHitmaskWithHitmask: (SGHitMask*) oldHitmask Partition: (CGRect) partition
+
+//should take the origin of the old hitmask as well
+-(id) initHitmaskWithHitmask: (SGHitMask*) oldHitmask Partition: (CGRect) partition OldHitMaskOrigin: (CGPoint) hitMaskOrigin
 {
 
     self = [super init];
     if (self) {
-        self.width = oldHitmask.width - partition.origin.x - partition.size.width;
-        self.height = oldHitmask.height - partition.origin.y - partition.size.height;
-        self.hitmask = malloc(sizeof(BOOL*) * self.height);
         
-        for (int i = 0; i < self.height; i++) {
-            self.hitmask[i] = malloc(sizeof(BOOL) * self.width);
+        self.width = partition.size.width;
+        self.height = partition.size.height;
+        self.hitmask = malloc(sizeof(BOOL*) * self.width);
+        
+        for (int i = 0; i < self.width; i++) {
             
-            for (int j =0; j < self.width; j++) {
-                self.hitmask[i][j] = oldHitmask.hitmask[i+(int)partition.origin.x][j+(int)partition.origin.y];
+            self.hitmask[i] = malloc(sizeof(BOOL) * self.height);
+            
+            for (int j = 0; j < self.height; j++) {
+                
+                self.hitmask[i][j] = oldHitmask.hitmask[i + (int)(partition.origin.x - hitMaskOrigin.x)][j + (int)(partition.origin.y -  hitMaskOrigin.y)];
+                
             }
         }
     }
+    
     return self;
 
 }
 
+-(id) initHitMaskWithBoolArray:(BOOL **)oldHitmask Width:(int)width Height:(int)height {
+    if (self = [super init]) {
+        self.width = width;
+        self.height = height;
+        self.hitmask = malloc(sizeof(BOOL*) * width);
+        
+        for (int i = 0 ; i < width; i++) {
+            self.hitmask[i] = malloc(sizeof(BOOL) * height);
+            
+            for (int j=0; j<height; j++) {
+                self.hitmask[i][j] = oldHitmask[i][j];
+            }
+        }
+    }
+    
+    return self;
+}
+
 +(BOOL) collisionBetweenEquallySizedHitmasks: (SGHitMask*) a And: (SGHitMask*) b
 {
-    for (int i = 0; i < a.height; i++) {
-        for (int j =0; j<a.height; j++) {
+    for (int i = 0; i < a.width; i++) {
+        for (int j = 0; j < a.height; j++) {
             if (a.hitmask[i][j] && b.hitmask[i][j]) {
                 return YES;
             }

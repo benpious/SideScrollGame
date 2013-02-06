@@ -10,6 +10,12 @@
 		3B07052016A508E900E2FC2D /* leveltScaleOffset.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B07051F16A508E900E2FC2D /* leveltScaleOffset.plist */; };
 		3B105022169F533C00E52403 /* SGJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B105021169F533C00E52403 /* SGJoystick.m */; };
 		3B125B6816A504EB0092C7A7 /* owlcharScaleOffset.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B125B6716A504EB0092C7A7 /* owlcharScaleOffset.plist */; };
+		3B2253F016C04E250036B7A2 /* NormalShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B2253EF16C04E250036B7A2 /* NormalShader.fsh */; };
+		3B2253F816C051340036B7A2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2253F716C051340036B7A2 /* SenTestingKit.framework */; };
+		3B2253F916C051340036B7A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88D7164862DC004BADC9 /* UIKit.framework */; };
+		3B2253FA16C051340036B7A2 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88D9164862DC004BADC9 /* Foundation.framework */; };
+		3B22540016C051340036B7A2 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B2253FE16C051340036B7A2 /* InfoPlist.strings */; };
+		3B22540316C051340036B7A2 /* SideScrollGameLogicTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B22540216C051340036B7A2 /* SideScrollGameLogicTests.m */; };
 		3B2B88D8164862DC004BADC9 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88D7164862DC004BADC9 /* UIKit.framework */; };
 		3B2B88DA164862DC004BADC9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88D9164862DC004BADC9 /* Foundation.framework */; };
 		3B2B88DC164862DC004BADC9 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88DB164862DC004BADC9 /* CoreGraphics.framework */; };
@@ -37,6 +43,17 @@
 		3B75A9F5167D8DB700657BF8 /* SGQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B75A9F4167D8DB700657BF8 /* SGQueue.m */; };
 		3B7FE5D7168E9816005E0AB1 /* catTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FE5D6168E9816005E0AB1 /* catTextureData.png */; };
 		3B7FE5DA168E9854005E0AB1 /* catAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */; };
+		3B8EB39D16C06F11001842D4 /* SGGameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B30743C167D222C0088A46A /* SGGameEngine.m */; };
+		3B8EB39E16C06F17001842D4 /* SGHitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727D41698B37E0065C382 /* SGHitMask.m */; };
+		3B8EB39F16C06F26001842D4 /* SGObjectEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B307438167D214A0088A46A /* SGObjectEntity.m */; };
+		3B8EB3A016C06F87001842D4 /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88DF164862DC004BADC9 /* OpenGLES.framework */; };
+		3B8EB3A116C06F91001842D4 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88DB164862DC004BADC9 /* CoreGraphics.framework */; };
+		3B8EB3A216C06F9A001842D4 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88DD164862DC004BADC9 /* GLKit.framework */; };
+		3B8EB3A316C06FB6001842D4 /* SGQueue.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B75A9F4167D8DB700657BF8 /* SGQueue.m */; };
+		3B8EB3A416C06FC6001842D4 /* SGMainCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B3EE0F2169E4E560005E2F6 /* SGMainCharacter.m */; };
+		3B8EB3A516C06FDB001842D4 /* SGLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD336FE169747CF00CFA9F5 /* SGLevel.m */; };
+		3B8EB3A616C06FE3001842D4 /* SGJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B105021169F533C00E52403 /* SGJoystick.m */; };
+		3B8EB3A716C06FFB001842D4 /* SGCharacter.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B307433167D14EE0088A46A /* SGCharacter.m */; };
 		3BA727D51698B37E0065C382 /* SGHitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727D41698B37E0065C382 /* SGHitMask.m */; };
 		3BA727E01698B95B0065C382 /* SGStaticAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727DF1698B95B0065C382 /* SGStaticAgent.m */; };
 		3BA727E31698BBA10065C382 /* SGSimpleAttackAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727E21698BBA10065C382 /* SGSimpleAttackAgent.m */; };
@@ -55,6 +72,14 @@
 		3B105021169F533C00E52403 /* SGJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGJoystick.m; sourceTree = "<group>"; };
 		3B125B6716A504EB0092C7A7 /* owlcharScaleOffset.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = owlcharScaleOffset.plist; sourceTree = "<group>"; };
 		3B13E37516897389000F9721 /* SGCharacterAgent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGCharacterAgent.h; sourceTree = "<group>"; };
+		3B2253EF16C04E250036B7A2 /* NormalShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NormalShader.fsh; sourceTree = "<group>"; };
+		3B2253F616C051340036B7A2 /* SideScrollGameLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SideScrollGameLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B2253F716C051340036B7A2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		3B2253FD16C051340036B7A2 /* SideScrollGameLogicTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SideScrollGameLogicTests-Info.plist"; sourceTree = "<group>"; };
+		3B2253FF16C051340036B7A2 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3B22540116C051340036B7A2 /* SideScrollGameLogicTests.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SideScrollGameLogicTests.h; sourceTree = "<group>"; };
+		3B22540216C051340036B7A2 /* SideScrollGameLogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SideScrollGameLogicTests.m; sourceTree = "<group>"; };
+		3B22540416C051340036B7A2 /* SideScrollGameLogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SideScrollGameLogicTests-Prefix.pch"; sourceTree = "<group>"; };
 		3B26596E1695FDD9009B106B /* SGAgentProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGAgentProtocol.h; sourceTree = "<group>"; };
 		3B2B88D3164862DC004BADC9 /* SideScrollGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideScrollGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2B88D7164862DC004BADC9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
@@ -115,6 +140,19 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3B2253F216C051340036B7A2 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B8EB3A216C06F9A001842D4 /* GLKit.framework in Frameworks */,
+				3B8EB3A116C06F91001842D4 /* CoreGraphics.framework in Frameworks */,
+				3B8EB3A016C06F87001842D4 /* OpenGLES.framework in Frameworks */,
+				3B2253F816C051340036B7A2 /* SenTestingKit.framework in Frameworks */,
+				3B2253F916C051340036B7A2 /* UIKit.framework in Frameworks */,
+				3B2253FA16C051340036B7A2 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3B2B88D0164862DC004BADC9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -137,6 +175,26 @@
 				3B105021169F533C00E52403 /* SGJoystick.m */,
 			);
 			name = Controls;
+			sourceTree = "<group>";
+		};
+		3B2253FB16C051340036B7A2 /* SideScrollGameLogicTests */ = {
+			isa = PBXGroup;
+			children = (
+				3B22540116C051340036B7A2 /* SideScrollGameLogicTests.h */,
+				3B22540216C051340036B7A2 /* SideScrollGameLogicTests.m */,
+				3B2253FC16C051340036B7A2 /* Supporting Files */,
+			);
+			path = SideScrollGameLogicTests;
+			sourceTree = "<group>";
+		};
+		3B2253FC16C051340036B7A2 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3B2253FD16C051340036B7A2 /* SideScrollGameLogicTests-Info.plist */,
+				3B2253FE16C051340036B7A2 /* InfoPlist.strings */,
+				3B22540416C051340036B7A2 /* SideScrollGameLogicTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		3B2A93CD168C02E200CC4883 /* Protocols */ = {
@@ -178,6 +236,7 @@
 			children = (
 				3B2B88F6164862DC004BADC9 /* Shader.fsh */,
 				3B2B88F8164862DC004BADC9 /* Shader.vsh */,
+				3B2253EF16C04E250036B7A2 /* NormalShader.fsh */,
 			);
 			name = Shaders;
 			sourceTree = "<group>";
@@ -186,6 +245,7 @@
 			isa = PBXGroup;
 			children = (
 				3B2B88E1164862DC004BADC9 /* SideScrollGame */,
+				3B2253FB16C051340036B7A2 /* SideScrollGameLogicTests */,
 				3B2B88D6164862DC004BADC9 /* Frameworks */,
 				3B2B88D4164862DC004BADC9 /* Products */,
 			);
@@ -195,6 +255,7 @@
 			isa = PBXGroup;
 			children = (
 				3B2B88D3164862DC004BADC9 /* SideScrollGame.app */,
+				3B2253F616C051340036B7A2 /* SideScrollGameLogicTests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -207,6 +268,7 @@
 				3B2B88DB164862DC004BADC9 /* CoreGraphics.framework */,
 				3B2B88DD164862DC004BADC9 /* GLKit.framework */,
 				3B2B88DF164862DC004BADC9 /* OpenGLES.framework */,
+				3B2253F716C051340036B7A2 /* SenTestingKit.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -353,6 +415,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		3B2253F516C051340036B7A2 /* SideScrollGameLogicTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3B22540516C051340036B7A2 /* Build configuration list for PBXNativeTarget "SideScrollGameLogicTests" */;
+			buildPhases = (
+				3B2253F116C051340036B7A2 /* Sources */,
+				3B2253F216C051340036B7A2 /* Frameworks */,
+				3B2253F316C051340036B7A2 /* Resources */,
+				3B2253F416C051340036B7A2 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SideScrollGameLogicTests;
+			productName = SideScrollGameLogicTests;
+			productReference = 3B2253F616C051340036B7A2 /* SideScrollGameLogicTests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		3B2B88D2164862DC004BADC9 /* SideScrollGame */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3B2B88FF164862DC004BADC9 /* Build configuration list for PBXNativeTarget "SideScrollGame" */;
@@ -393,11 +473,20 @@
 			projectRoot = "";
 			targets = (
 				3B2B88D2164862DC004BADC9 /* SideScrollGame */,
+				3B2253F516C051340036B7A2 /* SideScrollGameLogicTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		3B2253F316C051340036B7A2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B22540016C051340036B7A2 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3B2B88D1164862DC004BADC9 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -407,6 +496,7 @@
 				3B2B88F0164862DC004BADC9 /* Default@2x.png in Resources */,
 				3B2B88F2164862DC004BADC9 /* Default-568h@2x.png in Resources */,
 				3B2B88F5164862DC004BADC9 /* MainStoryboard.storyboard in Resources */,
+				3B2253F016C04E250036B7A2 /* NormalShader.fsh in Resources */,
 				3B2B88F7164862DC004BADC9 /* Shader.fsh in Resources */,
 				3B2B88F9164862DC004BADC9 /* Shader.vsh in Resources */,
 				3BE07C7F164B95D600DBFD78 /* sirowlTextureData.png in Resources */,
@@ -428,7 +518,39 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		3B2253F416C051340036B7A2 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		3B2253F116C051340036B7A2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3B8EB3A716C06FFB001842D4 /* SGCharacter.m in Sources */,
+				3B8EB3A616C06FE3001842D4 /* SGJoystick.m in Sources */,
+				3B8EB3A516C06FDB001842D4 /* SGLevel.m in Sources */,
+				3B8EB3A416C06FC6001842D4 /* SGMainCharacter.m in Sources */,
+				3B8EB3A316C06FB6001842D4 /* SGQueue.m in Sources */,
+				3B8EB39F16C06F26001842D4 /* SGObjectEntity.m in Sources */,
+				3B8EB39E16C06F17001842D4 /* SGHitMask.m in Sources */,
+				3B8EB39D16C06F11001842D4 /* SGGameEngine.m in Sources */,
+				3B22540316C051340036B7A2 /* SideScrollGameLogicTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		3B2B88CF164862DC004BADC9 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -453,6 +575,14 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		3B2253FE16C051340036B7A2 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3B2253FF16C051340036B7A2 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 		3B2B88E4164862DC004BADC9 /* InfoPlist.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -472,6 +602,44 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3B22540616C051340036B7A2 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SideScrollGameLogicTests/SideScrollGameLogicTests-Prefix.pch";
+				INFOPLIST_FILE = "SideScrollGameLogicTests/SideScrollGameLogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		3B22540716C051340036B7A2 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"\"$(SDKROOT)/Developer/Library/Frameworks\"",
+					"\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SideScrollGameLogicTests/SideScrollGameLogicTests-Prefix.pch";
+				INFOPLIST_FILE = "SideScrollGameLogicTests/SideScrollGameLogicTests-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		3B2B88FD164862DC004BADC9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -536,6 +704,7 @@
 			buildSettings = {
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SideScrollGame/SideScrollGame-Prefix.pch";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = "SideScrollGame/SideScrollGame-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
@@ -545,6 +714,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3B22540516C051340036B7A2 /* Build configuration list for PBXNativeTarget "SideScrollGameLogicTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3B22540616C051340036B7A2 /* Debug */,
+				3B22540716C051340036B7A2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		3B2B88CD164862DC004BADC9 /* Build configuration list for PBXProject "SideScrollGame" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

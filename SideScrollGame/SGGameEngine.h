@@ -35,15 +35,19 @@
 @property (assign) GLfloat cameraYOffset;
 @property (assign) GLfloat cameraXOffset;
 @property (retain) SGLevel* level;
+@property (assign) CGRect viewFrame;
 
 -(id) initWithLevelPlist: (NSString*) levelName;
-
 //if the viewcontroller has recognized a joystick action, this method is called
 -(void) applyJoystickMovewithAngle: (GLfloat) angle XPos: (GLfloat) xPos YPos: (GLfloat) yPos Radians: (GLfloat) radiansAngle Size: (CGSize) size;
 //if the viewcontroller recognizes a button press, this method is called
 -(void) applyTouchDownWithLocation:(CGPoint) loc;
 -(void) applyTouchUpWithLocation: (CGPoint) loc;
-
+//returns an array of objects conforming to SGEntityProtocol, used by the view controller for drawing
 -(NSMutableArray*) objectsToDraw;
+//main game loop
 -(void) eventLoopCallBack;
+
+-(BOOL)hitDetectedBetween: (NSObject<SGMassProtocol> const * const) a and: (NSObject<SGMassProtocol>const * const) b;
+
 @end

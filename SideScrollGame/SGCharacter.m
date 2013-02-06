@@ -24,7 +24,8 @@
 -(id) initCharacterNamed: (NSString*) name
 {
     if (self = [super init]) {
-        
+        self.position = malloc(sizeof(CGRect));
+        *(self.position) = CGRectMake(0.0f, 0.0f, 0.0f, 0.0f);
         currentAnimation = 0;
         currentFrame = 0;
         effect = [[GLKBaseEffect alloc] init];
@@ -62,6 +63,8 @@
         currAnimation->duration = [[temp objectAtIndex:1] intValue];
         self.width = [[temp objectAtIndex:2] floatValue];
         self.height = [[temp objectAtIndex:3] floatValue];
+        self.position->size.width = self.width;
+        self.position->size.height = self.height;
         currAnimation->xOffset = [[temp objectAtIndex:4] floatValue] ;
         currAnimation->yOffset = [[temp objectAtIndex:5] floatValue] ;
         
@@ -112,7 +115,29 @@
     self.effect.texture2d0.name = texture.name;
     self.effect.light0.enabled = GL_TRUE;
     self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
+
+}
+
+-(void) loadNormalMap: (NSString*) normalMapName
+{
+    //load the texture
+    NSError *error = nil;
+    NSDictionary* textureOps = @{GLKTextureLoaderApplyPremultiplication : @NO, GLKTextureLoaderGenerateMipmaps : @NO, GLKTextureLoaderOriginBottomLeft : @YES};
+    NSString* normalsNameFullPath = [[NSBundle mainBundle]
+                                   pathForResource:normalMapName ofType: nil];
+    GLKTextureInfo* normals = [GLKTextureLoader textureWithContentsOfFile: normalsNameFullPath options:textureOps error:&error];
     
+    if (error != nil) {
+        NSLog(@"error, %d", [error code]);
+    }
+    
+    if (self.texture == nil) {
+        NSLog(@"error, texture is nil");
+    }
+    
+    self.effect.texture2d1.envMode = GLKTextureEnvModeReplace;
+    self.effect.texture2d1.target = GLKTextureTarget2D;
+    self.effect.texture2d1.name = normals.name;
 }
 
 
@@ -125,7 +150,6 @@
             free(animations[i]->coords[j]);
             //free(animations[i]->animationHitmasks[j]);
         }
-        //free(animations[i]->animationHitmasks);
         free(animations[i]->coords);
         free(animations[i]);
     }
@@ -252,11 +276,13 @@
 
     textureCoords = animations[currentAnimation]->coords[currentFrame];
     
-    movementX += animations[currentAnimation]->xOffset;
+    movementX += animations[currentAnimation]->xOffset + self.fallSpeed;
     movementY += animations[currentAnimation]->yOffset;
     
-    self.effect.transform.projectionMatrix = GLKMatrix4MakeTranslation(movementX, movementY, 0);
     
+    self.effect.transform.projectionMatrix = GLKMatrix4MakeTranslation(movementX, movementY, 0);
+    self.position->origin.x = movementX;
+    self.position->origin.y = movementY;
 }
 
 -(void) applyActionEffect: (SGAction*) action
