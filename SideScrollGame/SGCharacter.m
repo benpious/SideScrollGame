@@ -276,8 +276,8 @@
 
     textureCoords = animations[currentAnimation]->coords[currentFrame];
     
-    movementX += animations[currentAnimation]->xOffset + self.fallSpeed;
-    movementY += animations[currentAnimation]->yOffset;
+    movementX += animations[currentAnimation]->xOffset;
+    movementY += animations[currentAnimation]->yOffset - self.fallSpeed;
     
     
     self.effect.transform.projectionMatrix = GLKMatrix4MakeTranslation(movementX, movementY, 0);

@@ -14,6 +14,7 @@
 @synthesize player;
 @synthesize level;
 
+#pragma mark hit dectection
 //call whenever an action is made
 -(BOOL)hitDetectedBetween: (NSObject<SGMassProtocol> const * const) a and: (NSObject<SGMassProtocol>const * const) b
 {
@@ -41,7 +42,6 @@
     [aMask release];
     [bMask release];
 
-    
     return NO;
 }
 
@@ -55,6 +55,7 @@
     
 }
 
+#pragma mark level initialiazation
 
 -(id) initWithLevelPlist: (NSString*) levelName
 {
@@ -62,15 +63,12 @@
         actionQueue = [[SGQueue alloc] init];
         [self loadPlistWithName:levelName];
         joystick = [[SGJoystick alloc] initJoystick];
+        gravitySpeed = .001;
     }
     
     return self;
 }
 
--(void) playerActionReceived
-{
-    
-}
 
 /*
  Loads the level from a given .plist file
@@ -117,6 +115,8 @@
     [objects insertObject:level atIndex:0];
 }
 
+
+#pragma mark callback related methods
 //called whenever the openglview's update function fires
 -(void) eventLoopCallBack
 {
@@ -140,6 +140,7 @@
     
     }
     
+    [self applyGravityTo:self.player];
     
     //loop through the action queue applying the results
     while (actionQueue.length != 0) {
@@ -155,17 +156,40 @@
 
 }
 
--(void) applyGravityTo: (NSObject<SGEntityProtocol, SGMassProtocol>* const) object
+-(void) applyGravityTo: (NSObject<SGEntityProtocol, SGMassProtocol>*) object
 {
     
     if (![self hitDetectedBetween:self.level and:object]) {
         
         object.fallSpeed += gravitySpeed;
-        object.effect.transform.projectionMatrix = GLKMatrix4Multiply(object.effect.transform.projectionMatrix ,GLKMatrix4MakeTranslation(0.0f, object.fallSpeed, 0.0f));
         
     }
+    
+    else object.fallSpeed = 0.0f;
 }
 
+//returns an array of objects to draw. The object receiving the array should release it at the end of its usefulness
+-(NSMutableArray*) objectsToDraw
+{
+    NSMutableArray* toReturn = [[NSMutableArray alloc] initWithArray:objects];
+    [toReturn addObjectsFromArray:characters];
+    
+    //test code
+    if (joystick.shouldDraw == YES) {
+        [toReturn addObject:joystick];
+    }
+    
+    
+    return toReturn;
+    
+}
+
+#pragma mark action methods
+
+-(void) playerActionReceived
+{
+    
+}
 
 -(void) applyJoystickMovewithAngle: (GLfloat const ) angle XPos: (GLfloat const) xPos YPos: (GLfloat const) yPos Radians: (GLfloat const) radiansAngle Size:(CGSize const)size
 {
@@ -212,22 +236,6 @@
     [joystick joyStickInputStopped];
 }
 
-
-//returns an array of objects to draw. The object receiving the array should release it at the end of its usefulness
--(NSMutableArray*) objectsToDraw
-{
-    NSMutableArray* toReturn = [[NSMutableArray alloc] initWithArray:objects];
-    [toReturn addObjectsFromArray:characters];
-    
-    //test code
-    if (joystick.shouldDraw == YES) {
-        [toReturn addObject:joystick];
-    }
-    
-    
-    return toReturn;
-    
-}
 
 
 @end
