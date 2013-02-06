@@ -19,10 +19,12 @@
 -(BOOL)hitDetectedBetween: (NSObject<SGMassProtocol> const * const) a and: (NSObject<SGMassProtocol>const * const) b
 {
     if ((a.position->origin.x < b.position->origin.x && a.position->size.width + a.position->origin.x < b.position->origin.x)||(a.position->origin.x > b.position->origin.x + b.position->size.width && a.position->size.width + a.position->origin.x > b.position->size.width + b.position->origin.x)) {
+        NSLog(@"too small");
         return NO;
     }
     
     if ((a.position->origin.y < b.position->origin.y && a.position->size.height + a.position->origin.y < b.position->size.height) || (a.position->origin.y > b.position->origin.y + b.position->size.height && a.position->size.height + a.position->origin.y > b.position->size.height + b.position->origin.y)) {
+        NSLog(@"too big");
         return NO;
     }
     

@@ -33,6 +33,23 @@
         fallSpeed = 0.0f;
         isFalling = NO;
         //self.hitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:[name stringByAppendingString: @"HitMask.hmk"] Width:self.width Height:self.height];
+        
+        // test code delete later
+        
+        BOOL** hitmaskarray = malloc(sizeof(BOOL*) * self.width);
+        for (int i =0; i<self.width; i++) {
+            hitmaskarray[i] = malloc(sizeof(BOOL) * self.height);
+            for (int j =0; j<self.height; j++) {
+                hitmaskarray[i][j] = NO;
+            }
+        }
+        
+        for (int i =0; i< self.width; i++) {
+            hitmaskarray[i][(int)(self.height -1)] = YES;
+        }
+        
+        self.hitmask = [[SGHitMask alloc] initHitMaskWithBoolArray:hitmaskarray Width:self.width Height:self.height];
+
     }
     
     return self;
@@ -93,7 +110,9 @@
     
     self.vertexCoords = malloc(sizeof(GLfloat) * 18);
     self.position->origin.x = xOffSet;
-    self.position->origin.y = yOffset;	
+    self.position->origin.y = yOffset;
+	self.position->size.width = width * scaleFactor;
+    self.position->size.height = height * scaleFactor;
     
     GLfloat proportion;
     

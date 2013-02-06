@@ -103,7 +103,7 @@
 
 -(void) dealloc
 {
-    for (int i = 0; i < self.height; i++) {
+    for (int i = 0; i < self.width; i++) {
 
         free(self.hitmask[i]);
     }

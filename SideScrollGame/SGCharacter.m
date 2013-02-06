@@ -38,6 +38,25 @@
         movementX = 0.0f;
         movementY = 0.0f;
         //self.hitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:[name stringByAppendingString: @"HitMask.hmk"] Width:self.width Height:self.height];
+        
+        // test code delete later
+        
+        BOOL** hitmaskarray = malloc(sizeof(BOOL*) * self.width);
+        for (int i =0; i<self.width; i++) {
+            hitmaskarray[i] = malloc(sizeof(BOOL) * self.height);
+            for (int j =0; j<self.height; j++) {
+                hitmaskarray[i][j] = YES;
+            }
+        }
+        self.hitmask = [[SGHitMask alloc] initHitMaskWithBoolArray:hitmaskarray Width:self.width Height:self.height];
+        
+        for (int i =0; i<self.width; i++) {
+            free(hitmaskarray[i]);
+        }
+        
+        free(hitmaskarray);
+        
+        // end test code
     }
     
     return self;
@@ -63,8 +82,6 @@
         currAnimation->duration = [[temp objectAtIndex:1] intValue];
         self.width = [[temp objectAtIndex:2] floatValue];
         self.height = [[temp objectAtIndex:3] floatValue];
-        self.position->size.width = self.width;
-        self.position->size.height = self.height;
         currAnimation->xOffset = [[temp objectAtIndex:4] floatValue] ;
         currAnimation->yOffset = [[temp objectAtIndex:5] floatValue] ;
         
@@ -199,6 +216,9 @@
 -(void) populateArraysWithScaleFactor: (GLfloat) scaleFactor XOffset: (GLfloat) xOffSet YOffset: (GLfloat) yOffset
 {
     
+    self.position->size.width = self.width * scaleFactor;
+    self.position->size.height = self.height * scaleFactor;
+
     self.vertexCoords = malloc(sizeof(GLfloat) * 18);
     
     
