@@ -110,16 +110,16 @@
 {
     
     self.vertexCoords = malloc(sizeof(GLfloat) * 18);
-    self.position->origin.x = xOffSet;
-    self.position->origin.y = yOffset;
+    self.position->origin.x = xOffSet * 100;
+    self.position->origin.y = yOffset * 100;
 	self.position->size.width = self.width * scaleFactor;
     self.position->size.height = self.height * scaleFactor;
     
     GLfloat proportion;
     
     //this test and if statement ensure that the vertex coords array is at the right proportion
-    if (width < height) {
-        proportion = height/width;
+    if (self.width < self.height) {
+        proportion = self.height/self.width;
         
         self.vertexCoords[0] = 1.0f*scaleFactor + xOffSet;
         self.vertexCoords[1] = proportion*scaleFactor + yOffset;

@@ -17,10 +17,13 @@
 #pragma mark hit dectection
 //call whenever an action is made
 -(BOOL)hitDetectedBetween: (NSObject<SGMassProtocol> const * const) a and: (NSObject<SGMassProtocol>const * const) b
-{    
-    CGRect partition = [self intersectionBetween:a And:b];
+{
+    NSLog(@"%d, %f", (int) a.position->origin.y, a.position->origin.y);
+    NSLog(@"%d, %f", (int) b.position->origin.x, b.position->origin.x);
+
+    CGRect partition = CGRectIntersection(*a.position, *b.position);
     if (CGRectIsNull(partition)) {
-        NSLog(@"no intersection");
+        //NSLog(@"no intersection");
         return NO;
     
     }
@@ -46,9 +49,9 @@
 {
     NSLog(@"%d, %f", (int) b.position->origin.y, b.position->origin.y);
     NSLog(@"%d, %f", (int) b.position->origin.x, b.position->origin.x);
-    CGRect apos = CGRectMake(a.position->origin.x, a.position->origin.y, a.position->size.width, a.position->size.height);
-    CGRect bpos = CGRectMake(b.position->origin.x, b.position->origin.y, b.position->size.width, b.position->size.height);
-    return CGRectIntersection(apos, bpos);
+    //CGRect apos = CGRectMake(a.position->origin.x, a.position->origin.y, a.position->size.width, a.position->size.height);
+    //CGRect bpos = CGRectMake(b.position->origin.x, b.position->origin.y, b.position->size.width, b.position->size.height);
+    return CGRectIntersection(*a.position, *b.position);
 }
 
 #pragma mark level initialiazation
