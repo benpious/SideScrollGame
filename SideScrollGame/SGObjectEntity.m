@@ -37,14 +37,15 @@
         // test code delete later
         
         BOOL** hitmaskarray = malloc(sizeof(BOOL*) * self.position->size.width);
-        for (int i =0; i<self.position->size.width; i++) {
+        for (int i = 0; i<self.position->size.width; i++) {
             hitmaskarray[i] = malloc(sizeof(BOOL) * self.position->size.height);
             for (int j =0; j<self.position->size.height; j++) {
                 hitmaskarray[i][j] = NO;
             }
         }
         
-        for (int i =0; i < self.position->size.width; i++) {
+        for (int i = 0; i < self.position->size.width; i++) {
+            //hitmaskarray[i][(int)self.position->size.height-1] = YES;
             hitmaskarray[i][0] = YES;
         }
         
@@ -111,8 +112,8 @@
     self.vertexCoords = malloc(sizeof(GLfloat) * 18);
     self.position->origin.x = xOffSet;
     self.position->origin.y = yOffset;
-	self.position->size.width = width * scaleFactor;
-    self.position->size.height = height * scaleFactor;
+	self.position->size.width = self.width * scaleFactor;
+    self.position->size.height = self.height * scaleFactor;
     
     GLfloat proportion;
     
@@ -136,7 +137,7 @@
     
     else {
         
-        proportion = width/height;
+        proportion = self.width/self.height;
         self.vertexCoords[0] = proportion*scaleFactor + xOffSet;
         self.vertexCoords[1] = 1.0f*scaleFactor + yOffset;
         self.vertexCoords[3] = 0.0f*scaleFactor + xOffSet;

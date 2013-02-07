@@ -31,7 +31,7 @@
 
 @property (retain) NSMutableArray* objects;
 @property (retain) NSMutableArray* characters;
-@property (assign) SGCharacter<Playable>* player;
+@property (assign) SGCharacter<Playable,SGMassProtocol, SGEntityProtocol>* player;
 @property (assign) GLfloat cameraYOffset;
 @property (assign) GLfloat cameraXOffset;
 @property (retain) SGLevel* level;

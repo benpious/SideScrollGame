@@ -46,8 +46,8 @@
 {
     NSLog(@"%d, %f", (int) b.position->origin.y, b.position->origin.y);
     NSLog(@"%d, %f", (int) b.position->origin.x, b.position->origin.x);
-    CGRect apos = CGRectMake(a.position->origin.x, a.position->origin.y+a.position->size.height, a.position->size.width, -a.position->size.height);
-    CGRect bpos = CGRectMake(b.position->origin.x, b.position->origin.y+b.position->size.height, b.position->size.width, -b.position->size.height);
+    CGRect apos = CGRectMake(a.position->origin.x, a.position->origin.y, a.position->size.width, a.position->size.height);
+    CGRect bpos = CGRectMake(b.position->origin.x, b.position->origin.y, b.position->size.width, b.position->size.height);
     return CGRectIntersection(apos, bpos);
 }
 

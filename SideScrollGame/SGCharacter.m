@@ -303,8 +303,8 @@
     
     
     self.effect.transform.projectionMatrix = GLKMatrix4MakeTranslation(movementX, movementY, 0);
-    self.position->origin.y+= animations[currentAnimation]->yOffset*100;
-    self.position->origin.x+= (animations[currentAnimation]->xOffset - self.fallSpeed)*100;
+    self.position->origin.y+= (animations[currentAnimation]->yOffset- self.fallSpeed)*100;
+    self.position->origin.x+= animations[currentAnimation]->xOffset*100;
 }
 
 -(void) applyActionEffect: (SGAction*) action
