@@ -41,16 +41,16 @@
         
         // test code delete later
         
-        BOOL** hitmaskarray = malloc(sizeof(BOOL*) * self.width);
-        for (int i =0; i<self.width; i++) {
-            hitmaskarray[i] = malloc(sizeof(BOOL) * self.height);
-            for (int j =0; j<self.height; j++) {
+        BOOL** hitmaskarray = malloc(sizeof(BOOL*) * self.position->size.width);
+        for (int i =0; i<self.position->size.width; i++) {
+            hitmaskarray[i] = malloc(sizeof(BOOL) * self.position->size.height);
+            for (int j =0; j<self.position->size.height; j++) {
                 hitmaskarray[i][j] = YES;
             }
         }
-        self.hitmask = [[SGHitMask alloc] initHitMaskWithBoolArray:hitmaskarray Width:self.width Height:self.height];
+        self.hitmask = [[SGHitMask alloc] initHitMaskWithBoolArray:hitmaskarray Width:self.position->size.width Height:self.position->size.height];
         
-        for (int i =0; i<self.width; i++) {
+        for (int i =0; i<self.position->size.width; i++) {
             free(hitmaskarray[i]);
         }
         
@@ -216,8 +216,10 @@
 -(void) populateArraysWithScaleFactor: (GLfloat) scaleFactor XOffset: (GLfloat) xOffSet YOffset: (GLfloat) yOffset
 {
     
-    self.position->size.width = self.width * scaleFactor;
-    self.position->size.height = self.height * scaleFactor;
+    self.position->origin.x = xOffSet * 100;
+    self.position->origin.y  = yOffset * 100;
+    self.position->size.width = self.height * scaleFactor;
+    self.position->size.height = self.width * scaleFactor;
 
     self.vertexCoords = malloc(sizeof(GLfloat) * 18);
     
@@ -301,8 +303,8 @@
     
     
     self.effect.transform.projectionMatrix = GLKMatrix4MakeTranslation(movementX, movementY, 0);
-    self.position->origin.x = movementX;
-    self.position->origin.y = movementY;
+    self.position->origin.y+= animations[currentAnimation]->yOffset*100;
+    self.position->origin.x+= (animations[currentAnimation]->xOffset - self.fallSpeed)*100;
 }
 
 -(void) applyActionEffect: (SGAction*) action

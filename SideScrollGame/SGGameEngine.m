@@ -17,19 +17,14 @@
 #pragma mark hit dectection
 //call whenever an action is made
 -(BOOL)hitDetectedBetween: (NSObject<SGMassProtocol> const * const) a and: (NSObject<SGMassProtocol>const * const) b
-{
-    if ((a.position->origin.x < b.position->origin.x && a.position->size.width + a.position->origin.x < b.position->origin.x)||(a.position->origin.x > b.position->origin.x + b.position->size.width && a.position->size.width + a.position->origin.x > b.position->size.width + b.position->origin.x)) {
-        NSLog(@"too small");
-        return NO;
-    }
-    
-    if ((a.position->origin.y < b.position->origin.y && a.position->size.height + a.position->origin.y < b.position->size.height) || (a.position->origin.y > b.position->origin.y + b.position->size.height && a.position->size.height + a.position->origin.y > b.position->size.height + b.position->origin.y)) {
-        NSLog(@"too big");
-        return NO;
-    }
-    
-    //test hitmasks using rect from intersectionbetween
+{    
     CGRect partition = [self intersectionBetween:a And:b];
+    if (CGRectIsNull(partition)) {
+        NSLog(@"no intersection");
+        return NO;
+    
+    }
+    
     SGHitMask* aMask = [[SGHitMask alloc] initHitmaskWithHitmask:a.hitmask Partition:partition OldHitMaskOrigin:a.position->origin];
     SGHitMask* bMask = [[SGHitMask alloc] initHitmaskWithHitmask:b.hitmask Partition:partition OldHitMaskOrigin:b.position->origin];
     
@@ -37,7 +32,6 @@
         
         [aMask release];
         [bMask release];
-        
         return YES;
     }
     
@@ -50,11 +44,11 @@
 //will only work if the two objects are on the screen
 -(CGRect) intersectionBetween: (NSObject<SGMassProtocol>const * const) a And: (NSObject<SGMassProtocol>const * const) b
 {
- 
-    
-    return CGRectMake(MAX(a.position->origin.x, b.position->origin.x), MAX(a.position->origin.y, b.position->origin.y),  MIN(a.position->size.width, b.position->size.width) - MAX(a.position->origin.x, b.position->origin.x) + MIN(a.position->origin.x, b.position->origin.x), MIN(a.position->size.height, b.position->size.height) -  MAX(a.position->origin.x, b.position->origin.x) + MIN(a.position->origin.x, b.position->origin.x));
-
-    
+    NSLog(@"%d, %f", (int) b.position->origin.y, b.position->origin.y);
+    NSLog(@"%d, %f", (int) b.position->origin.x, b.position->origin.x);
+    CGRect apos = CGRectMake(a.position->origin.x, a.position->origin.y+a.position->size.height, a.position->size.width, -a.position->size.height);
+    CGRect bpos = CGRectMake(b.position->origin.x, b.position->origin.y+b.position->size.height, b.position->size.width, -b.position->size.height);
+    return CGRectIntersection(apos, bpos);
 }
 
 #pragma mark level initialiazation

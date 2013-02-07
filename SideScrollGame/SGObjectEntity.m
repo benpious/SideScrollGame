@@ -36,19 +36,19 @@
         
         // test code delete later
         
-        BOOL** hitmaskarray = malloc(sizeof(BOOL*) * self.width);
-        for (int i =0; i<self.width; i++) {
-            hitmaskarray[i] = malloc(sizeof(BOOL) * self.height);
-            for (int j =0; j<self.height; j++) {
+        BOOL** hitmaskarray = malloc(sizeof(BOOL*) * self.position->size.width);
+        for (int i =0; i<self.position->size.width; i++) {
+            hitmaskarray[i] = malloc(sizeof(BOOL) * self.position->size.height);
+            for (int j =0; j<self.position->size.height; j++) {
                 hitmaskarray[i][j] = NO;
             }
         }
         
-        for (int i =0; i< self.width; i++) {
-            hitmaskarray[i][(int)(self.height -1)] = YES;
+        for (int i =0; i < self.position->size.width; i++) {
+            hitmaskarray[i][0] = YES;
         }
         
-        self.hitmask = [[SGHitMask alloc] initHitMaskWithBoolArray:hitmaskarray Width:self.width Height:self.height];
+        self.hitmask = [[SGHitMask alloc] initHitMaskWithBoolArray:hitmaskarray Width:self.position->size.width Height:self.position->size.height];
 
     }
     
