@@ -18,12 +18,8 @@
 //call whenever an action is made
 -(BOOL)hitDetectedBetween: (NSObject<SGMassProtocol> const * const) a and: (NSObject<SGMassProtocol>const * const) b
 {
-    NSLog(@"%d, %f", (int) a.position->origin.y, a.position->origin.y);
-    NSLog(@"%d, %f", (int) b.position->origin.x, b.position->origin.x);
-
     CGRect partition = CGRectIntersection(*a.position, *b.position);
     if (CGRectIsNull(partition)) {
-        //NSLog(@"no intersection");
         return NO;
     
     }
@@ -44,24 +40,15 @@
     return NO;
 }
 
-//will only work if the two objects are on the screen
--(CGRect) intersectionBetween: (NSObject<SGMassProtocol>const * const) a And: (NSObject<SGMassProtocol>const * const) b
-{
-    NSLog(@"%d, %f", (int) b.position->origin.y, b.position->origin.y);
-    NSLog(@"%d, %f", (int) b.position->origin.x, b.position->origin.x);
-    //CGRect apos = CGRectMake(a.position->origin.x, a.position->origin.y, a.position->size.width, a.position->size.height);
-    //CGRect bpos = CGRectMake(b.position->origin.x, b.position->origin.y, b.position->size.width, b.position->size.height);
-    return CGRectIntersection(*a.position, *b.position);
-}
 
 #pragma mark level initialiazation
 
--(id) initWithLevelPlist: (NSString*) levelName
+-(id) initWithLevelPlist: (NSString*) levelName ScreenSize:(CGRect)screenSize
 {
     if (self = [super init]) {
         actionQueue = [[SGQueue alloc] init];
-        [self loadPlistWithName:levelName];
-        joystick = [[SGJoystick alloc] initJoystick];
+        [self loadPlistWithName:levelName withScreenSize:screenSize];
+        joystick = [[SGJoystick alloc] initJoystickWithScreenSize:screenSize];
         gravitySpeed = .001;
     }
     
@@ -75,10 +62,10 @@
  Each of these arrays has the name of the file to be loaded, plus a label stating if it is a character
  or an object
  */
--(void) loadPlistWithName: (NSString*) levelName
+-(void) loadPlistWithName: (NSString*) levelName withScreenSize: (CGRect) screenSize
 {
     
-    level = [[SGLevel alloc] initWithLevelPlistNamed:levelName];
+    level = [[SGLevel alloc] initWithLevelPlistNamed:levelName withScreenSize:screenSize];
     
     NSPropertyListFormat format;
     NSError* error = nil;
@@ -97,17 +84,17 @@
         NSArray* currentEntity = [entityArray objectAtIndex:i];
         
         if ([[currentEntity objectAtIndex:1] isEqualToString: @"Character"]) {
-            [characters insertObject: [[SGCharacter alloc] initCharacterNamed: [currentEntity objectAtIndex:0]] atIndex:[characters count]] ;
+            [characters insertObject: [[SGCharacter alloc] initCharacterNamed: [currentEntity objectAtIndex:0] withScreenSize:screenSize] atIndex:[characters count]] ;
         }
         
         else {
             
             if ([[currentEntity objectAtIndex:1] isEqualToString: @"Main"]) {
-                [characters insertObject: [[SGMainCharacter alloc] initCharacterNamed: [currentEntity objectAtIndex:0]] atIndex:[characters count]] ;
+                [characters insertObject: [[SGMainCharacter alloc] initCharacterNamed: [currentEntity objectAtIndex:0] withScreenSize:screenSize] atIndex:[characters count]] ;
                 player = [characters objectAtIndex:[characters count]-1];
             }
             else
-            [objects  insertObject: [[SGObjectEntity alloc] initObjectNamed: [currentEntity objectAtIndex:0]] atIndex:[objects count]] ;
+            [objects  insertObject: [[SGObjectEntity alloc] initObjectNamed: [currentEntity objectAtIndex:0] withScreenSize:screenSize] atIndex:[objects count]] ;
         }
     }
     

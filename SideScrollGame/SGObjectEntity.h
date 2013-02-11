@@ -12,6 +12,6 @@
 
 @interface SGObjectEntity : NSObject<SGEntityProtocol, SGMassProtocol>
 
--(id) initObjectNamed: (NSString*) name;
+-(id) initObjectNamed: (NSString*) name withScreenSize: (CGRect) screenSize;
 
 @end

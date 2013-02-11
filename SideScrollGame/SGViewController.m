@@ -30,6 +30,7 @@ enum
 
 @interface SGViewController () {
     GLuint _program;
+    GLuint _normalMappingProgram;
     GLuint triBuffer;
 }
 
@@ -75,7 +76,8 @@ enum
 
     [self setupGL];
     
-    _engine = [[SGGameEngine alloc] initWithLevelPlist: @"levelt"];
+    CGRect screenSize = [[self view] frame];
+    _engine = [[SGGameEngine alloc] initWithLevelPlist: @"levelt" ScreenSize: screenSize];
 
 }
 
@@ -107,6 +109,7 @@ enum
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     [self loadShaders];
+    //[self loadNormalMappingShaders];
  
     // test stuff, delete when finished
     moving = NO;
@@ -158,15 +161,14 @@ enum
         NSObject<SGEntityProtocol>* current = [objects objectAtIndex:i];
         
         //turn off antialiasing of textures
-        glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, current.textureCoords);
         
         glBindBuffer(GL_ARRAY_BUFFER, 0);
         glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, current.vertexCoords);
-        
-
+            
         // Render the object with GLKit
         [current.effect prepareToDraw];
         
@@ -183,8 +185,7 @@ enum
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
-
-- (BOOL)loadShaders
+-(BOOL)loadShaders
 {
     GLuint vertShader, fragShader;
     NSString *vertShaderPathname, *fragShaderPathname;
@@ -205,13 +206,13 @@ enum
         NSLog(@"Failed to compile fragment shader");
         return NO;
     }
-    
+        
     // Attach vertex shader to program.
     glAttachShader(_program, vertShader);
     
     // Attach fragment shader to program.
     glAttachShader(_program, fragShader);
-    
+        
     // Bind attribute locations.
     // This needs to be done prior to linking.
     glBindAttribLocation(_program, ATTRIB_VERTEX, "position");
@@ -249,6 +250,80 @@ enum
     if (fragShader) {
         glDetachShader(_program, fragShader);
         glDeleteShader(fragShader);
+    }
+    
+    return YES;
+
+}
+
+
+- (BOOL)loadNormalMappingShaders
+{
+    GLuint vertShader, normFragShader;
+    NSString *vertShaderPathname, *normFragShaderPathName;
+    
+    // Create shader program.
+    _normalMappingProgram = glCreateProgram();
+    
+    // Create and compile vertex shader.
+    vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
+    if (![self compileShader:&vertShader type:GL_VERTEX_SHADER file:vertShaderPathname]) {
+        NSLog(@"Failed to compile vertex shader");
+        return NO;
+    }
+    
+    
+    // Create and compile normal mapping fragment shader.
+    normFragShaderPathName = [[NSBundle mainBundle] pathForResource:@"NormalShader" ofType:@"fsh"];
+    if (![self compileShader:&normFragShader type:GL_FRAGMENT_SHADER file:normFragShaderPathName]) {
+        NSLog(@"Failed to compile fragment shader");
+        return NO;
+    }
+    
+    // Attach vertex shader to program.
+    glAttachShader(_normalMappingProgram, vertShader);
+    
+    // Attach fragment shader to program.
+    glAttachShader(_normalMappingProgram, normFragShader);
+    
+    // Bind attribute locations.
+    // This needs to be done prior to linking.
+    glBindAttribLocation(_normalMappingProgram, ATTRIB_VERTEX, "position");
+    glBindAttribLocation(_normalMappingProgram, ATTRIB_NORMAL, "normal");
+    // Link program.
+    if (![self linkProgram:_normalMappingProgram]) {
+        NSLog(@"Failed to link program: %d", _normalMappingProgram);
+        
+        if (vertShader) {
+            glDeleteShader(vertShader);
+            vertShader = 0;
+        }
+
+        if (normFragShader) {
+            glDeleteShader(normFragShader);
+            normFragShader = 0;
+        }
+        if (_normalMappingProgram) {
+            glDeleteProgram(_normalMappingProgram);
+            _normalMappingProgram = 0;
+        }
+        
+        return NO;
+    }
+    
+    // Get uniform locations.
+    uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
+    uniforms[UNIFORM_NORMAL_MATRIX] = glGetUniformLocation(_program, "normalMatrix");
+    
+    // Release vertex and fragment shaders.
+    if (vertShader) {
+        glDetachShader(_program, vertShader);
+        glDeleteShader(vertShader);
+    }
+
+    if (normFragShader) {
+        glDetachShader(_program, normFragShader);
+        glDeleteShader(normFragShader);
     }
     
     return YES;

@@ -38,7 +38,7 @@ struct levelNode {
 {
     GLfloat changePoint;
 }
--(id) initWithLevelPlistNamed: (NSString*) levelName;
+-(id) initWithLevelPlistNamed: (NSString*) levelName withScreenSize: (CGRect) screenSize;
 
 
 @end

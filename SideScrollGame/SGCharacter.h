@@ -44,7 +44,7 @@ typedef struct {
 @property (assign) int health;
 //all files that the character will need to load to initialize will have the same name + a suffix indicating what they do
 // nametexture, nameinfo
--(id) initCharacterNamed: (NSString*) name;
+-(id) initCharacterNamed: (NSString*) name withScreenSize: (CGRect) screenSize;
 -(void)nextFrame;
 -(GLfloat*) glFloatArrayFromOriginX: (GLfloat) x OriginY: (GLfloat) y;
 -(void) setNextAnimation: (int) animation;

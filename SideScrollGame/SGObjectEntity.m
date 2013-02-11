@@ -20,7 +20,7 @@
 @synthesize width;
 @synthesize position;
 
--(id) initObjectNamed: (NSString*) name
+-(id) initObjectNamed: (NSString*) name withScreenSize:(CGRect)screenSize
 {
     if (self = [super init]) {
         
@@ -29,27 +29,14 @@
         *self.position = CGRectMake(0.0f, 0.0f, 0.0f, 0.0f);
         [self defineTextureCoords];
         [self loadTexture: [name stringByAppendingString:@"TextureData.png"]];
-        [self loadScaleAndOffsetInfo:[name stringByAppendingString:@"ScaleOffset"]];
+        [self loadScaleAndOffsetInfo:[name stringByAppendingString:@"ScaleOffset"] withScreenSize: (CGRect) screenSize];
         fallSpeed = 0.0f;
         isFalling = NO;
         //self.hitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:[name stringByAppendingString: @"HitMask.hmk"] Width:self.width Height:self.height];
         
         // test code delete later
         
-        BOOL** hitmaskarray = malloc(sizeof(BOOL*) * self.position->size.width);
-        for (int i = 0; i<self.position->size.width; i++) {
-            hitmaskarray[i] = malloc(sizeof(BOOL) * self.position->size.height);
-            for (int j =0; j<self.position->size.height; j++) {
-                hitmaskarray[i][j] = NO;
-            }
-        }
         
-        for (int i = 0; i < self.position->size.width; i++) {
-            //hitmaskarray[i][(int)self.position->size.height-1] = YES;
-            hitmaskarray[i][0] = YES;
-        }
-        
-        self.hitmask = [[SGHitMask alloc] initHitMaskWithBoolArray:hitmaskarray Width:self.position->size.width Height:self.position->size.height];
 
     }
     
@@ -106,49 +93,52 @@
     
 }
 
--(void) populateArraysWithScaleFactor: (GLfloat) scaleFactor XOffset: (GLfloat) xOffSet YOffset: (GLfloat) yOffset
+-(void) populateArraysWithScaleFactor: (GLfloat) scaleFactor xOffset: (GLfloat) xOffset yOffset: (GLfloat) yOffset withScreenSize: (CGRect) screenSize
 {
     
     self.vertexCoords = malloc(sizeof(GLfloat) * 18);
-    self.position->origin.x = xOffSet * 100;
+    self.position->origin.x = xOffset * 100;
     self.position->origin.y = yOffset * 100;
 	self.position->size.width = self.width * scaleFactor;
     self.position->size.height = self.height * scaleFactor;
     
     GLfloat proportion;
-    
+    GLfloat screenProportion = screenSize.size.width/screenSize.size.height;
     //this test and if statement ensure that the vertex coords array is at the right proportion
     if (self.width < self.height) {
-        proportion = self.height/self.width;
         
-        self.vertexCoords[0] = 1.0f*scaleFactor + xOffSet;
-        self.vertexCoords[1] = proportion*scaleFactor + yOffset;
-        self.vertexCoords[3] = 0.0f*scaleFactor + xOffSet;
-        self.vertexCoords[4] = 0.0f*scaleFactor + yOffset;
-        self.vertexCoords[6] = 0.0f*scaleFactor + xOffSet;
-        self.vertexCoords[7] = proportion*scaleFactor + yOffset;
-        self.vertexCoords[9] = 1.0f*scaleFactor + xOffSet;
-        self.vertexCoords[10] = proportion*scaleFactor + yOffset;
-        self.vertexCoords[12] = 1.0f*scaleFactor + xOffSet;
-        self.vertexCoords[13] = 0.0f + yOffset;
-        self.vertexCoords[15] = 0.0f + xOffSet;
-        self.vertexCoords[16] = 0.0f + yOffset;
+        proportion = self.height/self.width;
+        GLfloat proportionateHeight = 1.0*scaleFactor * screenProportion;
+        GLfloat proportionateWidth = proportion*scaleFactor;
+        
+        self.vertexCoords[0] = proportionateHeight + xOffset;
+        self.vertexCoords[1] = proportionateWidth + yOffset;
+        self.vertexCoords[3] = xOffset;
+        self.vertexCoords[4] = yOffset;
+        self.vertexCoords[6] = xOffset;
+        self.vertexCoords[7] = proportionateWidth + yOffset;
+        self.vertexCoords[9] = proportionateHeight + xOffset;
+        self.vertexCoords[10] = proportionateWidth + yOffset;
+        self.vertexCoords[12] = proportionateHeight + xOffset;
+        self.vertexCoords[13] = yOffset;
+        self.vertexCoords[15] = xOffset;
+        self.vertexCoords[16] = yOffset;
     }
     
     else {
         
         proportion = self.width/self.height;
-        self.vertexCoords[0] = proportion*scaleFactor + xOffSet;
+        self.vertexCoords[0] = proportion*scaleFactor + xOffset;
         self.vertexCoords[1] = 1.0f*scaleFactor + yOffset;
-        self.vertexCoords[3] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[3] = 0.0f*scaleFactor + xOffset;
         self.vertexCoords[4] = 0.0f*scaleFactor + yOffset;
-        self.vertexCoords[6] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[6] = 0.0f*scaleFactor + xOffset;
         self.vertexCoords[7] = 1.0f*scaleFactor + yOffset;
-        self.vertexCoords[9] = proportion*scaleFactor + xOffSet;
+        self.vertexCoords[9] = proportion*scaleFactor + xOffset;
         self.vertexCoords[10] = 1.0f*scaleFactor + yOffset;
-        self.vertexCoords[12] = proportion*scaleFactor + xOffSet;
+        self.vertexCoords[12] = proportion*scaleFactor + xOffset;
         self.vertexCoords[13] = 0.0f*scaleFactor + yOffset;
-        self.vertexCoords[15] = 0.0f*scaleFactor + xOffSet;
+        self.vertexCoords[15] = 0.0f*scaleFactor + xOffset;
         self.vertexCoords[16] = 0.0f*scaleFactor + yOffset;
         
         
@@ -161,7 +151,7 @@
     
 }
 
--(void) loadScaleAndOffsetInfo: (NSString*) plistName
+-(void) loadScaleAndOffsetInfo: (NSString*) plistName withScreenSize: (CGRect) screenSize
 {
     NSPropertyListFormat format;
     NSString* error = nil;
@@ -175,7 +165,7 @@
         NSLog(@"error reading plist");
     }
     
-    [self populateArraysWithScaleFactor:[[infoArray objectAtIndex:0] floatValue] XOffset:[[infoArray objectAtIndex:1] floatValue] YOffset:[[infoArray objectAtIndex:2] floatValue]];
+    [self populateArraysWithScaleFactor:[[infoArray objectAtIndex:0] floatValue] xOffset:[[infoArray objectAtIndex:1] floatValue] yOffset:[[infoArray objectAtIndex:2] floatValue] withScreenSize: screenSize];
     
 }
 

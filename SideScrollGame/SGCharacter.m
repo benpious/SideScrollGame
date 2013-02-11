@@ -21,7 +21,7 @@
 @synthesize position;
 
 #pragma Setup Methods
--(id) initCharacterNamed: (NSString*) name
+-(id) initCharacterNamed: (NSString*) name withScreenSize:(CGRect)screenSize
 {
     if (self = [super init]) {
         self.position = malloc(sizeof(CGRect));
@@ -30,9 +30,10 @@
         currentFrame = 0;
         effect = [[GLKBaseEffect alloc] init];
         [self loadTexture:[name stringByAppendingString:@"TextureData.png"]];
+        //[self loadNormalMap:[name stringByAppendingString:@"NormalData.png"]];
         //load animation arrays
         [self loadAnimations: [name stringByAppendingString:@"AnimationData"]];
-        [self populateArraysWithScaleFactor:1.0f XOffset:-0.5f YOffset:-0.5f];
+        [self populateArraysWithScaleFactor:1.0f XOffset:-0.5f YOffset:-0.5f screenSize: screenSize];
         self.fallSpeed = 0.0f;
         self.isFalling = NO;
         movementX = 0.0f;
@@ -213,11 +214,11 @@
  populates the vertexcoords array
  all of these arrays start at 0,0, then we can transform them to their proper place
  */
--(void) populateArraysWithScaleFactor: (GLfloat) scaleFactor XOffset: (GLfloat) xOffSet YOffset: (GLfloat) yOffset
+-(void) populateArraysWithScaleFactor: (GLfloat) scaleFactor XOffset: (GLfloat) xOffSet YOffset: (GLfloat) yOffSet screenSize: (CGRect) screenSize
 {
     
     self.position->origin.x = xOffSet * 100;
-    self.position->origin.y  = yOffset * 100;
+    self.position->origin.y  = yOffSet * 100;
     self.position->size.width = self.height * scaleFactor;
     self.position->size.height = self.width * scaleFactor;
 
@@ -225,40 +226,42 @@
     
     
     GLfloat proportion;
-    
+    GLfloat screenProportion = screenSize.size.width/screenSize.size.height;
     //this if statement ensures that the vertex coords array is at the right proportion
     if (self.width < self.height) {
         proportion = self.height/self.width;
+        GLfloat proportionateHeight = 1.0*scaleFactor * screenProportion;
+        GLfloat proportionateWidth = proportion*scaleFactor;
         
-        self.vertexCoords[0] = 1.0f*scaleFactor + xOffSet;
-        self.vertexCoords[1] = proportion*scaleFactor + yOffset;
-        self.vertexCoords[3] = 0.0f*scaleFactor + xOffSet;
-        self.vertexCoords[4] = 0.0f*scaleFactor + yOffset;
-        self.vertexCoords[6] = 0.0f*scaleFactor + xOffSet;
-        self.vertexCoords[7] = proportion*scaleFactor + yOffset;
-        self.vertexCoords[9] = 1.0f*scaleFactor + xOffSet;
-        self.vertexCoords[10] = proportion*scaleFactor + yOffset;
-        self.vertexCoords[12] = 1.0f*scaleFactor + xOffSet;
-        self.vertexCoords[13] = 0.0f + yOffset;
-        self.vertexCoords[15] = 0.0f + xOffSet;
-        self.vertexCoords[16] = 0.0f + yOffset;
+        self.vertexCoords[0] = proportionateHeight + xOffSet;
+        self.vertexCoords[1] = proportionateWidth + yOffSet;
+        self.vertexCoords[3] = xOffSet;
+        self.vertexCoords[4] = yOffSet;
+        self.vertexCoords[6] = xOffSet;
+        self.vertexCoords[7] = proportionateWidth + yOffSet;
+        self.vertexCoords[9] = proportionateHeight + xOffSet;
+        self.vertexCoords[10] = proportionateWidth + yOffSet;
+        self.vertexCoords[12] = proportionateHeight + xOffSet;
+        self.vertexCoords[13] = yOffSet;
+        self.vertexCoords[15] = xOffSet;
+        self.vertexCoords[16] = yOffSet;
     }
     
     else {
         
         proportion = self.width/self.height;
         self.vertexCoords[0] = proportion*scaleFactor + xOffSet;
-        self.vertexCoords[1] = 1.0f*scaleFactor + yOffset;
+        self.vertexCoords[1] = 1.0f*scaleFactor + yOffSet;
         self.vertexCoords[3] = 0.0f*scaleFactor + xOffSet;
-        self.vertexCoords[4] = 0.0f*scaleFactor + yOffset;
+        self.vertexCoords[4] = 0.0f*scaleFactor + yOffSet;
         self.vertexCoords[6] = 0.0f*scaleFactor + xOffSet;
-        self.vertexCoords[7] = 1.0f*scaleFactor + yOffset;
+        self.vertexCoords[7] = 1.0f*scaleFactor + yOffSet;
         self.vertexCoords[9] = proportion*scaleFactor + xOffSet;
-        self.vertexCoords[10] = 1.0f*scaleFactor + yOffset;
+        self.vertexCoords[10] = 1.0f*scaleFactor + yOffSet;
         self.vertexCoords[12] = proportion*scaleFactor + xOffSet;
-        self.vertexCoords[13] = 0.0f*scaleFactor + yOffset;
+        self.vertexCoords[13] = 0.0f*scaleFactor + yOffSet;
         self.vertexCoords[15] = 0.0f*scaleFactor + xOffSet;
-        self.vertexCoords[16] = 0.0f*scaleFactor + yOffset;
+        self.vertexCoords[16] = 0.0f*scaleFactor + yOffSet;
         
         
     }

@@ -12,7 +12,7 @@
 
 @property (assign) BOOL shouldDraw;
 -(void) recieveJoystickInputWithAngle:(const GLfloat) angle XPos: (const GLfloat) xPos YPos: (const GLfloat) yPos;
--(id) initJoystick;
+-(id) initJoystickWithScreenSize:(CGRect) screenSize;
 -(void) joyStickInputStopped;
 
 @end

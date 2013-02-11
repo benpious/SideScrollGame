@@ -12,9 +12,9 @@
 @synthesize shouldDraw;
 
 
--(id) initJoystick
+-(id) initJoystickWithScreenSize:(CGRect) screenSize
 {
-    if (self = [super initObjectNamed:@"joystick"]) {
+    if (self = [super initObjectNamed:@"joystick" withScreenSize: screenSize]) {
         shouldDraw = NO;
     }
     return  self;

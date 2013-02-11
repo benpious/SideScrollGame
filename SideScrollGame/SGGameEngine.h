@@ -37,7 +37,7 @@
 @property (retain) SGLevel* level;
 @property (assign) CGRect viewFrame;
 
--(id) initWithLevelPlist: (NSString*) levelName;
+-(id) initWithLevelPlist: (NSString*) levelName ScreenSize: (CGRect) screenSize;
 //if the viewcontroller has recognized a joystick action, this method is called
 -(void) applyJoystickMovewithAngle: (GLfloat) angle XPos: (GLfloat) xPos YPos: (GLfloat) yPos Radians: (GLfloat) radiansAngle Size: (CGSize) size;
 //if the viewcontroller recognizes a button press, this method is called

@@ -84,7 +84,7 @@
 		<integer>110</integer>
 		<string>128</string>
 		<integer>0</integer>
-		<real>0.01</real>
+		<real>0.03</real>
 		<array>
 			<integer>0</integer>
 			<integer>0</integer>
@@ -96,7 +96,7 @@
 		<integer>110</integer>
 		<string>128</string>
 		<integer>0</integer>
-		<real>-0.01</real>
+		<integer>0</integer>
 		<array>
 			<integer>0</integer>
 			<integer>0</integer>
