@@ -19,6 +19,7 @@
 -(BOOL)hitDetectedBetween: (NSObject<SGMassProtocol> const * const) a and: (NSObject<SGMassProtocol>const * const) b
 {
     CGRect partition = CGRectIntersection(*a.position, *b.position);
+    
     if (CGRectIsNull(partition)) {
         return NO;
     

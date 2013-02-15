@@ -18,6 +18,8 @@ enum
     NUM_UNIFORMS
 };
 
+const GLubyte indices[] = {0,1,2,3,4,5};
+
 GLint uniforms[NUM_UNIFORMS];
 
 // Attribute index.
@@ -32,6 +34,7 @@ enum
     GLuint _program;
     GLuint _normalMappingProgram;
     GLuint triBuffer;
+    GLuint indexBuffer;
 }
 
 @property (strong, nonatomic) EAGLContext *context;
@@ -115,21 +118,19 @@ enum
     moving = NO;
     min = 5;
     currAction = idle;
-    
-    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+        
+    glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
-    
-    glTexParameterf( GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
     glGenBuffers(1, &triBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, triBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, ((SGCharacter*)[[_engine characters] objectAtIndex:0]).vertexCoords, GL_STATIC_DRAW);
     
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-    glEnableVertexAttribArray(GLKVertexAttribNormal);
-    glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+    //glBindVertexArrayOES(0);
     
-    glBindVertexArrayOES(0);
+    glGenBuffers(1, &indexBuffer);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    
         
 }
 
@@ -152,35 +153,44 @@ enum
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
+
+    glVertexAttribPointer(ATTRIB_VERTEX, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
+    glEnableVertexAttribArray(ATTRIB_VERTEX);
+
     glClearColor(0.65f, 0.65f, 0.65f, 1.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     NSArray* objects = [_engine objectsToDraw];
     
+   // glEnableClientState(GL_VERTEX_ARRAY);
+
     for (int i=0; i< [objects count]; i++) {
         NSObject<SGEntityProtocol>* current = [objects objectAtIndex:i];
         
         //turn off antialiasing of textures
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 0, current.textureCoords);
+        //set uniforms for shaders
+        /*
+        GLint texture = glGetUniformLocation(_normalMappingProgram, "texture");
+        GLint normals = glGetUniformLocation(_normalMappingProgram, "normals");
         
-        glBindBuffer(GL_ARRAY_BUFFER, 0);
-        glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, current.vertexCoords);
-            
-        // Render the object with GLKit
-        [current.effect prepareToDraw];
+        glUniform1f(texture, current.effect.texture2d0.name);
+        glUniform1f(normals, current.effect.texture2d1.name);
+        */
         
-        glDrawArrays(GL_TRIANGLES, 0, 18);
-        
-        
-        // Render the object again with ES2
+        glBindBuffer(GL_ARRAY_BUFFER, current.drawingInfo->vertices);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+
+        glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(GLubyte), GL_UNSIGNED_BYTE, (void*)0);
         glUseProgram(_program);
-                 
+        NSLog(@"opengl error : %u", glGetError());
+        
     }
     
+    glDisableVertexAttribArray(ATTRIB_VERTEX);
     [objects release];
+
 
 }
 

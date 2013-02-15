@@ -11,7 +11,6 @@
 @implementation SGCharacter
 @synthesize hitmask;
 @synthesize texture;
-@synthesize effect;
 @synthesize vertexCoords;
 @synthesize textureCoords;
 @synthesize fallSpeed;
@@ -19,6 +18,8 @@
 @synthesize width;
 @synthesize height;
 @synthesize position;
+@synthesize drawingInfo;
+@synthesize normals;
 
 #pragma Setup Methods
 -(id) initCharacterNamed: (NSString*) name withScreenSize:(CGRect)screenSize
@@ -28,9 +29,11 @@
         *(self.position) = CGRectMake(0.0f, 0.0f, 0.0f, 0.0f);
         currentAnimation = 0;
         currentFrame = 0;
-        effect = [[GLKBaseEffect alloc] init];
+        self.drawingInfo = calloc(1 , sizeof(drawInfo));
         [self loadTexture:[name stringByAppendingString:@"TextureData.png"]];
+        
         //[self loadNormalMap:[name stringByAppendingString:@"NormalData.png"]];
+        
         //load animation arrays
         [self loadAnimations: [name stringByAppendingString:@"AnimationData"]];
         [self populateArraysWithScaleFactor:1.0f XOffset:-0.5f YOffset:-0.5f screenSize: screenSize];
@@ -49,9 +52,10 @@
                 hitmaskarray[i][j] = YES;
             }
         }
+        
         self.hitmask = [[SGHitMask alloc] initHitMaskWithBoolArray:hitmaskarray Width:self.position->size.width Height:self.position->size.height];
         
-        for (int i =0; i<self.position->size.width; i++) {
+        for (int i =0; i < self.position->size.width; i++) {
             free(hitmaskarray[i]);
         }
         
@@ -62,7 +66,6 @@
     
     return self;
 }
-
 
 -(void) loadAnimations: (NSString*) plistName
 {
@@ -106,18 +109,22 @@
     
    
     textureCoords = animations[0]->coords[0];
+    
+    glGenBuffers(1, &(self.drawingInfo->textureVertices));
+    glBindBuffer(GL_ARRAY_BUFFER, self.drawingInfo->textureVertices);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*12, self.textureCoords, GL_STATIC_DRAW);
+    
 }
 
 /*
- loads the texture, sets up the glkit base effect
+ loads the texture
  */
 -(void) loadTexture: (NSString*) imageName
 {
     //load the texture
     NSError *error = nil;
     NSDictionary* textureOps = @{GLKTextureLoaderApplyPremultiplication : @NO, GLKTextureLoaderGenerateMipmaps : @NO, GLKTextureLoaderOriginBottomLeft : @YES};
-    NSString* imageNameFullPath = [[NSBundle mainBundle]
-                           pathForResource:imageName ofType: nil];
+    NSString* imageNameFullPath = [[NSBundle mainBundle] pathForResource:imageName ofType: nil];
     self.texture = [GLKTextureLoader textureWithContentsOfFile: imageNameFullPath options:textureOps error:&error];
     
     if (error != nil) {
@@ -128,12 +135,6 @@
         NSLog(@"error, texture is nil");
     }
 
-    self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-    self.effect.texture2d0.target = GLKTextureTarget2D;
-    self.effect.texture2d0.name = texture.name;
-    self.effect.light0.enabled = GL_TRUE;
-    self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
-
 }
 
 -(void) loadNormalMap: (NSString*) normalMapName
@@ -143,7 +144,7 @@
     NSDictionary* textureOps = @{GLKTextureLoaderApplyPremultiplication : @NO, GLKTextureLoaderGenerateMipmaps : @NO, GLKTextureLoaderOriginBottomLeft : @YES};
     NSString* normalsNameFullPath = [[NSBundle mainBundle]
                                    pathForResource:normalMapName ofType: nil];
-    GLKTextureInfo* normals = [GLKTextureLoader textureWithContentsOfFile: normalsNameFullPath options:textureOps error:&error];
+    self.normals = [GLKTextureLoader textureWithContentsOfFile: normalsNameFullPath options:textureOps error:&error];
     
     if (error != nil) {
         NSLog(@"error, %d", [error code]);
@@ -153,9 +154,6 @@
         NSLog(@"error, texture is nil");
     }
     
-    self.effect.texture2d1.envMode = GLKTextureEnvModeReplace;
-    self.effect.texture2d1.target = GLKTextureTarget2D;
-    self.effect.texture2d1.name = normals.name;
 }
 
 
@@ -172,11 +170,12 @@
         free(animations[i]);
     }
     
+    free(drawingInfo);
     free(animations);
     free(vertexCoords);
     free(textureCoords);
-    [effect release];
     [texture release];
+    [hitmask release];
     
     [super dealloc];
 }
@@ -224,14 +223,14 @@
 
     self.vertexCoords = malloc(sizeof(GLfloat) * 18);
     
-    
     GLfloat proportion;
     GLfloat screenProportion = screenSize.size.width/screenSize.size.height;
     //this if statement ensures that the vertex coords array is at the right proportion
     if (self.width < self.height) {
+        
         proportion = self.height/self.width;
-        GLfloat proportionateHeight = 1.0*scaleFactor * screenProportion;
-        GLfloat proportionateWidth = proportion*scaleFactor;
+        GLfloat proportionateHeight = 1.0f *scaleFactor * screenProportion;
+        GLfloat proportionateWidth =  proportion *scaleFactor;
         
         self.vertexCoords[0] = proportionateHeight + xOffSet;
         self.vertexCoords[1] = proportionateWidth + yOffSet;
@@ -245,6 +244,7 @@
         self.vertexCoords[13] = yOffSet;
         self.vertexCoords[15] = xOffSet;
         self.vertexCoords[16] = yOffSet;
+        
     }
     
     else {
@@ -271,6 +271,10 @@
         self.vertexCoords[i*3+2] = 0.0f;
     }
     
+    glGenBuffers(1, &(self.drawingInfo->vertices));
+    glBindBuffer(GL_ARRAY_BUFFER, self.drawingInfo->vertices);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*18, self.vertexCoords, GL_STATIC_DRAW);
+
 }
 
 
@@ -301,11 +305,12 @@
 
     textureCoords = animations[currentAnimation]->coords[currentFrame];
     
+    
     movementX += animations[currentAnimation]->xOffset;
     movementY += animations[currentAnimation]->yOffset - self.fallSpeed;
     
     
-    self.effect.transform.projectionMatrix = GLKMatrix4MakeTranslation(movementX, movementY, 0);
+    self.drawingInfo->movementMatrix = GLKMatrix4MakeTranslation(movementX, movementY, 0);
     self.position->origin.y+= (animations[currentAnimation]->yOffset- self.fallSpeed)*100;
     self.position->origin.x+= animations[currentAnimation]->xOffset*100;
 }

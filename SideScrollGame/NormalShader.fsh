@@ -3,10 +3,8 @@
 varying lowp vec4 colorVarying;
 
 uniform sampler2D texture;
-uniform sampler2D normalTexture;
+uniform sampler2D normals;
 
-varying lowp vec2  fTextureCoords;
-uniform lowp mat4 fModelViewProjectionMatrix;
 
 void main()
 {

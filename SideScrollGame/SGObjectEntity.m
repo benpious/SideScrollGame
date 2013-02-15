@@ -11,7 +11,6 @@
 @implementation SGObjectEntity
 @synthesize vertexCoords;
 @synthesize textureCoords;
-@synthesize effect;
 @synthesize texture;
 @synthesize fallSpeed;
 @synthesize isFalling;
@@ -19,14 +18,15 @@
 @synthesize height;
 @synthesize width;
 @synthesize position;
+@synthesize drawingInfo;
+@synthesize normals;
 
 -(id) initObjectNamed: (NSString*) name withScreenSize:(CGRect)screenSize
 {
     if (self = [super init]) {
-        
-        self.effect = [[GLKBaseEffect alloc] init];
         self.position = malloc(sizeof(CGRect));
         *self.position = CGRectMake(0.0f, 0.0f, 0.0f, 0.0f);
+        self.drawingInfo =  malloc(sizeof(drawInfo));
         [self defineTextureCoords];
         [self loadTexture: [name stringByAppendingString:@"TextureData.png"]];
         [self loadScaleAndOffsetInfo:[name stringByAppendingString:@"ScaleOffset"] withScreenSize: (CGRect) screenSize];
@@ -34,11 +34,31 @@
         isFalling = NO;
         //self.hitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:[name stringByAppendingString: @"HitMask.hmk"] Width:self.width Height:self.height];
         
-        // test code delete later
+        //test code delete later
+        BOOL** hitmaskarray = malloc(sizeof(BOOL*) * self.position->size.width);
+        for (int i = 0; i<self.position->size.width; i++) {
+            hitmaskarray[i] = malloc(sizeof(BOOL) * self.position->size.height);
+            for (int j =0; j<self.position->size.height; j++) {
+                hitmaskarray[i][j] = NO;
+            }
+        }
         
+        for (int i = 0; i < self.position->size.width; i++) {
+            
+            hitmaskarray[i][0] = YES;
+        }
         
+        self.hitmask = [[SGHitMask alloc] initHitMaskWithBoolArray:hitmaskarray Width:self.position->size.width Height:self.position->size.height];
+        
+        for (int i = 0; i < self.position->size.width; i++) {
+            free(hitmaskarray[i]);
+        }
+        
+        free(hitmaskarray);
 
     }
+    
+    //end test code
     
     return self;
 
@@ -53,19 +73,14 @@
     self.texture = [GLKTextureLoader textureWithContentsOfFile: imageNameFullPath options:textureOps error:&error];
     
     if (error != nil) {
-        NSLog(@"Texture loading error: %d", [error code]);
+        NSLog(@"Object Texture loading error: %d", [error code]);
     }
     
     if (self.texture == nil) {
-        NSLog(@"Error: Texture was not loaded");
+        NSLog(@"Error: Object Texture was not loaded");
         return;
     }
     
-    self.effect.texture2d0.envMode = GLKTextureEnvModeReplace;
-    self.effect.texture2d0.target = GLKTextureTarget2D;
-    self.effect.texture2d0.name = texture.name;
-    self.effect.light0.enabled = GL_TRUE;
-    self.effect.light0.diffuseColor = GLKVector4Make(1.0f, 0.4f, 0.4f, 1.0f);
     self.width = self.texture.width;
     self.height = self.texture.height;    
     
@@ -76,6 +91,8 @@
 //defines the texture coordinates to cover the whole of the image given
 -(void) defineTextureCoords
 {
+    //NSLog(@"GL Error = %u", glGetError());
+
     self.textureCoords = malloc(sizeof(GLfloat) * 12);
     
     self.textureCoords[0] = 1.0f;
@@ -90,6 +107,10 @@
     self.textureCoords[9] = 0.0f;
     self.textureCoords[10] = 0.0f;
     self.textureCoords[11] = 0.0f;
+    
+    glGenBuffers(1, &(self.drawingInfo->textureVertices));
+    glBindBuffer(GL_ARRAY_BUFFER, self.drawingInfo->textureVertices);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*12, self.textureCoords, GL_STATIC_DRAW);
     
 }
 
@@ -141,13 +162,16 @@
         self.vertexCoords[15] = 0.0f*scaleFactor + xOffset;
         self.vertexCoords[16] = 0.0f*scaleFactor + yOffset;
         
-        
     }
     
     //fill the z coords with 0s
     for (int i = 0; i <= 5 ; i++) {
         self.vertexCoords[i*3+2] = 0.0f;
     }
+    
+    glGenBuffers(1, &(self.drawingInfo->vertices));
+    glBindBuffer(GL_ARRAY_BUFFER, self.drawingInfo->vertices);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*18, self.vertexCoords, GL_STATIC_DRAW);
     
 }
 
@@ -173,10 +197,10 @@
 -(void) dealloc
 {
     free(textureCoords);
+    
     free(vertexCoords);
     
     [texture release];
-    [effect release];
     
     [hitmask release];
     

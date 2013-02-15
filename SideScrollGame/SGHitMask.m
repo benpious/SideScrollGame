@@ -47,9 +47,7 @@
 -(id) initHitmaskWithHitmask: (SGHitMask*) oldHitmask Partition: (CGRect) partition OldHitMaskOrigin: (CGPoint) hitMaskOrigin
 {
 
-    self = [super init];
-    if (self) {
-        
+    if (self = [super init]) {
         self.width = partition.size.width;
         self.height = partition.size.height;
         self.hitmask = malloc(sizeof(BOOL*) * self.width);
@@ -65,15 +63,17 @@
             }
         }
     }
-    
     return self;
 
 }
 
 -(id) initHitMaskWithBoolArray:(BOOL **)oldHitmask Width:(int)width Height:(int)height {
+    
     if (self = [super init]) {
+        
         self.width = width;
         self.height = height;
+        
         self.hitmask = malloc(sizeof(BOOL*) * width);
         
         for (int i = 0 ; i < width; i++) {
@@ -109,7 +109,6 @@
     }
     
     free(self.hitmask);
-    
     [super dealloc];
 }
 
