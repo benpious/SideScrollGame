@@ -66,6 +66,11 @@
 
 -(void) loadTexture: (NSString*) imageName
 {
+    /*if there is a glerror reported when this method enters it will fail to load the texture
+     therefore, get the error just so that opengl won't fail -- obviously this isn't a great solution*/
+    glGetError();
+    //end test
+    
     NSError *error = nil;
     NSDictionary* textureOps = @{GLKTextureLoaderApplyPremultiplication : @NO, GLKTextureLoaderGenerateMipmaps : @NO, GLKTextureLoaderOriginBottomLeft : @YES};
     NSString* imageNameFullPath = [[NSBundle mainBundle]
@@ -73,6 +78,7 @@
     self.texture = [GLKTextureLoader textureWithContentsOfFile: imageNameFullPath options:textureOps error:&error];
     
     if (error != nil) {
+        NSLog(@"%@", imageName);
         NSLog(@"Object Texture loading error: %d", [error code]);
     }
     
