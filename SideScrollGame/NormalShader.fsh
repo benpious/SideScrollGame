@@ -4,7 +4,6 @@ varying mediump vec2 ftexCoord;
 uniform sampler2D texture;
 uniform sampler2D normals;
 
-
 void main()
 {
     //get the cosine of the light and the normals

@@ -17,10 +17,9 @@ void main()
     
     //float nDotVP = max(0.0, dot(eyeNormal, normalize(lightPosition)));
     
-    //gl_Position = modelViewProjectionMatrix * position;
     ftexCoord = texCoord;
 
-    gl_Position =  position;
-    
+    gl_Position = modelViewProjectionMatrix * position;
+
 
 }

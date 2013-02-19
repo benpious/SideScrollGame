@@ -27,6 +27,7 @@
         self.position = malloc(sizeof(CGRect));
         *self.position = CGRectMake(0.0f, 0.0f, 0.0f, 0.0f);
         self.drawingInfo =  malloc(sizeof(drawInfo));
+        self.drawingInfo->movementMatrix = GLKMatrix4MakeTranslation(0, 0, 0);
         [self defineTextureCoords];
         [self loadTexture: [name stringByAppendingString:@"TextureData.png"]];
         [self loadScaleAndOffsetInfo:[name stringByAppendingString:@"ScaleOffset"] withScreenSize: (CGRect) screenSize];
@@ -97,7 +98,6 @@
 //defines the texture coordinates to cover the whole of the image given
 -(void) defineTextureCoords
 {
-    //NSLog(@"GL Error = %u", glGetError());
 
     self.textureCoords = malloc(sizeof(GLfloat) * 12);
     
