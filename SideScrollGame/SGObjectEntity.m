@@ -27,9 +27,11 @@
         self.position = malloc(sizeof(CGRect));
         *self.position = CGRectMake(0.0f, 0.0f, 0.0f, 0.0f);
         self.drawingInfo =  malloc(sizeof(drawInfo));
+        //fill in the movement matrix
         self.drawingInfo->movementMatrix = GLKMatrix4MakeTranslation(0, 0, 0);
         [self defineTextureCoords];
         [self loadTexture: [name stringByAppendingString:@"TextureData.png"]];
+        [self loadNormalMap:[name stringByAppendingString:@"NormalData.png"]];
         [self loadScaleAndOffsetInfo:[name stringByAppendingString:@"ScaleOffset"] withScreenSize: (CGRect) screenSize];
         fallSpeed = 0.0f;
         isFalling = NO;
@@ -93,6 +95,25 @@
     
 }
 
+
+-(void) loadNormalMap: (NSString*) normalMapName
+{
+    //load the texture
+    NSError *error = nil;
+    NSDictionary* textureOps = @{GLKTextureLoaderApplyPremultiplication : @NO, GLKTextureLoaderGenerateMipmaps : @NO, GLKTextureLoaderOriginBottomLeft : @YES};
+    NSString* normalsNameFullPath = [[NSBundle mainBundle]
+                                     pathForResource:normalMapName ofType: nil];
+    self.normals = [GLKTextureLoader textureWithContentsOfFile: normalsNameFullPath options:textureOps error:&error];
+    
+    if (error != nil) {
+        NSLog(@"error, %d", [error code]);
+    }
+    
+    if (self.texture == nil) {
+        NSLog(@"error, texture is nil");
+    }
+    
+}
 
 
 //defines the texture coordinates to cover the whole of the image given

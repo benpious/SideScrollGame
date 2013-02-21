@@ -32,7 +32,7 @@
         self.drawingInfo = calloc(1 , sizeof(drawInfo));
         [self loadTexture:[name stringByAppendingString:@"TextureData.png"]];
         
-        //[self loadNormalMap:[name stringByAppendingString:@"NormalData.png"]];
+        [self loadNormalMap:[name stringByAppendingString:@"NormalData.png"]];
         
         //load animation arrays
         [self loadAnimations: [name stringByAppendingString:@"AnimationData"]];

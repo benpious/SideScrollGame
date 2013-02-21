@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B06E34B16D55FF800E425CD /* joystickNormalData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B06E34A16D55FF800E425CD /* joystickNormalData.png */; };
 		3B07052016A508E900E2FC2D /* leveltScaleOffset.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B07051F16A508E900E2FC2D /* leveltScaleOffset.plist */; };
 		3B105022169F533C00E52403 /* SGJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B105021169F533C00E52403 /* SGJoystick.m */; };
 		3B125B6816A504EB0092C7A7 /* owlcharScaleOffset.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B125B6716A504EB0092C7A7 /* owlcharScaleOffset.plist */; };
+		3B1AA00716D55E7800528734 /* owlcharNormalData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B1AA00416D55E7800528734 /* owlcharNormalData.png */; };
+		3B1AA00816D55E7800528734 /* leveltNormalData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B1AA00516D55E7800528734 /* leveltNormalData.png */; };
+		3B1AA00916D55E7800528734 /* sirowlNormalData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B1AA00616D55E7800528734 /* sirowlNormalData.png */; };
 		3B2253F016C04E250036B7A2 /* NormalShader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B2253EF16C04E250036B7A2 /* NormalShader.fsh */; };
 		3B2253F816C051340036B7A2 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2253F716C051340036B7A2 /* SenTestingKit.framework */; };
 		3B2253F916C051340036B7A2 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B2B88D7164862DC004BADC9 /* UIKit.framework */; };
@@ -69,11 +73,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3B06E34A16D55FF800E425CD /* joystickNormalData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = joystickNormalData.png; path = ../../../joystickNormalData.png; sourceTree = "<group>"; };
 		3B07051F16A508E900E2FC2D /* leveltScaleOffset.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = leveltScaleOffset.plist; sourceTree = "<group>"; };
 		3B105020169F533C00E52403 /* SGJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGJoystick.h; sourceTree = "<group>"; };
 		3B105021169F533C00E52403 /* SGJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGJoystick.m; sourceTree = "<group>"; };
 		3B125B6716A504EB0092C7A7 /* owlcharScaleOffset.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = owlcharScaleOffset.plist; sourceTree = "<group>"; };
 		3B13E37516897389000F9721 /* SGCharacterAgent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGCharacterAgent.h; sourceTree = "<group>"; };
+		3B1AA00416D55E7800528734 /* owlcharNormalData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = owlcharNormalData.png; path = ../../../owlcharNormalData.png; sourceTree = "<group>"; };
+		3B1AA00516D55E7800528734 /* leveltNormalData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leveltNormalData.png; path = ../../../leveltNormalData.png; sourceTree = "<group>"; };
+		3B1AA00616D55E7800528734 /* sirowlNormalData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sirowlNormalData.png; path = ../../../sirowlNormalData.png; sourceTree = "<group>"; };
 		3B2253EF16C04E250036B7A2 /* NormalShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = NormalShader.fsh; sourceTree = "<group>"; };
 		3B2253F616C051340036B7A2 /* SideScrollGameLogicTests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SideScrollGameLogicTests.octest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2253F716C051340036B7A2 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
@@ -340,6 +348,10 @@
 			isa = PBXGroup;
 			children = (
 				3B5A762A16C7188E00B7F46A /* catNormalData.png */,
+				3B1AA00416D55E7800528734 /* owlcharNormalData.png */,
+				3B1AA00516D55E7800528734 /* leveltNormalData.png */,
+				3B1AA00616D55E7800528734 /* sirowlNormalData.png */,
+				3B06E34A16D55FF800E425CD /* joystickNormalData.png */,
 			);
 			name = Normals;
 			sourceTree = "<group>";
@@ -529,6 +541,10 @@
 				3B07052016A508E900E2FC2D /* leveltScaleOffset.plist in Resources */,
 				3B82A60416C70F790002BA4D /* VertexNormalShader.vsh in Resources */,
 				3B5A762B16C7188E00B7F46A /* catNormalData.png in Resources */,
+				3B1AA00716D55E7800528734 /* owlcharNormalData.png in Resources */,
+				3B1AA00816D55E7800528734 /* leveltNormalData.png in Resources */,
+				3B1AA00916D55E7800528734 /* sirowlNormalData.png in Resources */,
+				3B06E34B16D55FF800E425CD /* joystickNormalData.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

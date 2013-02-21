@@ -5,21 +5,19 @@ varying vec2 ftexCoord;
 
 uniform mat4 modelViewProjectionMatrix;
 
+uniform vec3 lightPosition;
 uniform mat3 normalMatrix;
 attribute vec4 position;
+uniform vec4 diffuseColor;
 
 void main()
 {
 
-    //vec3 eyeNormal = normalize(normalMatrix * normal);
     vec3 lightPosition = vec3(0.0, 0.0, 1.0);
-    vec4 diffuseColor = vec4(0.4, 0.4, 1.0, 1.0);
-    
-    //float nDotVP = max(0.0, dot(eyeNormal, normalize(lightPosition)));
-    
+    vec4 diffuseColor = vec4(0.65, 0.65, 0.65, 1.0);
+        
     ftexCoord = texCoord;
 
     gl_Position = modelViewProjectionMatrix * position;
-
 
 }

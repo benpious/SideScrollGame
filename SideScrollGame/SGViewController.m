@@ -114,7 +114,6 @@ enum
     
     //enable transparency in textures
     glEnable (GL_BLEND);
-    glEnable(GL_TEXTURE_2D);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     //[self loadShaders];
@@ -140,8 +139,6 @@ enum
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     
     glGenBuffers(1, &normalBuffer);
-    glBindBuffer(GL_NORMAL_ARRAY, normalBuffer);
-    glBufferData(GL_NORMAL_ARRAY, sizeof(normals), normals, GL_STATIC_DRAW);
     
     glGenBuffers(1, &projectionMatrix);
         
@@ -171,43 +168,50 @@ enum
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     NSArray* objects = [_engine objectsToDraw];
-    
+
+    glUseProgram(_normalMappingProgram);
+
     for (int i=0; i< [objects count]; i++) {
         NSObject<SGEntityProtocol>* current = [objects objectAtIndex:i];
 
-        glUseProgram(_normalMappingProgram);
-
         //turn off antialiasing of textures
+        //this changes back after every iteration of the loop, that's why it's not outside
+        //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+        
+        //set texture and vertex uniforms
+        glActiveTexture(GL_TEXTURE0);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-        //set uniforms for shaders
-        //glUniform1f(UNIFORM_NORMALMAP, current.normals.name);
-
         glBindTexture(GL_TEXTURE_2D, current.texture.name);
         glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
+        glActiveTexture(GL_TEXTURE1);
+        glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
+        glBindTexture(GL_TEXTURE_2D, current.normals.name);
+        glUniform1i(uniforms[UNIFORM_NORMALMAP], 0);
+        
+        //load and bind texture coord attribute
         //this should be a VBO
         glBindBuffer(GL_ARRAY_BUFFER, triBuffer);
         glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*12, current.textureCoords, GL_STREAM_DRAW);
         glVertexAttribPointer(ATTRIB_TEXCOORDS, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
         glEnableVertexAttribArray(ATTRIB_TEXCOORDS);
         
+        //bind buffer and attrib data for the actual vertices to draw
         glBindBuffer(GL_ARRAY_BUFFER, current.drawingInfo->vertices);
         
         glVertexAttribPointer(ATTRIB_VERTEX, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
         glEnableVertexAttribArray(ATTRIB_VERTEX);
         
-        // need to bind normals here
         
-        //glVertexAttribPointer(ATTRIB_NORMAL, 3, GL_FLOAT, GL_TRUE, 0, BUFFER_OFFSET(0));
-        //glEnableVertexAttribArray(ATTRIB_NORMAL);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
+        
+        //load the uniform model view projection matrix
         glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, GL_FALSE, current.drawingInfo->movementMatrix.m);
         glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(GLubyte), GL_UNSIGNED_BYTE, 0);
 
     }
     
     glDisableVertexAttribArray(ATTRIB_VERTEX);
-    //glDisableVertexAttribArray(ATTRIB_NORMAL);
     glDisableVertexAttribArray(ATTRIB_TEXCOORDS);
 
     [objects release];
