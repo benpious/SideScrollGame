@@ -17,6 +17,10 @@ enum
     UNIFORM_NORMAL_MATRIX,
     UNIFORM_TEXTURE,
     UNIFORM_NORMALMAP,
+    UNIFORM_LIGHTDIR,
+    UNIFORM_DIFFUSECOLOR,
+    UNIFORM_LIGHTCOLOR,
+    UNIFORM_FALLOFF,
     NUM_UNIFORMS
 };
 
@@ -47,7 +51,7 @@ enum
 - (void)setupGL;
 - (void)tearDownGL;
 
-- (BOOL)loadShaders;
+- (BOOL)loadNormalMappingShaders;
 - (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file;
 - (BOOL)linkProgram:(GLuint)prog;
 - (BOOL)validateProgram:(GLuint)prog;
@@ -85,7 +89,7 @@ enum
     [self setupGL];
     
     CGRect screenSize = [[self view] frame];
-    _engine = [[SGGameEngine alloc] initWithLevelPlist: @"levelt" ScreenSize: screenSize];
+    _engine = [[SGGameEngine alloc] initWithLevelPlist: @"test" ScreenSize: screenSize];
 
 }
 
@@ -131,9 +135,7 @@ enum
     glGenBuffers(1, &triBuffer);
     glBindBuffer(GL_ARRAY_BUFFER, triBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, ((SGCharacter*)[[_engine characters] objectAtIndex:0]).vertexCoords, GL_STATIC_DRAW);
-    
-    //glBindVertexArrayOES(0);
-    
+        
     glGenBuffers(1, &indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
     glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
@@ -148,9 +150,9 @@ enum
 {
     [EAGLContext setCurrentContext:self.context];
             
-    if (_program) {
-        glDeleteProgram(_program);
-        _program = 0;
+    if (_normalMappingProgram) {
+        glDeleteProgram(_normalMappingProgram);
+        _normalMappingProgram = 0;
     }
 }
 
@@ -170,13 +172,15 @@ enum
     NSArray* objects = [_engine objectsToDraw];
 
     glUseProgram(_normalMappingProgram);
+    
+    //assign lighting uniforms
+    glUniform3f(uniforms[UNIFORM_FALLOFF], 16.0f , 16.0f , 16.0f);
+    glUniform4f(uniforms[UNIFORM_DIFFUSECOLOR], 1.0f, 1.0f, 1.0f, 0.3f);
+    glUniform3f(uniforms[UNIFORM_LIGHTDIR], 0.0f, 0.0f, 0.0f);
+    glUniform4f(uniforms[UNIFORM_LIGHTCOLOR], 0.0f, 0.0f, 1.0f, 1.0f);
 
     for (int i=0; i< [objects count]; i++) {
         NSObject<SGEntityProtocol>* current = [objects objectAtIndex:i];
-
-        //turn off antialiasing of textures
-        //this changes back after every iteration of the loop, that's why it's not outside
-        //glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         
         //set texture and vertex uniforms
         glActiveTexture(GL_TEXTURE0);
@@ -185,9 +189,10 @@ enum
         glUniform1i(uniforms[UNIFORM_TEXTURE], 0);
         glActiveTexture(GL_TEXTURE1);
         glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
+        
         glBindTexture(GL_TEXTURE_2D, current.normals.name);
         glUniform1i(uniforms[UNIFORM_NORMALMAP], 0);
+        
         
         //load and bind texture coord attribute
         //this should be a VBO
@@ -205,7 +210,6 @@ enum
         
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
         
-        //load the uniform model view projection matrix
         glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, GL_FALSE, current.drawingInfo->movementMatrix.m);
         glDrawElements(GL_TRIANGLES, sizeof(indices)/sizeof(GLubyte), GL_UNSIGNED_BYTE, 0);
 
@@ -220,76 +224,7 @@ enum
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
--(BOOL)loadShaders
-{
-    GLuint vertShader, fragShader;
-    NSString *vertShaderPathname, *fragShaderPathname;
-    
-    // Create shader program.
-    _program = glCreateProgram();
-    
-    // Create and compile vertex shader.
-    vertShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"vsh"];
-    if (![self compileShader:&vertShader type:GL_VERTEX_SHADER file:vertShaderPathname]) {
-        NSLog(@"Failed to compile vertex shader");
-        return NO;
-    }
-    
-    // Create and compile fragment shader.
-    fragShaderPathname = [[NSBundle mainBundle] pathForResource:@"Shader" ofType:@"fsh"];
-    if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER file:fragShaderPathname]) {
-        NSLog(@"Failed to compile fragment shader");
-        return NO;
-    }
-        
-    // Attach vertex shader to program.
-    glAttachShader(_program, vertShader);
-    
-    // Attach fragment shader to program.
-    glAttachShader(_program, fragShader);
-        
-    // Bind attribute locations.
-    // This needs to be done prior to linking.
-    glBindAttribLocation(_program, ATTRIB_VERTEX, "position");
-    glBindAttribLocation(_program, ATTRIB_NORMAL, "normal");
-    
-    // Link program.
-    if (![self linkProgram:_program]) {
-        NSLog(@"Failed to link program: %d", _program);
-        
-        if (vertShader) {
-            glDeleteShader(vertShader);
-            vertShader = 0;
-        }
-        if (fragShader) {
-            glDeleteShader(fragShader);
-            fragShader = 0;
-        }
-        if (_program) {
-            glDeleteProgram(_program);
-            _program = 0;
-        }
-        
-        return NO;
-    }
-    
-    // Get uniform locations.
-    uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
-    uniforms[UNIFORM_NORMAL_MATRIX] = glGetUniformLocation(_program, "normalMatrix");
-    
-    // Release vertex and fragment shaders.
-    if (vertShader) {
-        glDetachShader(_program, vertShader);
-        glDeleteShader(vertShader);
-    }
-    if (fragShader) {
-        glDetachShader(_program, fragShader);
-        glDeleteShader(fragShader);
-    }
-    
-    return YES;
 
-}
 
 
 - (BOOL)loadNormalMappingShaders
@@ -324,7 +259,6 @@ enum
     // Bind attribute locations.
     // This needs to be done prior to linking.
     glBindAttribLocation(_normalMappingProgram, ATTRIB_VERTEX, "position");
-    //glBindAttribLocation(_normalMappingProgram, ATTRIB_NORMAL, "normal");
     glBindAttribLocation(_normalMappingProgram, ATTRIB_TEXCOORDS, "texCoord");
     
     // Link program.
@@ -350,9 +284,13 @@ enum
     
     // Get uniform locations.
     uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_normalMappingProgram, "modelViewProjectionMatrix");
-    uniforms[UNIFORM_NORMAL_MATRIX] = glGetUniformLocation(_program, "normalMatrix");
     uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(_normalMappingProgram, "texture");
     uniforms[UNIFORM_NORMALMAP] = glGetUniformLocation(_normalMappingProgram, "normals");
+    uniforms[UNIFORM_LIGHTDIR] = glGetUniformLocation(_normalMappingProgram, "lightPos");
+    uniforms[UNIFORM_DIFFUSECOLOR] = glGetUniformLocation(_normalMappingProgram, "diffuseColor");
+    uniforms[UNIFORM_FALLOFF] = glGetUniformLocation(_normalMappingProgram, "falloff");
+    uniforms[UNIFORM_LIGHTCOLOR] = glGetUniformLocation(_normalMappingProgram, "lightColor");
+
 
     
     // Release vertex and fragment shaders.
