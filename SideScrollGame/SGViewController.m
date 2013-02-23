@@ -125,9 +125,7 @@ enum
     [self loadNormalMappingShaders];
  
     // test stuff, delete when finished
-    moving = NO;
     min = 5;
-    currAction = idle;
     //end test code
     
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -393,7 +391,6 @@ enum
 
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    moving = YES;
     UITouch* aTouch = [touches anyObject];
     beginning = [aTouch locationInView:nil];
 
@@ -401,7 +398,6 @@ enum
 
 -(void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 {
-    currAction = idle;
     [((SGCharacter*)[[_engine characters] objectAtIndex:0]) setNextAnimation:0];
     UITouch* aTouch = [touches anyObject];
     CGPoint loc = [aTouch locationInView:nil];

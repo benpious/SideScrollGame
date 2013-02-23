@@ -11,6 +11,7 @@
 		3B07052016A508E900E2FC2D /* leveltScaleOffset.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B07051F16A508E900E2FC2D /* leveltScaleOffset.plist */; };
 		3B105022169F533C00E52403 /* SGJoystick.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B105021169F533C00E52403 /* SGJoystick.m */; };
 		3B125B6816A504EB0092C7A7 /* owlcharScaleOffset.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B125B6716A504EB0092C7A7 /* owlcharScaleOffset.plist */; };
+		3B12722E16D959DD00A44D88 /* levelt.hmk in Resources */ = {isa = PBXBuildFile; fileRef = 3B12722D16D959DD00A44D88 /* levelt.hmk */; };
 		3B1AA00716D55E7800528734 /* owlcharNormalData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B1AA00416D55E7800528734 /* owlcharNormalData.png */; };
 		3B1AA00816D55E7800528734 /* leveltNormalData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B1AA00516D55E7800528734 /* leveltNormalData.png */; };
 		3B1AA00916D55E7800528734 /* sirowlNormalData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B1AA00616D55E7800528734 /* sirowlNormalData.png */; };
@@ -81,6 +82,7 @@
 		3B105020169F533C00E52403 /* SGJoystick.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGJoystick.h; sourceTree = "<group>"; };
 		3B105021169F533C00E52403 /* SGJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGJoystick.m; sourceTree = "<group>"; };
 		3B125B6716A504EB0092C7A7 /* owlcharScaleOffset.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = owlcharScaleOffset.plist; sourceTree = "<group>"; };
+		3B12722D16D959DD00A44D88 /* levelt.hmk */ = {isa = PBXFileReference; lastKnownFileType = file; name = levelt.hmk; path = ../../../levelt.hmk; sourceTree = "<group>"; };
 		3B13E37516897389000F9721 /* SGCharacterAgent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGCharacterAgent.h; sourceTree = "<group>"; };
 		3B1AA00416D55E7800528734 /* owlcharNormalData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = owlcharNormalData.png; path = ../../../owlcharNormalData.png; sourceTree = "<group>"; };
 		3B1AA00516D55E7800528734 /* leveltNormalData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leveltNormalData.png; path = ../../../leveltNormalData.png; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 		3BFE522C16881FF8005D025D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				3B12722D16D959DD00A44D88 /* levelt.hmk */,
 				3B2B88F3164862DC004BADC9 /* MainStoryboard.storyboard */,
 				3B2A93D1168C035500CC4883 /* Shaders */,
 				3B2A93D0168C032F00CC4883 /* Textures */,
@@ -557,6 +560,7 @@
 				3B79CAE416D7E61C00982296 /* testTextureData.png in Resources */,
 				3B79CAE516D7E61C00982296 /* testNormalData.png in Resources */,
 				3B79CAE716D7E63F00982296 /* testScaleOffset.plist in Resources */,
+				3B12722E16D959DD00A44D88 /* levelt.hmk in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

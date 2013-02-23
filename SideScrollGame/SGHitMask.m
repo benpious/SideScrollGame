@@ -21,24 +21,25 @@
                                       pathForResource:name ofType: nil];
         NSData* data = [[NSFileManager defaultManager] contentsAtPath:maskNameFullPath];
         
-        self.hitmask = malloc(sizeof(BOOL*)*height);
-        for (int i =0; i< height; i++) {
-            self.hitmask[i] = malloc(sizeof(BOOL) * width);
+        self.hitmask = malloc(sizeof(BOOL*) * width);
+        for (int i = 0; i < width; i++) {
+            self.hitmask[i] = malloc(sizeof(BOOL) * height);
         }
         
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j<width; j++) {
+        for (int i = 0; i < width; i++) {
+            for (int j = 0; j < height; j++) {
                 
-                if (((*((int*)[data bytes])) >> (int)((i *width) + width)) % 2 == 1) {
+                if (((uint8_t*)[data bytes])[(width * j + i)/8] & (1 << (i%8))) {
                     self.hitmask[i][j] = YES;
                 }
                 
-                else
-                {
+                else {
+                    
                     self.hitmask[i][j] = NO;
                 }
             }
         }
+        
     }
     return self;
 }
@@ -48,6 +49,7 @@
 {
 
     if (self = [super init]) {
+        
         self.width = partition.size.width;
         self.height = partition.size.height;
         self.hitmask = malloc(sizeof(BOOL*) * self.width);

@@ -17,8 +17,6 @@
 @interface SGViewController : GLKViewController
 {
     CGPoint beginning;
-    BOOL moving;
-    action currAction;
     float min;
 }
 
