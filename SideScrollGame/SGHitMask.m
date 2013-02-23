@@ -30,12 +30,12 @@
             for (int j = 0; j < height; j++) {
                 
                 if (((uint8_t*)[data bytes])[(width * j + i)/8] & (1 << (i%8))) {
-                    self.hitmask[i][j] = YES;
+                    self.hitmask[i][height-1-j] = YES;
                 }
                 
                 else {
                     
-                    self.hitmask[i][j] = NO;
+                    self.hitmask[i][height-1-j] = NO;
                 }
             }
         }

@@ -174,7 +174,7 @@ enum
     //assign lighting uniforms
     glUniform3f(uniforms[UNIFORM_FALLOFF], 0.4f , 3.0f , 20.0f);
     glUniform4f(uniforms[UNIFORM_DIFFUSECOLOR], 0.6f, 0.6f, 1.0f, 0.75f);
-    glUniform3f(uniforms[UNIFORM_LIGHTDIR], 1.0, 1.0, 0.0f);
+    glUniform3f(uniforms[UNIFORM_LIGHTDIR], 1.0, 1.0, 0.4f);
     glUniform4f(uniforms[UNIFORM_LIGHTCOLOR], 1.0f, 0.8f, 0.6f, 1.0f);
     glUniform2f(uniforms[UNIFORM_RESOLUTION], [self.view frame].size.height, [self.view frame].size.width);
 
