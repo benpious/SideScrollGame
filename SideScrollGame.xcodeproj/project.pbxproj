@@ -69,7 +69,7 @@
 		3BA7B528168549C500BE3A1B /* sirowlAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */; };
 		3BB49CA416A504AE006DB8CF /* owlcharTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB49CA316A504AE006DB8CF /* owlcharTextureData.png */; };
 		3BBC7FC316A4A46D005AAD9D /* leveltTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BBC7FC216A4A46D005AAD9D /* leveltTextureData.png */; };
-		3BD336FA1697426400CFA9F5 /* test.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BD336F91697426400CFA9F5 /* test.plist */; };
+		3BD336FA1697426400CFA9F5 /* levelt.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BD336F91697426400CFA9F5 /* levelt.plist */; };
 		3BD336FF169747CF00CFA9F5 /* SGLevel.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BD336FE169747CF00CFA9F5 /* SGLevel.m */; };
 		3BE07C7F164B95D600DBFD78 /* sirowlTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */; };
 		3BE3358E16A4B5EC007794D7 /* sirowlScaleOffset.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BE3358D16A4B5EC007794D7 /* sirowlScaleOffset.plist */; };
@@ -150,7 +150,7 @@
 		3BB49CA316A504AE006DB8CF /* owlcharTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = owlcharTextureData.png; path = ../../../owlcharTextureData.png; sourceTree = "<group>"; };
 		3BBC7FC216A4A46D005AAD9D /* leveltTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leveltTextureData.png; path = ../../../leveltTextureData.png; sourceTree = "<group>"; };
 		3BCF380E16A5E9CB002F3747 /* SGMassProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGMassProtocol.h; sourceTree = "<group>"; };
-		3BD336F91697426400CFA9F5 /* test.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = test.plist; sourceTree = "<group>"; };
+		3BD336F91697426400CFA9F5 /* levelt.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = levelt.plist; sourceTree = "<group>"; };
 		3BD336FD169747CF00CFA9F5 /* SGLevel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGLevel.h; sourceTree = "<group>"; };
 		3BD336FE169747CF00CFA9F5 /* SGLevel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGLevel.m; sourceTree = "<group>"; };
 		3BE07C7E164B95D600DBFD78 /* sirowlTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sirowlTextureData.png; path = ../../sirowlTextureData.png; sourceTree = "<group>"; };
@@ -420,7 +420,7 @@
 		3BD336FC1697427C00CFA9F5 /* LevelData */ = {
 			isa = PBXGroup;
 			children = (
-				3BD336F91697426400CFA9F5 /* test.plist */,
+				3BD336F91697426400CFA9F5 /* levelt.plist */,
 			);
 			name = LevelData;
 			sourceTree = "<group>";
@@ -540,7 +540,7 @@
 				3B4C9C7C168BAD070033A8B0 /* testanimationAnimationData.plist in Resources */,
 				3B7FE5D7168E9816005E0AB1 /* catTextureData.png in Resources */,
 				3B7FE5DA168E9854005E0AB1 /* catAnimationData.plist in Resources */,
-				3BD336FA1697426400CFA9F5 /* test.plist in Resources */,
+				3BD336FA1697426400CFA9F5 /* levelt.plist in Resources */,
 				3B43A93916A1F84E0061F137 /* joystickTextureData.png in Resources */,
 				3BBC7FC316A4A46D005AAD9D /* leveltTextureData.png in Resources */,
 				3BE3358E16A4B5EC007794D7 /* sirowlScaleOffset.plist in Resources */,

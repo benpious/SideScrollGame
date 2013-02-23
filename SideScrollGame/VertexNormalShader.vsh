@@ -10,6 +10,8 @@ attribute vec4 position;
 uniform vec4 diffuseColor;
 uniform vec4 lightColor;
 uniform lowp vec3 falloff;
+uniform lowp vec2 resolution;
+
 void main()
 {
 

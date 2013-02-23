@@ -21,6 +21,7 @@ enum
     UNIFORM_DIFFUSECOLOR,
     UNIFORM_LIGHTCOLOR,
     UNIFORM_FALLOFF,
+    UNIFORM_RESOLUTION,
     NUM_UNIFORMS
 };
 
@@ -89,7 +90,7 @@ enum
     [self setupGL];
     
     CGRect screenSize = [[self view] frame];
-    _engine = [[SGGameEngine alloc] initWithLevelPlist: @"test" ScreenSize: screenSize];
+    _engine = [[SGGameEngine alloc] initWithLevelPlist: @"levelt" ScreenSize: screenSize];
 
 }
 
@@ -127,7 +128,6 @@ enum
     moving = NO;
     min = 5;
     currAction = idle;
-
     //end test code
     
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -174,10 +174,11 @@ enum
     glUseProgram(_normalMappingProgram);
     
     //assign lighting uniforms
-    glUniform3f(uniforms[UNIFORM_FALLOFF], 16.0f , 16.0f , 16.0f);
-    glUniform4f(uniforms[UNIFORM_DIFFUSECOLOR], 1.0f, 1.0f, 1.0f, 0.3f);
-    glUniform3f(uniforms[UNIFORM_LIGHTDIR], 0.0f, 0.0f, 0.0f);
-    glUniform4f(uniforms[UNIFORM_LIGHTCOLOR], 0.0f, 0.0f, 1.0f, 1.0f);
+    glUniform3f(uniforms[UNIFORM_FALLOFF], 0.4f , 3.0f , 20.0f);
+    glUniform4f(uniforms[UNIFORM_DIFFUSECOLOR], 0.6f, 0.6f, 1.0f, 0.75f);
+    glUniform3f(uniforms[UNIFORM_LIGHTDIR], 1.0, 1.0, 0.0f);
+    glUniform4f(uniforms[UNIFORM_LIGHTCOLOR], 1.0f, 0.8f, 0.6f, 1.0f);
+    glUniform2f(uniforms[UNIFORM_RESOLUTION], [self.view frame].size.height, [self.view frame].size.width);
 
     for (int i=0; i< [objects count]; i++) {
         NSObject<SGEntityProtocol>* current = [objects objectAtIndex:i];
@@ -286,10 +287,11 @@ enum
     uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_normalMappingProgram, "modelViewProjectionMatrix");
     uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(_normalMappingProgram, "texture");
     uniforms[UNIFORM_NORMALMAP] = glGetUniformLocation(_normalMappingProgram, "normals");
-    uniforms[UNIFORM_LIGHTDIR] = glGetUniformLocation(_normalMappingProgram, "lightPos");
+    uniforms[UNIFORM_LIGHTDIR] = glGetUniformLocation(_normalMappingProgram, "lightPosition");
     uniforms[UNIFORM_DIFFUSECOLOR] = glGetUniformLocation(_normalMappingProgram, "diffuseColor");
     uniforms[UNIFORM_FALLOFF] = glGetUniformLocation(_normalMappingProgram, "falloff");
     uniforms[UNIFORM_LIGHTCOLOR] = glGetUniformLocation(_normalMappingProgram, "lightColor");
+    uniforms[UNIFORM_RESOLUTION] = glGetUniformLocation(_normalMappingProgram, "resolution");
 
 
     
