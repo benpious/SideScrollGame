@@ -9,8 +9,6 @@
 #import "SGObjectEntity.h"
 
 @implementation SGObjectEntity
-@synthesize vertexCoords;
-@synthesize textureCoords;
 @synthesize texture;
 @synthesize fallSpeed;
 @synthesize isFalling;
@@ -120,32 +118,33 @@
 -(void) defineTextureCoords
 {
 
-    self.textureCoords = malloc(sizeof(GLfloat) * 12);
+    GLfloat* textureCoordsArray = malloc(sizeof(GLfloat) * 12);
     
-    self.textureCoords[0] = 1.0f;
-    self.textureCoords[1] = 1.0f;
-    self.textureCoords[2] = 0.0f;
-    self.textureCoords[3] = 0.0f;
-    self.textureCoords[4] = 0.0f;
-    self.textureCoords[5] = 1.0f;
-    self.textureCoords[6] = 1.0f;
-    self.textureCoords[7] = 1.0f;
-    self.textureCoords[8] = 1.0f;
-    self.textureCoords[9] = 0.0f;
-    self.textureCoords[10] = 0.0f;
-    self.textureCoords[11] = 0.0f;
+    textureCoordsArray[0] = 1.0f;
+    textureCoordsArray[1] = 1.0f;
+    textureCoordsArray[2] = 0.0f;
+    textureCoordsArray[3] = 0.0f;
+    textureCoordsArray[4] = 0.0f;
+    textureCoordsArray[5] = 1.0f;
+    textureCoordsArray[6] = 1.0f;
+    textureCoordsArray[7] = 1.0f;
+    textureCoordsArray[8] = 1.0f;
+    textureCoordsArray[9] = 0.0f;
+    textureCoordsArray[10] = 0.0f;
+    textureCoordsArray[11] = 0.0f;
     
     glGenBuffers(1, &(self.drawingInfo->textureVertices));
     glBindBuffer(GL_ARRAY_BUFFER, self.drawingInfo->textureVertices);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*12, self.textureCoords, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*12, textureCoordsArray, GL_STATIC_DRAW);
+    free(textureCoordsArray);
     
 }
 
 -(void) populateArraysWithScaleFactor: (GLfloat) scaleFactor xOffset: (GLfloat) xOffset yOffset: (GLfloat) yOffset withScreenSize: (CGRect) screenSize
 {
     
-    self.vertexCoords = malloc(sizeof(GLfloat) * 18);
-    self.position->origin.x = xOffset * 100;
+    GLfloat* vertexCoords = malloc(sizeof(GLfloat) * 18);
+    self.position->origin.x = xOffset * 100*screenSize.size.height/screenSize.size.width;
     self.position->origin.y = yOffset * 100;
 	self.position->size.width = self.width * scaleFactor;
     self.position->size.height = self.height * scaleFactor;
@@ -159,46 +158,47 @@
         GLfloat proportionateHeight = 1.0*scaleFactor * screenProportion;
         GLfloat proportionateWidth = proportion*scaleFactor;
         
-        self.vertexCoords[0] = proportionateHeight + xOffset;
-        self.vertexCoords[1] = proportionateWidth + yOffset;
-        self.vertexCoords[3] = xOffset;
-        self.vertexCoords[4] = yOffset;
-        self.vertexCoords[6] = xOffset;
-        self.vertexCoords[7] = proportionateWidth + yOffset;
-        self.vertexCoords[9] = proportionateHeight + xOffset;
-        self.vertexCoords[10] = proportionateWidth + yOffset;
-        self.vertexCoords[12] = proportionateHeight + xOffset;
-        self.vertexCoords[13] = yOffset;
-        self.vertexCoords[15] = xOffset;
-        self.vertexCoords[16] = yOffset;
+        vertexCoords[0] = proportionateHeight + xOffset;
+        vertexCoords[1] = proportionateWidth + yOffset;
+        vertexCoords[3] = xOffset;
+        vertexCoords[4] = yOffset;
+        vertexCoords[6] = xOffset;
+        vertexCoords[7] = proportionateWidth + yOffset;
+        vertexCoords[9] = proportionateHeight + xOffset;
+        vertexCoords[10] = proportionateWidth + yOffset;
+        vertexCoords[12] = proportionateHeight + xOffset;
+        vertexCoords[13] = yOffset;
+        vertexCoords[15] = xOffset;
+        vertexCoords[16] = yOffset;
     }
     
     else {
         
         proportion = self.width/self.height;
-        self.vertexCoords[0] = proportion*scaleFactor + xOffset;
-        self.vertexCoords[1] = 1.0f*scaleFactor + yOffset;
-        self.vertexCoords[3] = 0.0f*scaleFactor + xOffset;
-        self.vertexCoords[4] = 0.0f*scaleFactor + yOffset;
-        self.vertexCoords[6] = 0.0f*scaleFactor + xOffset;
-        self.vertexCoords[7] = 1.0f*scaleFactor + yOffset;
-        self.vertexCoords[9] = proportion*scaleFactor + xOffset;
-        self.vertexCoords[10] = 1.0f*scaleFactor + yOffset;
-        self.vertexCoords[12] = proportion*scaleFactor + xOffset;
-        self.vertexCoords[13] = 0.0f*scaleFactor + yOffset;
-        self.vertexCoords[15] = 0.0f*scaleFactor + xOffset;
-        self.vertexCoords[16] = 0.0f*scaleFactor + yOffset;
+        vertexCoords[0] = proportion*scaleFactor + xOffset;
+        vertexCoords[1] = 1.0f*scaleFactor + yOffset;
+        vertexCoords[3] = 0.0f*scaleFactor + xOffset;
+        vertexCoords[4] = 0.0f*scaleFactor + yOffset;
+        vertexCoords[6] = 0.0f*scaleFactor + xOffset;
+        vertexCoords[7] = 1.0f*scaleFactor + yOffset;
+        vertexCoords[9] = proportion*scaleFactor + xOffset;
+        vertexCoords[10] = 1.0f*scaleFactor + yOffset;
+        vertexCoords[12] = proportion*scaleFactor + xOffset;
+        vertexCoords[13] = 0.0f*scaleFactor + yOffset;
+        vertexCoords[15] = 0.0f*scaleFactor + xOffset;
+        vertexCoords[16] = 0.0f*scaleFactor + yOffset;
         
     }
     
     //fill the z coords with 0s
     for (int i = 0; i <= 5 ; i++) {
-        self.vertexCoords[i*3+2] = 0.0f;
+        vertexCoords[i*3+2] = 0.0f;
     }
     
     glGenBuffers(1, &(self.drawingInfo->vertices));
     glBindBuffer(GL_ARRAY_BUFFER, self.drawingInfo->vertices);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*18, self.vertexCoords, GL_STATIC_DRAW);
+    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*18, vertexCoords, GL_STATIC_DRAW);
+    free(vertexCoords);
     
 }
 
@@ -223,10 +223,7 @@
 
 -(void) dealloc
 {
-    free(textureCoords);
-    
-    free(vertexCoords);
-    
+        
     [texture release];
     
     [hitmask release];

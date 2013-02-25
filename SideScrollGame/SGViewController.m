@@ -131,8 +131,8 @@ enum
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 
     glGenBuffers(1, &triBuffer);
-    glBindBuffer(GL_ARRAY_BUFFER, triBuffer);
-    glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, ((SGCharacter*)[[_engine characters] objectAtIndex:0]).vertexCoords, GL_STATIC_DRAW);
+    //glBindBuffer(GL_ARRAY_BUFFER, triBuffer);
+    //glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, ((SGCharacter*)[[_engine characters] objectAtIndex:0]).vertexCoords, GL_STATIC_DRAW);
         
     glGenBuffers(1, &indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);
@@ -174,7 +174,7 @@ enum
     //assign lighting uniforms
     glUniform3f(uniforms[UNIFORM_FALLOFF], 0.4f , 3.0f , 20.0f);
     glUniform4f(uniforms[UNIFORM_DIFFUSECOLOR], 0.6f, 0.6f, 1.0f, 0.75f);
-    glUniform3f(uniforms[UNIFORM_LIGHTDIR], 1.0, 1.0, 0.4f);
+    glUniform3f(uniforms[UNIFORM_LIGHTDIR], 1.0, 1.0, 0.2f);
     glUniform4f(uniforms[UNIFORM_LIGHTCOLOR], 1.0f, 0.8f, 0.6f, 1.0f);
     glUniform2f(uniforms[UNIFORM_RESOLUTION], [self.view frame].size.height, [self.view frame].size.width);
 
@@ -193,10 +193,9 @@ enum
         glUniform1i(uniforms[UNIFORM_NORMALMAP], 0);
         
         
-        //load and bind texture coord attribute
-        //this should be a VBO
-        glBindBuffer(GL_ARRAY_BUFFER, triBuffer);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*12, current.textureCoords, GL_STREAM_DRAW);
+        //load and bind texture coord attribute and buffer
+        glBindBuffer(GL_ARRAY_BUFFER, current.drawingInfo->textureVertices);
+        
         glVertexAttribPointer(ATTRIB_TEXCOORDS, 2, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
         glEnableVertexAttribArray(ATTRIB_TEXCOORDS);
         

@@ -47,10 +47,12 @@
 -(id) initWithLevelPlist: (NSString*) levelName ScreenSize:(CGRect)screenSize
 {
     if (self = [super init]) {
+        
         actionQueue = [[SGQueue alloc] init];
         [self loadPlistWithName:levelName withScreenSize:screenSize];
         joystick = [[SGJoystick alloc] initJoystickWithScreenSize:screenSize];
         gravitySpeed = .001;
+        
     }
     
     return self;
@@ -115,13 +117,14 @@
     for(SGCharacter* currChar in characters)
     {
         [currChar nextFrame];
-    
+            
         //request an action from each one
         
         if ([currChar respondsToSelector:NSSelectorFromString( @"requestMoveWithGameState:")]) {
             [actionQueue offer: [currChar performSelector:NSSelectorFromString( @"requestMoveWithGameState:") withObject:state]];
         }
-
+    
+        
         //apply gravity if applicable
         [self applyGravityTo:currChar];
     

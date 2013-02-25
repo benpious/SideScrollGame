@@ -19,8 +19,6 @@ typedef struct {
 } drawInfo;
 
 @protocol SGEntityProtocol <NSObject>
-@property (assign) GLfloat* textureCoords;
-@property (assign) GLfloat* vertexCoords;
 @property (retain) GLKTextureInfo *texture;
 @property (retain) GLKTextureInfo *normals;
 @property (assign) BOOL isFalling;

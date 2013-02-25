@@ -20,7 +20,7 @@
 typedef struct {
     NSString* name;
     int duration;
-    GLfloat** coords;
+    GLuint* coords;
     GLfloat xOffset;
     GLfloat yOffset;
     BOOL** animationHitmasks;
@@ -46,6 +46,7 @@ typedef struct {
 // nametexture, nameinfo
 -(id) initCharacterNamed: (NSString*) name withScreenSize: (CGRect) screenSize;
 -(void)nextFrame;
+-(void) undoAction;
 -(GLfloat*) glFloatArrayFromOriginX: (GLfloat) x OriginY: (GLfloat) y;
 -(void) setNextAnimation: (int) animation;
 
