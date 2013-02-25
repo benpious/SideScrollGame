@@ -18,7 +18,7 @@
 //call whenever an action is made
 -(BOOL)hitDetectedBetween: (NSObject<SGMassProtocol> const * const) a and: (NSObject<SGMassProtocol>const * const) b
 {
-    CGRect partition = CGRectIntersection(*a.position, *b.position);
+    CGRect partition = CGRectIntersection(*(a.position), *(b.position));
     
     if (CGRectIsNull(partition)) {
         return NO;
@@ -109,7 +109,6 @@
 //called whenever the openglview's update function fires
 -(void) eventLoopCallBack
 {
-    
     //make the gamestate array TODO: should include level
     NSArray* state = [[NSArray alloc] initWithObjects:characters, objects, nil];
 
@@ -130,7 +129,7 @@
     
     }
     
-    [self applyGravityTo:self.player];
+    [self applyGravityTo: self.player];
     
     //loop through the action queue applying the results
     while (actionQueue.length != 0) {
@@ -168,7 +167,6 @@
     if (joystick.shouldDraw == YES) {
         [toReturn addObject:joystick];
     }
-    
     
     return toReturn;
     

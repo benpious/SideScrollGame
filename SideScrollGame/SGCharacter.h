@@ -23,7 +23,7 @@ typedef struct {
     GLuint* coords;
     GLfloat xOffset;
     GLfloat yOffset;
-    BOOL** animationHitmasks;
+    SGHitMask** animationHitmasks;
 } animation;
 
 

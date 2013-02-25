@@ -33,46 +33,30 @@
         [self loadNormalMap:[name stringByAppendingString:@"NormalData.png"]];
         
         //load animation arrays
-        [self loadAnimations: [name stringByAppendingString:@"AnimationData"]];
+        [self loadAnimations: name];
+                
         [self populateArraysWithScaleFactor:1.0f XOffset:-0.5f YOffset:-0.5f screenSize: screenSize];
         self.fallSpeed = 0.0f;
         self.isFalling = NO;
         movementX = 0.0f;
         movementY = 0.0f;
-        //self.hitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:[name stringByAppendingString: @"HitMask.hmk"] Width:self.width Height:self.height];
         
-        // test code delete later
-        
-        BOOL** hitmaskarray = malloc(sizeof(BOOL*) * self.position->size.width);
-        for (int i =0; i<self.position->size.width; i++) {
-            hitmaskarray[i] = malloc(sizeof(BOOL) * self.position->size.height);
-            for (int j =0; j<self.position->size.height; j++) {
-                hitmaskarray[i][j] = YES;
-            }
-        }
-        
-        self.hitmask = [[SGHitMask alloc] initHitMaskWithBoolArray:hitmaskarray Width:self.position->size.width Height:self.position->size.height];
-        
-        for (int i =0; i < self.position->size.width; i++) {
-            free(hitmaskarray[i]);
-        }
-        
-        free(hitmaskarray);
-        
-        // end test code
     }
     
     return self;
 }
 
+//loads animations and hitmasks -- should consider changing the name....
 -(void) loadAnimations: (NSString*) plistName
 {
     NSPropertyListFormat format;
     NSString* error = nil;
-    NSString* path = [[NSBundle mainBundle] pathForResource:plistName ofType:@".plist"];
+    NSString* path = [[NSBundle mainBundle] pathForResource:[plistName stringByAppendingString:@"AnimationData"] ofType:@".plist"];
     NSData* plistXML = [[NSFileManager defaultManager] contentsAtPath:path];
     NSArray* animationArray = (NSArray*)[NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListImmutable format:&format error:nil];
     
+    SGHitMask* overallHitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:[plistName stringByAppendingString: @".hmk" ] Width: texture.width Height:texture.height];
+
     animations = malloc(sizeof(animation*) * [animationArray count]);
     
     for (int i = 0; i < [animationArray count]; i++) {
@@ -82,16 +66,21 @@
         animation* currAnimation = malloc(sizeof(animation));
         currAnimation->name = [temp objectAtIndex:0];
         currAnimation->duration = [[temp objectAtIndex:1] intValue];
+        //the next two lines are an issue, don't know what the hell I was thinking here.... this should be set once, and remain constant
         self.width = [[temp objectAtIndex:2] floatValue];
         self.height = [[temp objectAtIndex:3] floatValue];
-        currAnimation->xOffset = [[temp objectAtIndex:4] floatValue] ;
-        currAnimation->yOffset = [[temp objectAtIndex:5] floatValue] ;
+        currAnimation->xOffset = [[temp objectAtIndex:4] floatValue];
+        currAnimation->yOffset = [[temp objectAtIndex:5] floatValue];
         
         
-        currAnimation->coords = malloc(sizeof(GLfloat*) * (currAnimation->duration));
+        currAnimation->coords = malloc(sizeof(GLuint) * (currAnimation->duration));
+        currAnimation->animationHitmasks = malloc(sizeof(SGHitMask*) * (currAnimation->duration));
         
         for (int j = 6; (j - 6) < currAnimation->duration; j++) {
             GLfloat* textureCoords = [self glFloatArrayFromOriginX:[[[temp objectAtIndex: j]objectAtIndex: 0] floatValue] OriginY:[[[temp objectAtIndex: j]objectAtIndex: 1] floatValue]];
+                        
+            currAnimation->animationHitmasks[j-6] = [[SGHitMask alloc] initHitmaskWithHitmask:overallHitmask Partition:CGRectMake([[[temp objectAtIndex: j]objectAtIndex: 1] floatValue], [[[temp objectAtIndex: j]objectAtIndex: 0] floatValue], self.height, self.width) OldHitMaskOrigin:CGPointMake(0.0, 0.0)];
+            
             glGenBuffers(1, &(currAnimation->coords[j-6]));
             glBindBuffer(GL_ARRAY_BUFFER, currAnimation->coords[j-6]);
             glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat)*12, textureCoords, GL_STATIC_DRAW);
@@ -109,8 +98,12 @@
         NSLog(@"error reading plist");
     }
     
-   
+    [overallHitmask release];
+    
+    //set the texturevertices for the first time
     drawingInfo->textureVertices = animations[currentAnimation]->coords[currentFrame];
+    self.hitmask = animations[currentAnimation]->animationHitmasks[currentFrame];
+    
 
 }
 
@@ -164,17 +157,16 @@
     //loop through freeing all animations
     for (int i=0; i<numAnimations; i++) {
         //free memory allocated in animation struct
-        for (int j = 0 ; j < animations[i]->duration; j++) {
-            free(animations[i]->coords[j]);
+            free(animations[i]->coords);
             //free(animations[i]->animationHitmasks[j]);
-        }
-        free(animations[i]->coords);
+        //[animations[i]->animationHitmasks release];
         free(animations[i]);
     }
     
     free(drawingInfo);
     free(animations);
     [texture release];
+    [normals release];
     [hitmask release];
     
     [super dealloc];
@@ -305,6 +297,8 @@
     }
 
     drawingInfo->textureVertices = animations[currentAnimation]->coords[currentFrame];
+    self.hitmask = animations[currentAnimation]->animationHitmasks[currentFrame];
+
     
     
     movementX += animations[currentAnimation]->xOffset;

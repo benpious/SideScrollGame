@@ -43,7 +43,7 @@
                 hitmaskarray[i][j] = NO;
             }
         }
-        
+        /*
         for (int i = 0; i < self.position->size.width; i++) {
             
             hitmaskarray[i][0] = YES;
@@ -54,7 +54,7 @@
         for (int i = 0; i < self.position->size.width; i++) {
             free(hitmaskarray[i]);
         }
-        
+         */
         free(hitmaskarray);
 
     }
@@ -225,6 +225,7 @@
 {
         
     [texture release];
+    [normals release];
     
     [hitmask release];
     

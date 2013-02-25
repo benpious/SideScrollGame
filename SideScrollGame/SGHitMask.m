@@ -49,7 +49,7 @@
 {
 
     if (self = [super init]) {
-        
+
         self.width = partition.size.width;
         self.height = partition.size.height;
         self.hitmask = malloc(sizeof(BOOL*) * self.width);
@@ -59,12 +59,12 @@
             self.hitmask[i] = malloc(sizeof(BOOL) * self.height);
             
             for (int j = 0; j < self.height; j++) {
-                
                 self.hitmask[i][j] = oldHitmask.hitmask[i + (int)(partition.origin.x - hitMaskOrigin.x)][j + (int)(partition.origin.y -  hitMaskOrigin.y)];
                 
             }
         }
     }
+    
     return self;
 
 }
