@@ -12,12 +12,12 @@
 
 typedef enum
 {
-    up,
-    down,
-    backwards,
-    forwards,
-    idle
-    
+    up=4,
+    down=3,
+    backwards=2,
+    forwards=1,
+    idle=0,
+    dead=5,
 }
 action;
 

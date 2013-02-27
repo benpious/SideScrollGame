@@ -7,10 +7,6 @@
 //
 
 
-const int idleAnimation = 0;
-const int walkForwardAnimation = 1;
-const int attackAnimation = 2;
-const int blockAnimation = 3;
 #import "SGMainCharacter.h"
 
 
@@ -29,7 +25,7 @@ const int blockAnimation = 3;
             currentAnimation = 2;
             break;
         case backwards:
-            currentAnimation = walkForwardAnimation;
+            currentAnimation = forwards;
             break;
         default:
             break;

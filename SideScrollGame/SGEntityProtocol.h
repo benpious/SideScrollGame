@@ -10,6 +10,9 @@
 #import <GLKit/GLKit.h>
 #import "SGAction.h"
 
+/*
+ Provides all the information needed for OpenGL ES 
+ */
 typedef struct {
     GLuint vertices;
     GLuint textureVertices;
@@ -18,6 +21,11 @@ typedef struct {
     GLKMatrix4 movementMatrix;
 } drawInfo;
 
+/*
+ An SGEntity is a sprite which is drawn in an opengl context. 
+ It has basic interactivity with the environment, such as the ability to fall,
+ and the ability to change based on the actions of other entities
+ */
 @protocol SGEntityProtocol <NSObject>
 @property (retain) GLKTextureInfo *texture;
 @property (retain) GLKTextureInfo *normals;

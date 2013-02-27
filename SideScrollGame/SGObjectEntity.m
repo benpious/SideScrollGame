@@ -33,33 +33,9 @@
         [self loadScaleAndOffsetInfo:[name stringByAppendingString:@"ScaleOffset"] withScreenSize: (CGRect) screenSize];
         fallSpeed = 0.0f;
         isFalling = NO;
-        //self.hitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:[name stringByAppendingString: @"HitMask.hmk"] Width:self.width Height:self.height];
-        
-        //test code delete later
-        BOOL** hitmaskarray = malloc(sizeof(BOOL*) * self.position->size.width);
-        for (int i = 0; i<self.position->size.width; i++) {
-            hitmaskarray[i] = malloc(sizeof(BOOL) * self.position->size.height);
-            for (int j =0; j<self.position->size.height; j++) {
-                hitmaskarray[i][j] = NO;
-            }
+        self.hitmask = [[SGHitMask alloc] initHitMaskWithFileNamed: name Width:self.width Height:self.height];
         }
-        /*
-        for (int i = 0; i < self.position->size.width; i++) {
-            
-            hitmaskarray[i][0] = YES;
-        }
-        
-        self.hitmask = [[SGHitMask alloc] initHitMaskWithBoolArray:hitmaskarray Width:self.position->size.width Height:self.position->size.height];
-        
-        for (int i = 0; i < self.position->size.width; i++) {
-            free(hitmaskarray[i]);
-        }
-         */
-        free(hitmaskarray);
-
-    }
     
-    //end test code
     
     return self;
 

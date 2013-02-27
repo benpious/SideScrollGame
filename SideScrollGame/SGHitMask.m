@@ -18,7 +18,7 @@
     if (self = [super init]) {
         
         NSString* maskNameFullPath = [[NSBundle mainBundle]
-                                      pathForResource:name ofType: nil];
+                                      pathForResource:[name stringByAppendingString: @".hmk" ] ofType: nil];
         NSData* data = [[NSFileManager defaultManager] contentsAtPath:maskNameFullPath];
         
         self.hitmask = malloc(sizeof(BOOL*) * width);

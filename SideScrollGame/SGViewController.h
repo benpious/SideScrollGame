@@ -16,10 +16,12 @@
 
 @interface SGViewController : GLKViewController
 {
+    //keeps track of the first point touches were detected
     CGPoint beginning;
+    //minimum distance dragged before recognized as a joystick event
     float min;
 }
-
+//temporary -- in future, SGEngine should have a view controller, not the other way round.
 @property (retain) SGGameEngine* engine;
 
 @end

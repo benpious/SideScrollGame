@@ -11,15 +11,21 @@
 @implementation SGLevel
 -(id) initWithLevelPlistNamed: (NSString*) levelName withScreenSize: (CGRect) screenSize
 {
+    //eventually will need some stuff here
     if (self = [super initObjectNamed:levelName withScreenSize:screenSize]) {
         
-        self.hitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:[levelName stringByAppendingString:@".hmk"] Width:self.width Height:self.height];
-        
+        ;
     }
     
     return self;
 }
 
+/*
+ Since OpenGL ES caps the size of a texture at ~2048x2048, we may need to load in several textures
+ Furthermore, it may be that it is better to "bake" lighting rather than calculating it for every pixel of the background,
+ since this is likely a major factor in the current frame rate issues on the simulator (current as of 2/27/13)
+ this should probably override the sgobject method, but until it is implemented I'll keep the current name (fucking awful, I know)
+ */
 -(void) loadLevelTextureDataNamed: (NSString*) levelName
 {
     
@@ -30,11 +36,19 @@
     
 }
 
-+(levelNode*) depthFirstSearchWithHead: (levelNode*) head Goal: (id) goal
++(levelPath*) breadthFirstSearchWithHead: (levelNode*) head Goal: (id) goal
 {
+    levelPath* pathHead = malloc(sizeof(pathHead));
     levelNode* curr = head;
-    if (curr->data == goal) {
-        return curr;
+    
+    for (int i =0; i<curr->numLeaves; i++) {
+        if (curr->leaves[i]->nextNode->data == goal) {
+            ;
+        }
+        else
+        {
+            ;
+        }
     }
     
 }

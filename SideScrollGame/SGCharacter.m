@@ -25,7 +25,7 @@
     if (self = [super init]) {
         self.position = malloc(sizeof(CGRect));
         *(self.position) = CGRectMake(0.0f, 0.0f, 0.0f, 0.0f);
-        currentAnimation = 0;
+        currentAnimation = idle;
         currentFrame = 0;
         self.drawingInfo = calloc(1 , sizeof(drawInfo));
         [self loadTexture:[name stringByAppendingString:@"TextureData.png"]];
@@ -40,7 +40,6 @@
         self.isFalling = NO;
         movementX = 0.0f;
         movementY = 0.0f;
-        
     }
     
     return self;
@@ -55,7 +54,7 @@
     NSData* plistXML = [[NSFileManager defaultManager] contentsAtPath:path];
     NSArray* animationArray = (NSArray*)[NSPropertyListSerialization propertyListWithData:plistXML options:NSPropertyListImmutable format:&format error:nil];
     
-    SGHitMask* overallHitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:[plistName stringByAppendingString: @".hmk" ] Width: texture.width Height:texture.height];
+    SGHitMask* overallHitmask = [[SGHitMask alloc] initHitMaskWithFileNamed:plistName Width: texture.width Height:texture.height];
 
     animations = malloc(sizeof(animation*) * [animationArray count]);
     
@@ -207,9 +206,10 @@
  */
 -(void) populateArraysWithScaleFactor: (GLfloat) scaleFactor XOffset: (GLfloat) xOffSet YOffset: (GLfloat) yOffSet screenSize: (CGRect) screenSize
 {
-    
+    //because the position is going to be used with arrays for hit detection, it needs be integerlike
     self.position->origin.x = xOffSet * 100*screenSize.size.height/screenSize.size.width;
     self.position->origin.y  = yOffSet * 100*screenSize.size.width/screenSize.size.height;
+    
     self.position->size.width = self.height * scaleFactor;
     self.position->size.height = self.width * scaleFactor;
 
@@ -282,8 +282,6 @@
 
 /*
  moves to the next frame in the current animation
- note that this method does NOT change the opengl texture array pointer to texcoords -- 
- this must be done after this method is called -- it is currently done in ViewController before drawing
  */
 -(void)nextFrame
 {

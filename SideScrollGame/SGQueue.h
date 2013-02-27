@@ -7,7 +7,11 @@
 //
 
 #import <Foundation/Foundation.h>
-
+/*
+ A basic queue class.
+ 
+ May not be needed, consider deleting. 
+ */
 typedef struct node  node;
 struct node {
     node* next;

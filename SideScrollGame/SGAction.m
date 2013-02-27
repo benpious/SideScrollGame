@@ -15,14 +15,25 @@
 -(id) initWithArea: (CGRect const) area Damage: (int const) damage knockBack: (GLfloat const) knockBack forceNextAnimation: (BOOL const) forceNextAnimation nextAction: (NSString*) nextAction
 {
     if (self = [super init]) {
-        _area = area;
-        _damage = damage;
-        _knockBack = knockBack;
-        _forceNextAnimation = forceNextAnimation;
-        _nextAction = nextAction;
+        self.position = malloc(sizeof(CGRect));
+        *self.position = area;
+        self.damage = damage;
+        self.knockBack = knockBack;
+        self.forceNextAnimation = forceNextAnimation;
+        self.nextAction = nextAction;
     }
     
     return self;
+}
+
+-(void) dealloc
+{
+    for (int i =0; i<self.numFramesActive; i++) {
+        [self.actionMasks[i] release];
+    }
+    
+    free(self.position);
+    [super dealloc];
 }
 
 @end

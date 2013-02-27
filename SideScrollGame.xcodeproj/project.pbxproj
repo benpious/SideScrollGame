@@ -53,6 +53,9 @@
 		3B7FE5D7168E9816005E0AB1 /* catTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FE5D6168E9816005E0AB1 /* catTextureData.png */; };
 		3B7FE5DA168E9854005E0AB1 /* catAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */; };
 		3B82A60416C70F790002BA4D /* VertexNormalShader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 3B82A60316C70F790002BA4D /* VertexNormalShader.vsh */; };
+		3B8B2BA216DC45E1008DCDC4 /* owlchar.hmk in Resources */ = {isa = PBXBuildFile; fileRef = 3B8B2B9F16DC45E1008DCDC4 /* owlchar.hmk */; };
+		3B8B2BA316DC45E1008DCDC4 /* joystick.hmk in Resources */ = {isa = PBXBuildFile; fileRef = 3B8B2BA016DC45E1008DCDC4 /* joystick.hmk */; };
+		3B8B2BA416DC45E1008DCDC4 /* sirowl.hmk in Resources */ = {isa = PBXBuildFile; fileRef = 3B8B2BA116DC45E1008DCDC4 /* sirowl.hmk */; };
 		3B8EB39D16C06F11001842D4 /* SGGameEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B30743C167D222C0088A46A /* SGGameEngine.m */; };
 		3B8EB39E16C06F17001842D4 /* SGHitMask.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727D41698B37E0065C382 /* SGHitMask.m */; };
 		3B8EB39F16C06F26001842D4 /* SGObjectEntity.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B307438167D214A0088A46A /* SGObjectEntity.m */; };
@@ -84,7 +87,6 @@
 		3B105021169F533C00E52403 /* SGJoystick.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGJoystick.m; sourceTree = "<group>"; };
 		3B125B6716A504EB0092C7A7 /* owlcharScaleOffset.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = owlcharScaleOffset.plist; sourceTree = "<group>"; };
 		3B12722D16D959DD00A44D88 /* levelt.hmk */ = {isa = PBXFileReference; lastKnownFileType = file; name = levelt.hmk; path = ../../../levelt.hmk; sourceTree = "<group>"; };
-		3B13E37516897389000F9721 /* SGCharacterAgent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGCharacterAgent.h; sourceTree = "<group>"; };
 		3B1AA00416D55E7800528734 /* owlcharNormalData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = owlcharNormalData.png; path = ../../../owlcharNormalData.png; sourceTree = "<group>"; };
 		3B1AA00516D55E7800528734 /* leveltNormalData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leveltNormalData.png; path = ../../../leveltNormalData.png; sourceTree = "<group>"; };
 		3B1AA00616D55E7800528734 /* sirowlNormalData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = sirowlNormalData.png; path = ../../../sirowlNormalData.png; sourceTree = "<group>"; };
@@ -97,6 +99,7 @@
 		3B22540216C051340036B7A2 /* SideScrollGameLogicTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SideScrollGameLogicTests.m; sourceTree = "<group>"; };
 		3B22540416C051340036B7A2 /* SideScrollGameLogicTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SideScrollGameLogicTests-Prefix.pch"; sourceTree = "<group>"; };
 		3B26596E1695FDD9009B106B /* SGAgentProtocol.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SGAgentProtocol.h; sourceTree = "<group>"; };
+		3B2A359416DE9E2400EC9425 /* LevelNavStructs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LevelNavStructs.h; sourceTree = "<group>"; };
 		3B2B88D3164862DC004BADC9 /* SideScrollGame.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SideScrollGame.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B2B88D7164862DC004BADC9 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		3B2B88D9164862DC004BADC9 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -142,6 +145,9 @@
 		3B7FE5D6168E9816005E0AB1 /* catTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = catTextureData.png; path = ../../catTextureData.png; sourceTree = "<group>"; };
 		3B7FE5D9168E9854005E0AB1 /* catAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = catAnimationData.plist; sourceTree = "<group>"; };
 		3B82A60316C70F790002BA4D /* VertexNormalShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = VertexNormalShader.vsh; sourceTree = "<group>"; };
+		3B8B2B9F16DC45E1008DCDC4 /* owlchar.hmk */ = {isa = PBXFileReference; lastKnownFileType = file; name = owlchar.hmk; path = ../../../owlchar.hmk; sourceTree = "<group>"; };
+		3B8B2BA016DC45E1008DCDC4 /* joystick.hmk */ = {isa = PBXFileReference; lastKnownFileType = file; name = joystick.hmk; path = ../../../joystick.hmk; sourceTree = "<group>"; };
+		3B8B2BA116DC45E1008DCDC4 /* sirowl.hmk */ = {isa = PBXFileReference; lastKnownFileType = file; name = sirowl.hmk; path = ../../../sirowl.hmk; sourceTree = "<group>"; };
 		3BA727D31698B37E0065C382 /* SGHitMask.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGHitMask.h; sourceTree = "<group>"; };
 		3BA727D41698B37E0065C382 /* SGHitMask.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGHitMask.m; sourceTree = "<group>"; };
 		3BA727D81698B5F10065C382 /* actions.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = actions.h; sourceTree = "<group>"; };
@@ -223,7 +229,6 @@
 			isa = PBXGroup;
 			children = (
 				3B3EE0F0169E4D380005E2F6 /* Playable.h */,
-				3B13E37516897389000F9721 /* SGCharacterAgent.h */,
 				3B307436167D15880088A46A /* SGEntityProtocol.h */,
 				3BCF380E16A5E9CB002F3747 /* SGMassProtocol.h */,
 			);
@@ -434,6 +439,9 @@
 			children = (
 				3BCBBBF416DBF9B50024BC89 /* cat.hmk */,
 				3B12722D16D959DD00A44D88 /* levelt.hmk */,
+				3B8B2B9F16DC45E1008DCDC4 /* owlchar.hmk */,
+				3B8B2BA016DC45E1008DCDC4 /* joystick.hmk */,
+				3B8B2BA116DC45E1008DCDC4 /* sirowl.hmk */,
 			);
 			name = Hitmasks;
 			sourceTree = "<group>";
@@ -441,6 +449,7 @@
 		3BFE522B16881FC2005D025D /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				3B2A359416DE9E2400EC9425 /* LevelNavStructs.h */,
 				3B30743B167D222C0088A46A /* SGGameEngine.h */,
 				3B30743C167D222C0088A46A /* SGGameEngine.m */,
 				3BA727D81698B5F10065C382 /* actions.h */,
@@ -573,6 +582,9 @@
 				3B79CAE716D7E63F00982296 /* testScaleOffset.plist in Resources */,
 				3B12722E16D959DD00A44D88 /* levelt.hmk in Resources */,
 				3BCBBBF516DBF9B50024BC89 /* cat.hmk in Resources */,
+				3B8B2BA216DC45E1008DCDC4 /* owlchar.hmk in Resources */,
+				3B8B2BA316DC45E1008DCDC4 /* joystick.hmk in Resources */,
+				3B8B2BA416DC45E1008DCDC4 /* sirowl.hmk in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

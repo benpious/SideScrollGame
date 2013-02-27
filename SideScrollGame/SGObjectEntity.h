@@ -10,6 +10,9 @@
 #import "SGEntityProtocol.h"
 #import "SGMassProtocol.h"
 
+/*
+ This class is for anything that doesn't need to be animated and is just a static object
+ */
 @interface SGObjectEntity : NSObject<SGEntityProtocol, SGMassProtocol>
 
 -(id) initObjectNamed: (NSString*) name withScreenSize: (CGRect) screenSize;

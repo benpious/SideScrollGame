@@ -13,8 +13,7 @@
 #import "SGMassProtocol.h"
 
 /*
- This class is for anything with an animation
- 
+ This class is for anything with an animation and movements.
 */
 
 typedef struct {
@@ -49,6 +48,5 @@ typedef struct {
 -(void) undoAction;
 -(GLfloat*) glFloatArrayFromOriginX: (GLfloat) x OriginY: (GLfloat) y;
 -(void) setNextAnimation: (int) animation;
-
 
 @end

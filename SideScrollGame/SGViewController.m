@@ -26,7 +26,6 @@ enum
 };
 
 const GLubyte indices[] = {0,1,2,3,4,5};
-const GLubyte normals[] = {0,0,1, 0,0,1, 0,0,1, 0,0,1, 0,0,1, 0,0,1};
 GLint uniforms[NUM_UNIFORMS];
 
 // Attribute index.
@@ -41,7 +40,6 @@ enum
 @interface SGViewController () {
     GLuint _program;
     GLuint _normalMappingProgram;
-    GLuint triBuffer;
     GLuint indexBuffer;
     GLuint normalBuffer;
     GLuint projectionMatrix;
@@ -121,7 +119,6 @@ enum
     glEnable (GL_BLEND);
     glBlendFunc (GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
-    //[self loadShaders];
     [self loadNormalMappingShaders];
  
     // test stuff, delete when finished
@@ -129,10 +126,6 @@ enum
     //end test code
     
     glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-
-    glGenBuffers(1, &triBuffer);
-    //glBindBuffer(GL_ARRAY_BUFFER, triBuffer);
-    //glBufferData(GL_ARRAY_BUFFER, sizeof(GLfloat) * 18, ((SGCharacter*)[[_engine characters] objectAtIndex:0]).vertexCoords, GL_STATIC_DRAW);
         
     glGenBuffers(1, &indexBuffer);
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBuffer);

@@ -18,7 +18,12 @@
 #import "SGJoystick.h"
 #import "SGLevel.h"
 #import "SGMassProtocol.h"
+#import "LevelNavStructs.h"
 
+/*
+ Contains methods releated to game logic and loading individual levels. Each time a new level is needed create a new
+ SGGAmeEngine with the initwithlevelplist method. 
+ */
 @interface SGGameEngine : NSObject
 {
     SGQueue* actionQueue;

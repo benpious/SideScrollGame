@@ -109,7 +109,7 @@
 //called whenever the openglview's update function fires
 -(void) eventLoopCallBack
 {
-    //make the gamestate array TODO: should include level
+    //make the gamestate array TODO: should include level 
     NSArray* state = [[NSArray alloc] initWithObjects:characters, objects, nil];
 
     //loop through all the characters
@@ -163,10 +163,11 @@
     NSMutableArray* toReturn = [[NSMutableArray alloc] initWithArray:objects];
     [toReturn addObjectsFromArray:characters];
     
-    //test code
+    //test code, in the future, this will be handled on a per object to draw basis
     if (joystick.shouldDraw == YES) {
         [toReturn addObject:joystick];
     }
+    //end test code
     
     return toReturn;
     
@@ -211,12 +212,6 @@
         return;
     }
     
-    
-}
-
--(void) applyTouchDownWithLocation:(CGPoint) loc
-{
-    
 }
 
 -(void) applyTouchUpWithLocation: (CGPoint) loc
@@ -225,5 +220,10 @@
 }
 
 
+//when there are buttons, this method will be used to send events to them if appropriate
+-(void) applyTouchDownWithLocation:(CGPoint) loc
+{
+    
+}
 
 @end
