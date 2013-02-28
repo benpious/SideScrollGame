@@ -19,6 +19,7 @@
 #import "SGLevel.h"
 #import "SGMassProtocol.h"
 #import "LevelNavStructs.h"
+#import "SGWalkAgent.h"
 
 /*
  Contains methods releated to game logic and loading individual levels. Each time a new level is needed create a new

@@ -35,9 +35,10 @@
     return NO;
 }
 
--(SGAction*) requestMoveWithGameState: (NSArray*) gameState
+-(action) requestMoveWithGameState: (NSArray*) gameState
 {
-    return noAction;
+    
+    return idle;
 }
 
 @end

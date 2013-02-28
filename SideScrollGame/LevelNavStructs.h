@@ -51,9 +51,9 @@ struct levelPath {
 struct levelNode {
     levelPath** leaves;
     int numLeaves;
-    id data;
+    int identifier;
+    SGHitMask* area;
     
 };
-
 
 #endif

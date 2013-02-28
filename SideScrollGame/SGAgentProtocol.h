@@ -8,7 +8,8 @@
 
 #import <Foundation/Foundation.h>
 #import "SGAction.h"
-
+#import "actions.h"
+#import "SGCharacter.h"
 /*
     unlike the character, action, and object classes, which should not be subclassed but instead read from plist files
     agent logic is implemented in classes which conform to the agent protocol
@@ -22,12 +23,12 @@
 
 //dictionary of the actions currently available
 @property (retain) NSDictionary* actions;
-
+@property (retain) SGCharacter* character;
 -(BOOL) flankOrder;
 -(BOOL) attackOrder;
 -(BOOL) waitOrder;
 
 //called by the gameengine to request an action given the current game state
--(SGAction*) requestMoveWithGameState: (NSArray*) gameState;
+-(action) requestMoveWithGameState: (NSArray*) gameState;
 
 @end

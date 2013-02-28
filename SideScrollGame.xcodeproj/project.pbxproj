@@ -71,6 +71,8 @@
 		3BA727E01698B95B0065C382 /* SGStaticAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727DF1698B95B0065C382 /* SGStaticAgent.m */; };
 		3BA727E31698BBA10065C382 /* SGSimpleAttackAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA727E21698BBA10065C382 /* SGSimpleAttackAgent.m */; };
 		3BA7B528168549C500BE3A1B /* sirowlAnimationData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */; };
+		3BA8971016DFF53100C175C5 /* testNodeData.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BA8970F16DFF53100C175C5 /* testNodeData.plist */; };
+		3BA8971416DFFD6F00C175C5 /* SGWalkAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = 3BA8971316DFFD6F00C175C5 /* SGWalkAgent.m */; };
 		3BB49CA416A504AE006DB8CF /* owlcharTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BB49CA316A504AE006DB8CF /* owlcharTextureData.png */; };
 		3BBC7FC316A4A46D005AAD9D /* leveltTextureData.png in Resources */ = {isa = PBXBuildFile; fileRef = 3BBC7FC216A4A46D005AAD9D /* leveltTextureData.png */; };
 		3BCBBBF516DBF9B50024BC89 /* cat.hmk in Resources */ = {isa = PBXBuildFile; fileRef = 3BCBBBF416DBF9B50024BC89 /* cat.hmk */; };
@@ -156,6 +158,9 @@
 		3BA727E11698BBA10065C382 /* SGSimpleAttackAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGSimpleAttackAgent.h; sourceTree = "<group>"; };
 		3BA727E21698BBA10065C382 /* SGSimpleAttackAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGSimpleAttackAgent.m; sourceTree = "<group>"; };
 		3BA7B527168549C500BE3A1B /* sirowlAnimationData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = sirowlAnimationData.plist; sourceTree = "<group>"; };
+		3BA8970F16DFF53100C175C5 /* testNodeData.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = testNodeData.plist; sourceTree = "<group>"; };
+		3BA8971216DFFD6F00C175C5 /* SGWalkAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SGWalkAgent.h; sourceTree = "<group>"; };
+		3BA8971316DFFD6F00C175C5 /* SGWalkAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SGWalkAgent.m; sourceTree = "<group>"; };
 		3BB49CA316A504AE006DB8CF /* owlcharTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = owlcharTextureData.png; path = ../../../owlcharTextureData.png; sourceTree = "<group>"; };
 		3BBC7FC216A4A46D005AAD9D /* leveltTextureData.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = leveltTextureData.png; path = ../../../leveltTextureData.png; sourceTree = "<group>"; };
 		3BCBBBF416DBF9B50024BC89 /* cat.hmk */ = {isa = PBXFileReference; lastKnownFileType = file; name = cat.hmk; path = ../../../cat.hmk; sourceTree = "<group>"; };
@@ -238,6 +243,7 @@
 		3B2A93CF168C030C00CC4883 /* Plist Files */ = {
 			isa = PBXGroup;
 			children = (
+				3BA8971116DFF53700C175C5 /* Level Node Data */,
 				3BB1C7FE16A4B2480099B0CE /* ObjectInfo */,
 				3BD336FB1697427000CFA9F5 /* AnimationData */,
 				3BD336FC1697427C00CFA9F5 /* LevelData */,
@@ -391,8 +397,18 @@
 				3BA727DF1698B95B0065C382 /* SGStaticAgent.m */,
 				3BA727E11698BBA10065C382 /* SGSimpleAttackAgent.h */,
 				3BA727E21698BBA10065C382 /* SGSimpleAttackAgent.m */,
+				3BA8971216DFFD6F00C175C5 /* SGWalkAgent.h */,
+				3BA8971316DFFD6F00C175C5 /* SGWalkAgent.m */,
 			);
 			name = "Agent Implementations";
+			sourceTree = "<group>";
+		};
+		3BA8971116DFF53700C175C5 /* Level Node Data */ = {
+			isa = PBXGroup;
+			children = (
+				3BA8970F16DFF53100C175C5 /* testNodeData.plist */,
+			);
+			name = "Level Node Data";
 			sourceTree = "<group>";
 		};
 		3BB1C7FE16A4B2480099B0CE /* ObjectInfo */ = {
@@ -585,6 +601,7 @@
 				3B8B2BA216DC45E1008DCDC4 /* owlchar.hmk in Resources */,
 				3B8B2BA316DC45E1008DCDC4 /* joystick.hmk in Resources */,
 				3B8B2BA416DC45E1008DCDC4 /* sirowl.hmk in Resources */,
+				3BA8971016DFF53100C175C5 /* testNodeData.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +658,7 @@
 				3BA727E31698BBA10065C382 /* SGSimpleAttackAgent.m in Sources */,
 				3B3EE0F3169E4E560005E2F6 /* SGMainCharacter.m in Sources */,
 				3B105022169F533C00E52403 /* SGJoystick.m in Sources */,
+				3BA8971416DFFD6F00C175C5 /* SGWalkAgent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

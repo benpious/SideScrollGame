@@ -15,14 +15,14 @@
 typedef struct node  node;
 struct node {
     node* next;
-    id data;
+    void* data;
 
 };
 
 @interface SGQueue : NSObject
 @property (assign) int length;
 @property (readonly, assign) node* head;
--(void) offer: (id) object;
--(id) pop;
+-(void) offer: (void*) object;
+-(void*) pop;
 
 @end

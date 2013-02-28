@@ -4,6 +4,12 @@
 <array>
 	<array>
 		<string>cat</string>
+		<string>Character</string>
+		<integer>0</integer>
+		<integer>0</integer>
+	</array>
+	<array>
+		<string>cat</string>
 		<string>Main</string>
 		<integer>0</integer>
 		<integer>0</integer>

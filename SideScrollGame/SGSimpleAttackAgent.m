@@ -10,7 +10,7 @@
 
 @implementation SGSimpleAttackAgent
 @synthesize actions;
-//never respond to any requests if by some chance they are made, ATTACK AT ALL COSTS!!!!!!!!
+//never respond to any requests if by some chance they are made, attack at all costs
 -(BOOL) flankOrder
 {
     return NO;
@@ -25,7 +25,7 @@
     return NO;
 }
 
--(SGAction*) requestMoveWithGameState: (NSArray*) gameState
+-(action) requestMoveWithGameState: (NSArray*) gameState
 {
     //if within attack range attack
     

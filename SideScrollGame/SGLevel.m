@@ -36,19 +36,27 @@
     
 }
 
-+(levelPath*) breadthFirstSearchWithHead: (levelNode*) head Goal: (id) goal
++(levelPath*) dijkstra: (levelNode*) head Goal: (int) goalID
 {
     levelPath* pathHead = malloc(sizeof(pathHead));
-    levelNode* curr = head;
+    SGQueue* queue = [[SGQueue alloc] init];
+    [queue offer:head];
     
-    for (int i =0; i<curr->numLeaves; i++) {
-        if (curr->leaves[i]->nextNode->data == goal) {
-            ;
+    while (queue.length > 0) {
+        levelNode* curr = [queue pop];
+        for (int i =0; i<curr->numLeaves; i++) {
+            if (curr->leaves[i]->nextNode->identifier == goalID) {
+                break;
+            }
+            else
+            {
+                [queue offer:curr] ;
+            }
         }
-        else
-        {
-            ;
+        if (curr->identifier == goalID) {
+            break;
         }
+
     }
     
 }

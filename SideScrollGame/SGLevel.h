@@ -10,6 +10,7 @@
 #import "SGObjectEntity.h"
 #import "SGAction.h"
 #import "LevelNavStructs.h"
+#import "SGQueue.h"
 
 /*
  Subclasses and extends SGObjectEntity, adding features necessary for loading a level

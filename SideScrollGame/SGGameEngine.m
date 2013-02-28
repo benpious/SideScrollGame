@@ -87,6 +87,10 @@
         NSArray* currentEntity = [entityArray objectAtIndex:i];
         
         if ([[currentEntity objectAtIndex:1] isEqualToString: @"Character"]) {
+            //test code delete later
+            //SGWalkAgent* walk = [[SGWalkAgent alloc] init];
+            //walk.character =
+            //end test code
             [characters insertObject: [[SGCharacter alloc] initCharacterNamed: [currentEntity objectAtIndex:0] withScreenSize:screenSize] atIndex:[characters count]] ;
         }
         
@@ -217,6 +221,7 @@
 -(void) applyTouchUpWithLocation: (CGPoint) loc
 {
     [joystick joyStickInputStopped];
+    [player setNextAnimation:idle];
 }
 
 
