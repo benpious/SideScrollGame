@@ -1,5 +1,5 @@
 //
-//  SGWalkAgent.h
+//  SGAbstractAgent.h
 //  SideScrollGame
 //
 //  Created by Benjamin Pious on 2/28/13.
@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SGAbstractAgent.h"
-
-
-@interface SGWalkAgent : SGAbstractAgent
+#import "SGAgentProtocol.h"
+@interface SGAbstractAgent : NSObject<SGAgentProtocol>
 
 @end

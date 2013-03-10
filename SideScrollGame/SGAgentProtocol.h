@@ -30,5 +30,6 @@
 
 //called by the gameengine to request an action given the current game state
 -(action) requestMoveWithGameState: (NSArray*) gameState;
+-(id)initWithCharacter: (SGCharacter*) character;
 
 @end

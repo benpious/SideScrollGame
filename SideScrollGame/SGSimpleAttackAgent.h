@@ -7,9 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SGAgentProtocol.h"
-#import "SGAction.h"
-
-@interface SGSimpleAttackAgent : NSObject<SGAgentProtocol>
+#import "SGAbstractAgent.h"
+@interface SGSimpleAttackAgent : SGAbstractAgent
 
 @end

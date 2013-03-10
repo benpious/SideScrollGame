@@ -1,17 +1,24 @@
 //
-//  SGStaticAgent.m
+//  SGAbstractAgent.m
 //  SideScrollGame
 //
-//  Created by Benjamin Pious on 1/5/13.
+//  Created by Benjamin Pious on 2/28/13.
 //  Copyright (c) 2013 Benjamin Pious. All rights reserved.
 //
 
-#import "SGStaticAgent.h"
+#import "SGAbstractAgent.h"
 
-@implementation SGStaticAgent
+@implementation SGAbstractAgent
 @synthesize actions;
-
-//never respond to any requests if by some chance they are made
+@synthesize character;
+-(id)initWithCharacter:(SGCharacter *)character
+{
+    if (self = [super init]) {
+        self.character = character;
+    }
+    
+    return self;
+}
 -(BOOL) flankOrder
 {
     return NO;
@@ -31,5 +38,4 @@
     
     return idle;
 }
-
 @end

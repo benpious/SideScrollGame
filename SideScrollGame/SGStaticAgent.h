@@ -7,9 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "SGAgentProtocol.h"
+#import "SGAbstractAgent.h"
 
-@interface SGStaticAgent : NSObject<SGAgentProtocol>
+@interface SGStaticAgent : SGAbstractAgent
 {
     SGAction* noAction;
 }
